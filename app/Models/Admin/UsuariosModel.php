@@ -15,7 +15,6 @@ class UsuariosModel extends Model
     protected $returnType = 'object';
 
     protected $allowedFields = [
-        'id_usuario',
         'us_titulo',
         'us_apellidos',
         'us_nombres',

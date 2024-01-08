@@ -26,8 +26,11 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Administrador
+                    <div class="small">
+                        <?= session('nomPerfil') ?>
+                        <br>
+                        <?= session('modalidad') ?>
+                    </div>
                 </div>
             </nav>
         </div>

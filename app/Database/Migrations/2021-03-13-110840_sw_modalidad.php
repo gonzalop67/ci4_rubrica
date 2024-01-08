@@ -22,6 +22,10 @@ class SwModalidad extends Migration
 				'constraint'     => 1,
 				'unsigned'       => true,
 			],
+			'mo_orden' => [
+				'type'           => 'INT',
+				'unsigned'       => true,
+			],
 		]);
 		$this->forge->addKey('id_modalidad', true);
 		$this->forge->createTable('sw_modalidad');

@@ -35,10 +35,10 @@ class SwPeriodoLectivo extends Migration
 				'unsigned'       => true,
 			],
 			'pe_fecha_inicio' => [
-				'type'           => 'DATETIME',
+				'type'           => 'DATE',
 			],
 			'pe_fecha_fin' => [
-				'type'           => 'DATETIME',
+				'type'           => 'DATE',
 			],
 		]);
 		$this->forge->addKey('id_periodo_lectivo', true);
