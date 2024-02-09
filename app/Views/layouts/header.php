@@ -6,7 +6,6 @@
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" /> -->
                     <?php
                     use App\Models\Admin\ModalidadesModel;
                     use App\Models\Admin\PeriodosLectivosModel;
@@ -29,7 +28,6 @@
                                    $fecha_final = explode("-", $periodo_lectivo->pe_fecha_fin);
 
                                    $nombrePeriodoLectivo = $meses_abrev[(int)$fecha_inicial[1]] . " " . $fecha_inicial[0] . " - " . $meses_abrev[(int)$fecha_final[1]] . " " . $fecha_final[0] . " [" . $periodo_lectivo->pe_descripcion . "]";
-                                    // $nombrePeriodoLectivo = $fecha_inicial[1];
                                    ?>
 
                                    <option value="<?= $periodo_lectivo->id_periodo_lectivo ?>"><?= $nombrePeriodoLectivo; ?></option>

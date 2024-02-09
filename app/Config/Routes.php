@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Auth\Login::index');
+$routes->get('/', 'Auth\Login::index', ['as' => 'login']);
 
 $routes->group('auth', ['namespace' => 'App\Controllers\Auth'], static function ($routes) {
 
@@ -17,3 +17,6 @@ $routes->group('auth', ['namespace' => 'App\Controllers\Auth'], static function 
 
 });
 
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'auth'], function ($routes) {
+    $routes->get('modalidades', 'Modalidad::index', ['as' => 'modalidades']);
+});
