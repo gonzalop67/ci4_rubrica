@@ -22,8 +22,7 @@ class ModalidadesModel extends Model
     public function listarModalidades()
     {
         $modalidades = $this->db->query("SELECT * 
-                                           FROM sw_modalidad 
-                                          WHERE mo_activo = 1
+                                           FROM sw_modalidad
                                        ORDER BY mo_orden ASC");
 
         return $modalidades->getResult();

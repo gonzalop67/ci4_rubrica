@@ -26,7 +26,7 @@
                                 <div class="collapse" id="<?= $menu->mnu_texto ?>" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <?php foreach ($model->listarMenusHijos($menu->id_menu) as $menu2) { ?>
-                                            <a class="nav-link" href="<?php echo base_url() . $menu2->mnu_link; ?>"><?= $menu2->mnu_texto ?></a>
+                                            <a class="nav-link <?= service('request')->uri->getRoutePath() == $menu2->mnu_link ? 'active' : '' ?>" href="<?php echo base_url() . $menu2->mnu_link; ?>"><?= $menu2->mnu_texto ?></a>
                                         <?php } ?>
                                         <!-- <a class="nav-link" href="#!">Supletorios</a> -->
                                     </nav>
