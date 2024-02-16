@@ -16,7 +16,8 @@ class ModalidadesModel extends Model
 
     protected $allowedFields = [
         'mo_nombre', 
-        'mo_activo'
+        'mo_activo',
+        'mo_orden'
     ];
 
     public function listarModalidades()
@@ -26,5 +27,13 @@ class ModalidadesModel extends Model
                                        ORDER BY mo_orden ASC");
 
         return $modalidades->getResult();
+    }
+
+    public function getNextOrderNumber()
+    {
+        $query = $this->db->query("SELECT MAX(mo_orden) AS secuencial FROM sw_modalidad");
+        $modalidad = $query->getRow();
+
+        return $modalidad == null ? 1 : $modalidad->secuencial + 1;
     }
 }

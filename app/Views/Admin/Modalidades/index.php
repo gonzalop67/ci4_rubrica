@@ -17,6 +17,12 @@ Modalidades
             Listado
         </div>
         <div class="card-body">
+            <?php if (session('msg')) : ?>
+                <div class="alert alert-<?= session('msg.type') ?> alert-dismissible fade show" role="alert">
+                    <?= session('msg.body') ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif ?>
             <a href="<?= base_url(route_to('modalidades_create')) ?>" class="btn btn-block btn-success btn-sm">
                 <i class="fa fa-fw fa-plus-circle"></i> Nuevo registro
             </a>
