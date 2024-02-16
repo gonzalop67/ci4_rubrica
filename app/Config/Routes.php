@@ -19,4 +19,6 @@ $routes->group('auth', ['namespace' => 'App\Controllers\Auth'], static function 
 
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'auth'], function ($routes) {
     $routes->get('modalidades', 'Modalidad::index', ['as' => 'modalidades']);
+    $routes->get('modalidades/create', 'Modalidad::create', ['as' => 'modalidades_create']);
+    $routes->post('modalidades/guardar', 'Modalidad::store', ['as' => 'modalidades_store']);
 });

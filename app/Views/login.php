@@ -24,7 +24,7 @@
                                     <h3 class="text-center font-weight-light my-4">S.I.A.E.</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form id="frmLogin" action="<?= base_url() . route_to('signin') ?>" method="POST" autocomplete="off">
+                                    <form id="frmLogin" action="<?= base_url(route_to('signin')) ?>" method="POST" autocomplete="off">
                                         <?= csrf_field() ?>
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Ingrese usuario">
