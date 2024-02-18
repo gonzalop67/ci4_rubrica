@@ -23,14 +23,32 @@ class Modalidad extends BaseController
         $Institucion = $this->institucionModel
             ->where('id_institucion', 1)
             ->first();
-        $modalidades = $this->modalidadModel->listarModalidades();
+        
         $data = [
             'nomInstitucion' => $Institucion->in_nombre,
-            'urlInstitucion' => $Institucion->in_url,
-            'modalidades'    => $modalidades
+            'urlInstitucion' => $Institucion->in_url,  
         ];
 
         return view('Admin/Modalidades/index', $data);
+    }
+
+    public function dataModalidades()
+    {
+        if ($this->request->isAJAX()) {
+            $modalidades = $this->modalidadModel->listarModalidades();
+
+            $data = [
+                'modalidades'    => $modalidades
+            ];
+
+            $msg = [
+                'data' => view('Admin/Modalidades/dataModalidades', $data)
+            ];
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
     }
 
     public function create()
@@ -152,6 +170,18 @@ class Modalidad extends BaseController
 
     public function delete()
     {
-        //
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+
+            $this->modalidadModel->delete($id);
+
+            $msg = [
+                'success' => "La Modalidad fue eliminada correctamente."
+            ];
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
     }
 }
