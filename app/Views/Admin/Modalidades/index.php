@@ -19,7 +19,7 @@ Modalidades
         <div class="card-body">
             <?php if (session('msg')) : ?>
                 <div class="alert alert-<?= session('msg.type') ?> alert-dismissible fade show" role="alert">
-                    <?= session('msg.body') ?>
+                    <p><i class="icon fa fa-<?= session('msg.icon') ?>"></i> <?= session('msg.body') ?></p>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
@@ -31,7 +31,7 @@ Modalidades
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Activo</th>
-                    <th colspan="2">Acciones</th>
+                    <th>Acciones</th>
                 </thead>
                 <tbody>
                     <?php foreach ($modalidades as $modalidad) { ?>
@@ -45,8 +45,12 @@ Modalidades
                                     <span class="badge bg-danger">Inactivo</span>
                                 <?php endif ?>
                             </td>
-                            <td>Editar</td>
-                            <td>Eliminar</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="<?= base_url(route_to('modalidades_edit', $modalidad->id_modalidad)) ?>" class="btn btn-warning btn-sm" title="Editar"><span class="fa fa-pencil"></span></a>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(<?= $modalidad->id_modalidad ?>)"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -55,3 +59,44 @@ Modalidades
     </div>
 </div>
 <?= $this->endsection('content') ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    function eliminar(id) {
+        Swal.fire({
+            title: "Eliminar",
+            text: "¿Está seguro de eliminar este registro?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, elimínelo!",
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "<?= base_url(route_to('modalidades_delete')) ?>",
+                    data: {
+                        id: id
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.sukses) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Berhasil",
+                                text: response.sukses,
+                            });
+                            datamahasiswa();
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    }
+                });
+            }
+        });
+    }
+</script>
+<?= $this->endsection('scripts') ?>
