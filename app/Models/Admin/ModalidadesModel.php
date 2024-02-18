@@ -15,7 +15,7 @@ class ModalidadesModel extends Model
     protected $returnType     = 'object';
 
     protected $allowedFields = [
-        'mo_nombre', 
+        'mo_nombre',
         'mo_activo',
         'mo_orden'
     ];
@@ -35,5 +35,14 @@ class ModalidadesModel extends Model
         $modalidad = $query->getRow();
 
         return $modalidad == null ? 1 : $modalidad->secuencial + 1;
+    }
+
+    public function actualizarOrden($id_modalidad, $mo_orden)
+    {
+        $data = [
+            'mo_orden' => $mo_orden
+        ];
+
+        $this->update($id_modalidad, $data);
     }
 }

@@ -23,10 +23,10 @@ class Modalidad extends BaseController
         $Institucion = $this->institucionModel
             ->where('id_institucion', 1)
             ->first();
-        
+
         $data = [
             'nomInstitucion' => $Institucion->in_nombre,
-            'urlInstitucion' => $Institucion->in_url,  
+            'urlInstitucion' => $Institucion->in_url,
         ];
 
         return view('Admin/Modalidades/index', $data);
@@ -128,7 +128,7 @@ class Modalidad extends BaseController
 
         $reglas = [
             'nombre' => [
-                'rules' => 'required|max_length[64]'.$is_unique,
+                'rules' => 'required|max_length[64]' . $is_unique,
                 'errors' => [
                     'required'   => 'El campo Nombre es obligatorio.',
                     'max_length' => 'El campo Nombre no debe exceder los 64 caracteres.',
@@ -144,8 +144,7 @@ class Modalidad extends BaseController
             ]
         ];
 
-        if (!$this->validate($reglas)) 
-        {
+        if (!$this->validate($reglas)) {
             return redirect()->back()->withInput()
                 ->with('msg', [
                     'type' => 'danger',
@@ -180,6 +179,20 @@ class Modalidad extends BaseController
             ];
 
             echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
+
+    public function saveNewPositions()
+    {
+        if ($this->request->isAJAX()) {
+            foreach ($_POST['positions'] as $position) {
+                $index = $position[0];
+                $newPosition = $position[1];
+
+                $this->modalidadModel->actualizarOrden($index, $newPosition);
+            }
         } else {
             exit('Lo siento, no se puede procesar.');
         }

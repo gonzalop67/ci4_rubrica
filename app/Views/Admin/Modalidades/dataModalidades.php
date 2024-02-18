@@ -1,5 +1,5 @@
 <?php foreach ($modalidades as $modalidad) { ?>
-    <tr>
+    <tr data-index='<?= $modalidad->id_modalidad ?>' data-orden='<?= $modalidad->mo_orden ?>'>
         <td><?= $modalidad->id_modalidad ?></td>
         <td><?= $modalidad->mo_nombre ?></td>
         <td>

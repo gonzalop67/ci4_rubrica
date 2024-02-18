@@ -17,7 +17,12 @@
     <link rel="stylesheet" href="<?= base_url() ?>Assets/plugins/node_modules/sweetalert2/dist/sweetalert2.min.css">
     <script src="<?= base_url() ?>Assets/plugins/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
+    <!-- jquery-ui -->
+    <link rel="stylesheet" href="<?= base_url() ?>Assets/plugins/jquery-ui/jquery-ui.css">
+
     <script src="<?= base_url() ?>Assets/js/jquery-3.7.0.min.js"></script>
+    <!-- jquery-ui -->
+    <script src="<?= base_url() ?>Assets/plugins/jquery-ui/jquery-ui.js"></script>
 </head>
 
 <body class="sb-nav-fixed">

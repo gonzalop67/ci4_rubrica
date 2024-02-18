@@ -26,4 +26,5 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('modalidades/editar/(:any)', 'Modalidad::edit/$1', ['as' => 'modalidades_edit']);
     $routes->post('modalidades/actualizar', 'Modalidad::update', ['as' => 'modalidades_update']);
     $routes->post('modalidades/eliminar', 'Modalidad::delete', ['as' => 'modalidades_delete']);
+    $routes->post('modalidades/saveNewPositions', 'Modalidad::saveNewPositions', ['as' => 'modalidades_saveNewPositions']);
 });
