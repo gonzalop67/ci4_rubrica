@@ -4,6 +4,10 @@
 Dashboard
 <?= $this->endsection('title') ?>
 
+<?= $this->section('css') ?>
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+<?= $this->endsection('css') ?>
+
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
     <h1 class="mt-4">Dashboard</h1>

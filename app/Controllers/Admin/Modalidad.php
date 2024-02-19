@@ -172,11 +172,19 @@ class Modalidad extends BaseController
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
 
-            $this->modalidadModel->delete($id);
+            try {
+                $this->modalidadModel->delete($id);
 
-            $msg = [
-                'success' => "La Modalidad fue eliminada correctamente."
-            ];
+                $msg = [
+                    'icon'    => "success",
+                    'message' => "La Modalidad fue eliminada correctamente."
+                ];
+            } catch (\Exception $e) {
+                $msg = [
+                    'icon'    => "error",
+                    'message' => "La Modalidad no se puede eliminar porque tiene periodos lectivos asociados."
+                ];
+            }
 
             echo json_encode($msg);
         } else {

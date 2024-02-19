@@ -27,4 +27,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('modalidades/actualizar', 'Modalidad::update', ['as' => 'modalidades_update']);
     $routes->post('modalidades/eliminar', 'Modalidad::delete', ['as' => 'modalidades_delete']);
     $routes->post('modalidades/saveNewPositions', 'Modalidad::saveNewPositions', ['as' => 'modalidades_saveNewPositions']);
+    //RUTAS PARA PERIODOS LECTIVOS
+	$routes->get('periodos_lectivos', 'Periodos_lectivos::index', ['as' => 'periodos_lectivos']);
 });

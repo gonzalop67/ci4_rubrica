@@ -32,8 +32,10 @@ class PeriodosLectivosModel extends Model
                                                       sw_periodo_estado pe, 
                                                       sw_modalidad m 
                                                 WHERE pe.id_periodo_estado = p.id_periodo_estado 
-                                                  AND m.id_modalidad = p.id_modalidad 
-                                                ORDER BY id_periodo_lectivo DESC");
+                                                  AND m.id_modalidad = p.id_modalidad
+                                                  AND mo_activo = 1 
+                                                ORDER BY mo_orden ASC,
+                                                         pe_fecha_inicio DESC");
 
         return $periodos_lectivos->getResult();
     }

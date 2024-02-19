@@ -95,10 +95,11 @@ Modalidades
                     success: function(response) {
                         if (response.success) {
                             Swal.fire({
-                                icon: "success",
+                                icon: response.icon,
                                 title: "Eliminar",
-                                text: response.success,
+                                text: response.message,
                             });
+                            
                             dataModalidades();
                         }
                     },
