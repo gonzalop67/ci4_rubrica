@@ -40,6 +40,12 @@ class SwPeriodoLectivo extends Migration
 			'pe_fecha_fin' => [
 				'type'           => 'DATE',
 			],
+			'pe_nota_minima' => [
+				'type' => 'FLOAT'
+			],
+			'pe_nota_aprobacion' => [
+				'type' => 'FLOAT'
+			]
 		]);
 		$this->forge->addKey('id_periodo_lectivo', true);
 		$this->forge->addForeignKey('id_periodo_estado','sw_periodo_estado','id_periodo_estado');

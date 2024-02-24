@@ -28,8 +28,8 @@ Crear Una Modalidad
             <form action="<?= base_url(route_to('modalidades_store')) ?>" method="post">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" value="<?= old('nombre') ?>" name="nombre" id="nombre" autofocus required>
-                    <p style="color: #e73d4a"><?= session('errors.nombre') ?></p>
+                    <input type="text" class="form-control <?= session('errors.nombre') ? 'is-invalid' : '' ?>" value="<?= old('nombre') ?>" name="nombre" id="nombre" autofocus required>
+                    <p class="invalid-feedback"><?= session('errors.nombre') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="activo" class="form-label">Activo:</label>
@@ -37,7 +37,7 @@ Crear Una Modalidad
                         <option value="1">Sí</option>
                         <option value="0">No</option>
                     </select>
-                    <p style="color: #e73d4a"></p>
+                    <p class="invalid-feedback"><?= session('errors.activo') ?></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a href="<?= base_url(route_to('modalidades')) ?>" class="btn btn-secondary">Regresar</a>

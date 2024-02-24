@@ -50,23 +50,71 @@ class Periodos_lectivos extends BaseController
             'urlInstitucion' => $Institucion->in_url,
             'modalidades'    => $modalidades
         ];
-        
+
         return view('Admin/Periodos_lectivos/create', $data);
     }
 
     public function store()
     {
+        $pe_anio_inicio = $this->request->getVar('pe_anio_inicio');
+        $max_anio_inicio = $this->periodoLectivoModel->obtenerMaxAnioInicio();
+
+        // dd($this->request->getPost());
+
         if (!$this->validate([
             'pe_anio_inicio' => [
                 'label' => 'Año Inicial',
-                'rules' => 'required|integer',
+                'rules' => 'required|integer|greater_than_equal_to[' . $max_anio_inicio . ']',
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio',
-                    'integer' => 'El campo {field} debe ser un número entero'
+                    'integer' => 'El campo {field} debe ser un número entero',
+                    'greater_than_equal_to' => 'El {field} no puede ser menor que el máximo año de inicio en la BD'
                 ]
             ],
-            
+            'pe_anio_fin' => [
+                'label' => 'Año Final',
+                'rules' => 'required|integer|greater_than_equal_to[' . $pe_anio_inicio . ']',
+                'errors' => [
+                    'required'  => 'El campo {field} es obligatorio',
+                    'integer'   => 'El campo {field} debe ser un número entero',
+                    'greater_than_equal_to' => 'El {field} no puede ser menor que el Año Inicial'
+                ]
+            ],
+            'pe_fecha_inicio' => [
+                'label' => 'Fecha de inicio',
+                'rules' => 'required|valid_date[Y-m-d]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'valid_date' => 'El campo {field} debe tener un formato de fecha válido'
+                ]
+            ],
+            'pe_fecha_fin' => [
+                'label' => 'Fecha de fin',
+                'rules' => 'required|valid_date[Y-m-d]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'valid_date' => 'El campo {field} debe tener un formato de fecha válido'
+                ]
+            ],
+            'pe_nota_minima' => [
+                'label' => 'Nota Mínima',
+                'rules' => 'required|numeric|greater_than[0]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'numeric' => 'El campo {field} debe ser numérico',
+                    'greater_than' => 'La {field} no puede ser menor que cero'
+                ]
+            ],
+            'id_modalidad' => [
+                'label' => 'Modalidad',
+                'rules' => 'required|is_not_unique[sw_modalidad.id_modalidad]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'is_not_unique' => 'No existe esa {field} en la base de datos'
+                ]
+            ]
         ])) {
+            // dd($this->validator->getErrors());
             return redirect()->back()->withInput()
                 ->with('msg', [
                     'type' => 'danger',
@@ -74,5 +122,24 @@ class Periodos_lectivos extends BaseController
                 ])
                 ->with('errors', $this->validator->getErrors());
         }
+
+        $datos = [
+            'id_periodo_estado' => 1,
+            'id_modalidad' => trim($this->request->getVar('id_modalidad')),
+            'pe_anio_inicio'  => trim($this->request->getVar('pe_anio_inicio')),
+            'pe_anio_fin'  => trim($this->request->getVar('pe_anio_fin')),
+            'pe_fecha_inicio'  => trim($this->request->getVar('pe_fecha_inicio')),
+            'pe_fecha_fin'  => trim($this->request->getVar('pe_fecha_fin')),
+            'pe_nota_minima' => trim($this->request->getVar('pe_nota_minima')),
+            'pe_nota_aprobacion' => trim($this->request->getVar('pe_nota_aprobacion')),
+        ];
+
+        $this->periodoLectivoModel->save($datos);
+
+        return redirect('periodos_lectivos')->with('msg', [
+            'type' => 'success',
+            'icon' => 'check',
+            'body' => 'El periodo lectivo fue guardado correctamente.'
+        ]);
     }
 }

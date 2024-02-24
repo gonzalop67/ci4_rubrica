@@ -20,7 +20,9 @@ class PeriodosLectivosModel extends Model
         'pe_anio_inicio',
         'pe_anio_fin',
         'pe_fecha_inicio',
-        'pe_fecha_fin'
+        'pe_fecha_fin',
+        'pe_nota_minima',
+        'pe_nota_aprobacion'
     ];
 
     public function listarPeriodosLectivos()
@@ -32,8 +34,7 @@ class PeriodosLectivosModel extends Model
                                                       sw_periodo_estado pe, 
                                                       sw_modalidad m 
                                                 WHERE pe.id_periodo_estado = p.id_periodo_estado 
-                                                  AND m.id_modalidad = p.id_modalidad
-                                                  AND mo_activo = 1 
+                                                  AND m.id_modalidad = p.id_modalidad 
                                                 ORDER BY mo_orden ASC,
                                                          pe_fecha_inicio DESC");
 
@@ -52,4 +53,10 @@ class PeriodosLectivosModel extends Model
         return $periodos_lectivos->getResult();
     }
 
+    public function obtenerMaxAnioInicio()
+    {
+        $registro = $this->db->query("SELECT MAX(pe_anio_inicio) AS max_anio_inicio FROM sw_periodo_lectivo");
+
+        return $registro->getRow()->max_anio_inicio;
+    }
 }
