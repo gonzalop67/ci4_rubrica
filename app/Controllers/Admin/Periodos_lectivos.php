@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\Admin\InstitucionModel;
 use App\Models\Admin\ModalidadesModel;
 use App\Models\Admin\PeriodosLectivosModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Periodos_lectivos extends BaseController
 {
@@ -140,6 +141,104 @@ class Periodos_lectivos extends BaseController
             'type' => 'success',
             'icon' => 'check',
             'body' => 'El periodo lectivo fue guardado correctamente.'
+        ]);
+    }
+
+    public function edit(string $id)
+    {
+        if (!$periodo_lectivo = $this->periodoLectivoModel->find($id)) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $Institucion = $this->institucionModel
+            ->where('id_institucion', 1)
+            ->first();
+
+        $modalidades = $this->modalidadModel->listarModalidades();
+
+        return view('Admin/Periodos_lectivos/edit', [
+            'periodo_lectivo' => $periodo_lectivo,
+            'nomInstitucion' => $Institucion->in_nombre,
+            'urlInstitucion' => $Institucion->in_url,
+            'modalidades'    => $modalidades
+        ]);
+    }
+
+    public function update()
+    {
+        $pe_anio_inicio = $this->request->getVar('pe_anio_inicio');
+        $max_anio_inicio = $this->periodoLectivoModel->obtenerMaxAnioInicio();
+
+        if (!$this->validate([
+            'pe_anio_inicio' => [
+                'label' => 'Año Inicial',
+                'rules' => 'required|integer|greater_than_equal_to[' . $max_anio_inicio . ']',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'integer' => 'El campo {field} debe ser un número entero',
+                    'greater_than_equal_to' => 'El {field} no puede ser menor que el máximo año de inicio en la BD'
+                ]
+            ],
+            'pe_anio_fin' => [
+                'label' => 'Año Final',
+                'rules' => 'required|integer|greater_than_equal_to[' . $pe_anio_inicio . ']',
+                'errors' => [
+                    'required'  => 'El campo {field} es obligatorio',
+                    'integer'   => 'El campo {field} debe ser un número entero',
+                    'greater_than_equal_to' => 'El {field} no puede ser menor que el Año Inicial'
+                ]
+            ],
+            'pe_fecha_inicio' => [
+                'label' => 'Fecha de inicio',
+                'rules' => 'required|valid_date[Y-m-d]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'valid_date' => 'El campo {field} debe tener un formato de fecha válido'
+                ]
+            ],
+            'pe_fecha_fin' => [
+                'label' => 'Fecha de fin',
+                'rules' => 'required|valid_date[Y-m-d]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'valid_date' => 'El campo {field} debe tener un formato de fecha válido'
+                ]
+            ],
+            'pe_nota_minima' => [
+                'label' => 'Nota Mínima',
+                'rules' => 'required|numeric|greater_than[0]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'numeric' => 'El campo {field} debe ser numérico',
+                    'greater_than' => 'La {field} no puede ser menor que cero'
+                ]
+            ],
+        ])) {
+            // dd($this->validator->getErrors());
+            return redirect()->back()->withInput()
+                ->with('msg', [
+                    'type' => 'danger',
+                    'body' => 'Tienes campos incorrectos'
+                ])
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $datos = [
+            'id_periodo_lectivo' => $this->request->getVar('id_periodo_lectivo'),
+            'pe_anio_inicio'  => trim($this->request->getVar('pe_anio_inicio')),
+            'pe_anio_fin'  => trim($this->request->getVar('pe_anio_fin')),
+            'pe_fecha_inicio'  => trim($this->request->getVar('pe_fecha_inicio')),
+            'pe_fecha_fin'  => trim($this->request->getVar('pe_fecha_fin')),
+            'pe_nota_minima' => trim($this->request->getVar('pe_nota_minima')),
+            'pe_nota_aprobacion' => trim($this->request->getVar('pe_nota_aprobacion')),
+        ];
+
+        $this->periodoLectivoModel->save($datos);
+
+        return redirect('periodos_lectivos')->with('msg', [
+            'type' => 'success',
+            'icon' => 'check',
+            'body' => 'El periodo lectivo fue actualizado correctamente.'
         ]);
     }
 }

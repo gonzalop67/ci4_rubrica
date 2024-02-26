@@ -2,7 +2,7 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">INICIO</div>
+                        <!-- <div class="sb-sidenav-menu-heading">INICIO</div> -->
                         <a class="nav-link <?= service('request')->uri->getRoutePath() == 'auth/dashboard' ? 'active' : '' ?>" href="<?= base_url() . route_to('dashboard') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Dashboard
