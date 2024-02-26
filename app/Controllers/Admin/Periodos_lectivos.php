@@ -3,7 +3,6 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\Admin\InstitucionModel;
 use App\Models\Admin\ModalidadesModel;
 use App\Models\Admin\PeriodosLectivosModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -11,27 +10,19 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 class Periodos_lectivos extends BaseController
 {
     private $modalidadModel;
-    private $institucionModel;
     private $periodoLectivoModel;
 
     public function __construct()
     {
         $this->modalidadModel = new ModalidadesModel();
-        $this->institucionModel = new InstitucionModel();
         $this->periodoLectivoModel = new PeriodosLectivosModel();
     }
 
     public function index()
     {
-        $Institucion = $this->institucionModel
-            ->where('id_institucion', 1)
-            ->first();
-
         $periodos_lectivos = $this->periodoLectivoModel->listarPeriodosLectivos();
 
         $data = [
-            'nomInstitucion' => $Institucion->in_nombre,
-            'urlInstitucion' => $Institucion->in_url,
             'periodos_lectivos' => $periodos_lectivos
         ];
 
@@ -40,15 +31,9 @@ class Periodos_lectivos extends BaseController
 
     public function create()
     {
-        $Institucion = $this->institucionModel
-            ->where('id_institucion', 1)
-            ->first();
-
         $modalidades = $this->modalidadModel->listarModalidades();
 
         $data = [
-            'nomInstitucion' => $Institucion->in_nombre,
-            'urlInstitucion' => $Institucion->in_url,
             'modalidades'    => $modalidades
         ];
 
@@ -150,16 +135,10 @@ class Periodos_lectivos extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $Institucion = $this->institucionModel
-            ->where('id_institucion', 1)
-            ->first();
-
         $modalidades = $this->modalidadModel->listarModalidades();
 
         return view('Admin/Periodos_lectivos/edit', [
             'periodo_lectivo' => $periodo_lectivo,
-            'nomInstitucion' => $Institucion->in_nombre,
-            'urlInstitucion' => $Institucion->in_url,
             'modalidades'    => $modalidades
         ]);
     }

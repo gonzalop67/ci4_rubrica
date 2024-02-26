@@ -24,7 +24,7 @@ Modalidades
                 </div>
             <?php endif ?>
             <a href="<?= base_url(route_to('modalidades_create')) ?>" class="btn btn-block btn-success btn-sm">
-                <i class="fa fa-fw fa-plus-circle"></i> Nuevo registro
+                <i class="fa fa-fw fa-plus-circle"></i> Nueva Modalidad
             </a>
             <table id="tbl_modalidad" class="table table-hover table-striped">
                 <thead>

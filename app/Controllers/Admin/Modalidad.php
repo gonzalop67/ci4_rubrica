@@ -3,33 +3,21 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\Admin\InstitucionModel;
 use App\Models\Admin\ModalidadesModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Modalidad extends BaseController
 {
-    private $institucionModel;
     private $modalidadModel;
 
     public function __construct()
     {
-        $this->institucionModel = new InstitucionModel();
         $this->modalidadModel = new ModalidadesModel();
     }
 
     public function index()
     {
-        $Institucion = $this->institucionModel
-            ->where('id_institucion', 1)
-            ->first();
-
-        $data = [
-            'nomInstitucion' => $Institucion->in_nombre,
-            'urlInstitucion' => $Institucion->in_url,
-        ];
-
-        return view('Admin/Modalidades/index', $data);
+        return view('Admin/Modalidades/index');
     }
 
     public function dataModalidades()
@@ -53,14 +41,7 @@ class Modalidad extends BaseController
 
     public function create()
     {
-        $Institucion = $this->institucionModel
-            ->where('id_institucion', 1)
-            ->first();
-        $data = [
-            'nomInstitucion' => $Institucion->in_nombre,
-            'urlInstitucion' => $Institucion->in_url,
-        ];
-        return view('Admin/Modalidades/create', $data);
+        return view('Admin/Modalidades/create');
     }
 
     public function store()
@@ -105,14 +86,8 @@ class Modalidad extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $Institucion = $this->institucionModel
-            ->where('id_institucion', 1)
-            ->first();
-
         return view('Admin/Modalidades/edit', [
-            'modalidad' => $modalidad,
-            'nomInstitucion' => $Institucion->in_nombre,
-            'urlInstitucion' => $Institucion->in_url
+            'modalidad' => $modalidad
         ]);
     }
 
