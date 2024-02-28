@@ -30,41 +30,8 @@
 
 <script>
     $(document).ready(function() {
-        let table = new DataTable('#tbl_perfiles', {
-            pageLength: 5,
-            lengthMenu: [5, 10, 15, {
-                label: 'Todos',
-                value: -1
-            }],
-            language: {
-                url: '//cdn.datatables.net/plug-ins/2.0.1/i18n/es-ES.json',
-            },
-        });
+        
     });
-
-    function dataPerfiles() {
-        $.ajax({
-            url: "<?= base_url(route_to('perfiles_data')) ?>",
-            dataType: "json",
-            success: function(response) {
-                $('.viewdata').html(response.data);
-
-                let table = new DataTable('#tbl_perfiles', {
-                    pageLength: 5,
-                    lengthMenu: [5, 10, 15, {
-                        label: 'Todos',
-                        value: -1
-                    }],
-                    language: {
-                        url: '//cdn.datatables.net/plug-ins/2.0.1/i18n/es-ES.json',
-                    },
-                });
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-            }
-        });
-    }
 
     function eliminar(id) {
         Swal.fire({

@@ -42,14 +42,47 @@ Perfiles
 <?= $this->section('scripts') ?>
 <script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
 <script>
+    let table;
+    let tableInitialized = false;
+
     $(document).ready(function() {
         dataPerfiles();
-
+        
         //Autoclose
         window.setTimeout(function() {
             $(".alert").fadeOut(1500, 0);
         }, 3000); //3 segundos y desaparece
     });
 
+    function dataPerfiles() {
+        $.ajax({
+            url: "<?= base_url(route_to('perfiles_data')) ?>",
+            dataType: "json",
+            success: function(response) {
+                $('.viewdata').html(response.data);
+
+                if (tableInitialized) {
+                    table.destroy();
+                }
+
+                table = new DataTable('#tbl_perfiles', {
+                    destroy: true,
+                    pageLength: 5,
+                    lengthMenu: [5, 10, 15, {
+                        label: 'Todos',
+                        value: -1
+                    }],
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/2.0.1/i18n/es-ES.json',
+                    },
+                });
+
+                tableInitialized = true;
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
 </script>
 <?= $this->endsection('scripts') ?>
