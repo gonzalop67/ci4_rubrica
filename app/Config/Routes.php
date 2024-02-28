@@ -35,4 +35,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('periodos_lectivos/actualizar', 'Periodos_lectivos::update', ['as' => 'periodos_lectivos_update']);
     //RUTAS PARA PERFILES
 	$routes->get('perfiles', 'Perfiles::index', ['as' => 'perfiles']);
+    $routes->get('perfiles/dataPerfiles', 'Perfiles::dataPerfiles', ['as' => 'perfiles_data']);
+    $routes->get('perfiles/create', 'Perfiles::create', ['as' => 'perfiles_create']);
+    $routes->post('perfiles/guardar', 'Perfiles::store', ['as' => 'perfiles_store']);
+    $routes->get('perfiles/editar/(:any)', 'Perfiles::edit/$1', ['as' => 'perfiles_edit']);
+    $routes->post('perfiles/actualizar', 'Perfiles::update', ['as' => 'perfiles_update']);
+    $routes->post('perfiles/eliminar', 'Perfiles::delete', ['as' => 'perfiles_delete']);
 });

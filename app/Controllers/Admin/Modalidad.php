@@ -49,19 +49,16 @@ class Modalidad extends BaseController
         if (!$this->validate([
             'nombre' => [
                 'label' => 'Nombre',
-                'rules' => 'required|is_unique[sw_modalidad.mo_nombre]',
+                'rules' => 'required|max_length[64]|is_unique[sw_modalidad.mo_nombre]',
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo Nombre no debe exceder los 64 caracteres.',
                     'is_unique' => 'El campo {field} debe ser único'
                 ]
             ],
             'activo' => 'is_not_unique[sw_modalidad.mo_activo]'
         ])) {
             return redirect()->back()->withInput()
-                ->with('msg', [
-                    'type' => 'danger',
-                    'body' => 'Tienes campos incorrectos'
-                ])
                 ->with('errors', $this->validator->getErrors());
         }
 
