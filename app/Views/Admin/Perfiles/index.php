@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/layout') ?>
 
 <?= $this->section('title') ?>
-Periodos Lectivos
+Perfiles
 <?= $this->endsection('title') ?>
 
 <?= $this->section('css') ?>
@@ -10,9 +10,8 @@ Periodos Lectivos
 
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
-    <!-- <h2 class="mt-4">Modalidades</h2> -->
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Administración de Periodos Lectivos</li>
+        <li class="breadcrumb-item active">Administración de Perfiles</li>
     </ol>
 
     <div class="card mb-4">
@@ -27,42 +26,35 @@ Periodos Lectivos
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
-            <a href="<?= base_url(route_to('periodos_lectivos_create')) ?>" class="btn btn-block btn-danger btn-sm">
-                <i class="fa fa-fw fa-plus-circle"></i> Crear Periodo Lectivo
+            <a href="<?= base_url(route_to('perfiles_create')) ?>" class="btn btn-block btn-success btn-sm">
+                <i class="fa fa-fw fa-plus-circle"></i> Nuevo Perfil
             </a>
             <hr>
             <div class="row">
                 <div class="col-md-12 table-responsive">
-                    <table id="tbl_periodo_lectivo" class="table table-hover table-striped">
+                    <table id="tbl_perfiles" class="table table-hover table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Id</th>
-                                <th>Modalidad</th>
-                                <th>Fecha Inicial</th>
-                                <th>Fecha Final</th>
-                                <th>Estado</th>
-                                <th>Opciones</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_periodos_lectivos">
+                        <tbody id="tbody_perfiles">
                             <?php
                             $contador = 0;
-                            foreach ($periodos_lectivos as $v) {
+                            foreach ($perfiles as $v) {
                                 $contador++;
                             ?>
                                 <tr>
                                     <td><?= $contador; ?></td>
-                                    <td><?= $v->id_periodo_lectivo; ?></td>
-                                    <td><?= $v->mo_nombre; ?></td>
-                                    <td><?php $fecha = date_create($v->pe_fecha_inicio);
-                                        echo date_format($fecha, "d/M/Y") ?></td>
-                                    <td><?php $fecha = date_create($v->pe_fecha_fin);
-                                        echo date_format($fecha, "d/M/Y"); ?></td>
-                                    <td><?= $v->pe_descripcion; ?></td>
+                                    <td><?= $v->id_perfil; ?></td>
+                                    <td><?= $v->pe_nombre; ?></td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="<?= base_url(route_to('periodos_lectivos_edit', $v->id_periodo_lectivo)) ?>" class="btn btn-warning btn-sm" title="Editar"><span class="fa fa-pencil"></span></a>
+                                            <a href="<?= base_url(route_to('perfiles_edit', $v->id_perfil)) ?>" class="btn btn-warning btn-sm" title="Editar"><span class="fa fa-pencil"></span></a>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(<?= $v->id_perfil ?>)"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -79,7 +71,7 @@ Periodos Lectivos
 <?= $this->section('scripts') ?>
 <script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
 <script>
-    let table = new DataTable('#tbl_periodo_lectivo', {
+    let table = new DataTable('#tbl_perfiles', {
         pageLength: 5,
         lengthMenu: [5, 10, 15, {
             label: 'Todos',
