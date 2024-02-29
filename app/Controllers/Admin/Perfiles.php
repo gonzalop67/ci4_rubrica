@@ -133,7 +133,7 @@ class Perfiles extends BaseController
             } catch (\Exception $e) {
                 $msg = [
                     'icon'    => "error",
-                    'message' => "El Perfil no se puede eliminar porque tiene registros relacionados en otras tablas."
+                    'message' => "No se puede eliminar el Perfil porque tiene registros relacionados en otras tablas."
                 ];
             }
 

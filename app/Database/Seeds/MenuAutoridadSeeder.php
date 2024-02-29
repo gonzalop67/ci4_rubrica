@@ -1,6 +1,8 @@
 <?php namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use App\Models\Admin\MenusModel;
+use App\Models\Admin\MenusPerfilesModel;
 
 class MenuAutoridadSeeder extends Seeder
 {
@@ -154,85 +156,24 @@ class MenuAutoridadSeeder extends Seeder
 			]
 		];
 
-		$builder = $this->db->table('sw_menu');
-		$builder->insertBatch($menus);
+        $menuModel = new MenusModel();
+        $menuPerfilModel = new MenusPerfilesModel();
 
-        $menus_perfiles = [
-            [
-                'id_perfil' => 2,
-                'id_menu' => 27
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 28
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 29
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 30
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 31
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 32
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 33
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 34
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 35
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 36
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 37
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 38
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 39
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 40
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 41
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 42
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 43
-            ],
-            [
-                'id_perfil' => 2,
-                'id_menu' => 44
-            ]
-        ];
+        foreach ($menus as $menu) {
+            $menuModel->save([
+                'mnu_texto'     => $menu['mnu_texto'],
+                'mnu_link'      => $menu['mnu_link'],
+                'mnu_nivel'     => $menu['mnu_nivel'],
+                'mnu_orden'     => $menu['mnu_orden'],
+                'mnu_padre'     => $menu['mnu_padre'],
+                'mnu_publicado' => $menu['mnu_publicado']
+            ]);
+            $id_menu = $menuModel->getInsertID();
+            $menuPerfilModel->save([
+                'id_menu' => $id_menu,
+                'id_perfil' => 2
+            ]);
+        }
 
-        $builder = $this->db->table('sw_menu_perfil');
-		$builder->insertBatch($menus_perfiles);
 	}
 }

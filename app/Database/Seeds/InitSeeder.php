@@ -52,6 +52,11 @@ class InitSeeder extends Seeder
         $this->call('MenuAdministradorSeeder');
         $this->call('MenuAutoridadSeeder');
         $this->call('MenuSecretariaSeeder');
+        $this->call('MenuDocenteSeeder');
+        $this->call('MenuTutorSeeder');
+        $this->call('MenuInspeccionSeeder');
+        $this->call('MenuDECESeeder');
+        $this->call('MenuRepresentanteSeeder');
 	}
 
 	protected function truncateTablas(array $tablas)

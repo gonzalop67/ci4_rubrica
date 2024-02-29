@@ -4,14 +4,14 @@ use CodeIgniter\Database\Seeder;
 use App\Models\Admin\MenusModel;
 use App\Models\Admin\MenusPerfilesModel;
 
-class MenuDocenteSeeder extends Seeder
+class MenuInspeccionSeeder extends Seeder
 {
 	public function run()
 	{	
 		
         $menus = [
             [
-				'mnu_texto'     => 'Calificaciones', // id_menu = 62
+				'mnu_texto'     => 'Comportamiento', // id_menu = 92
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 1,
@@ -19,7 +19,7 @@ class MenuDocenteSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Asistencia', // id_menu = 63
+				'mnu_texto'     => 'Horarios', // id_menu = 93
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 2,
@@ -27,7 +27,7 @@ class MenuDocenteSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Informes', // id_menu = 64
+				'mnu_texto'     => 'Definiciones', // id_menu = 94
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 3,
@@ -35,115 +35,83 @@ class MenuDocenteSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Reportes', // id_menu = 65
+				'mnu_texto'     => 'Consultas', // id_menu = 95
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 4,
                 'mnu_padre'     => 0,
                 'mnu_publicado' => 1
 			],
-            [
-				'mnu_texto'     => 'Listas', // id_menu = 66
-                'mnu_link'      => '#',
-                'mnu_nivel'     => 1,
-                'mnu_orden'     => 5,
-                'mnu_padre'     => 0,
-                'mnu_publicado' => 1
-			],
 			[
-				'mnu_texto'     => 'Parciales', // id_menu = 67
-                'mnu_link'      => 'docentes/parciales',
+				'mnu_texto'     => 'Parciales', // id_menu = 96
+                'mnu_link'      => 'inspeccion/parciales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 62,
+                'mnu_padre'     => 92,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Supletorios', // id_menu = 68
-                'mnu_link'      => 'docentes/supletorios',
+				'mnu_texto'     => 'Sub Periodo', // id_menu = 97
+                'mnu_link'      => 'inspeccion/quimestrales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 62,
+                'mnu_padre'     => 92,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Remediales', // id_menu = 69
-                'mnu_link'      => 'docentes/remdiales',
+				'mnu_texto'     => 'Periodo', // id_menu = 98
+                'mnu_link'      => 'inspeccion/anuales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
-                'mnu_padre'     => 62,
+                'mnu_padre'     => 92,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'De Gracia', // id_menu = 70
-                'mnu_link'      => 'docentes/de_gracia',
+				'mnu_texto'     => 'Leccionario', // id_menu = 99
+                'mnu_link'      => 'inspeccion/leccionario',
                 'mnu_nivel'     => 2,
-                'mnu_orden'     => 4,
-                'mnu_padre'     => 62,
+                'mnu_orden'     => 1,
+                'mnu_padre'     => 93,
+                'mnu_publicado' => 1
+			],
+			[
+				'mnu_texto'     => 'De Docentes', // id_menu = 100
+                'mnu_link'      => 'inspeccion/horario_docentes',
+                'mnu_nivel'     => 2,
+                'mnu_orden'     => 2,
+                'mnu_padre'     => 93,
+                'mnu_publicado' => 1
+			],
+			[
+				'mnu_texto'     => 'Valor del mes', // id_menu = 101
+                'mnu_link'      => 'inspeccion/valor_del_mes',
+                'mnu_nivel'     => 2,
+                'mnu_orden'     => 1,
+                'mnu_padre'     => 94,
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Ingresar Asistencia', // id_menu = 71
-                'mnu_link'      => 'docentes/asistencia',
-                'mnu_nivel'     => 2,
-                'mnu_orden'     => 1,
-                'mnu_padre'     => 63,
-                'mnu_publicado' => 1
-			],
-			[
-				'mnu_texto'     => 'Ver Horario', // id_menu = 72
-                'mnu_link'      => 'docentes/horario',
+				'mnu_texto'     => 'Feriados', // id_menu = 102
+                'mnu_link'      => 'inspeccion/feriados',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 63,
-                'mnu_publicado' => 1
-			],
-			[
-				'mnu_texto'     => 'Parciales', // id_menu = 73
-                'mnu_link'      => 'docentes/informe_parciales',
-                'mnu_nivel'     => 2,
-                'mnu_orden'     => 1,
-                'mnu_padre'     => 64,
-                'mnu_publicado' => 1
-			],
-			[
-				'mnu_texto'     => 'Anuales', // id_menu = 74
-                'mnu_link'      => 'docentes/informe_anual',
-                'mnu_nivel'     => 2,
-                'mnu_orden'     => 2,
-                'mnu_padre'     => 64,
-                'mnu_publicado' => 1
-			],
-			[
-				'mnu_texto'     => 'Quimestrales', // id_menu = 75
-                'mnu_link'      => 'docentes/reporte_quimestral',
-                'mnu_nivel'     => 2,
-                'mnu_orden'     => 1,
-                'mnu_padre'     => 65,
-                'mnu_publicado' => 1
-			],
-			[
-				'mnu_texto'     => 'Anuales', // id_menu = 76
-                'mnu_link'      => 'docentes/reporte_anual',
-                'mnu_nivel'     => 2,
-                'mnu_orden'     => 2,
-                'mnu_padre'     => 65,
+                'mnu_padre'     => 94,
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Por Parcial', // id_menu = 77
-                'mnu_link'      => 'docentes/listas_parciales',
+				'mnu_texto'     => 'Lista de Docentes', // id_menu = 103
+                'mnu_link'      => 'inspeccion/lista_docentes',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 66,
+                'mnu_padre'     => 95,
                 'mnu_publicado' => 1
 			],
-			[
-				'mnu_texto'     => 'Por Quimestre', // id_menu = 78
-                'mnu_link'      => 'docentes/listas_quimestrales',
+            [
+				'mnu_texto'     => 'Horarios de Clase', // id_menu = 104
+                'mnu_link'      => 'inspeccion/horario_clases',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 66,
+                'mnu_padre'     => 95,
                 'mnu_publicado' => 1
 			],
 		];
@@ -163,9 +131,9 @@ class MenuDocenteSeeder extends Seeder
             $id_menu = $menuModel->getInsertID();
             $menuPerfilModel->save([
                 'id_menu' => $id_menu,
-                'id_perfil' => 4
+                'id_perfil' => 5
             ]);
         }
 
-    }
+	}
 }

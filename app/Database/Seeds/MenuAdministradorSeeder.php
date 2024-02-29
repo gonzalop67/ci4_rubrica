@@ -1,15 +1,16 @@
 <?php namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use App\Models\Admin\MenusModel;
+use App\Models\Admin\MenusPerfilesModel;
 
 class MenuAdministradorSeeder extends Seeder
 {
 	public function run()
 	{	
-		
         $menus = [
 			[
-				'mnu_texto'     => 'Administración',
+				'mnu_texto'     => 'Administración', // id_menu = 1
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 1,
@@ -17,7 +18,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Definiciones',
+				'mnu_texto'     => 'Definiciones', // id_menu = 2
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 2,
@@ -25,7 +26,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Especificaciones',
+				'mnu_texto'     => 'Especificaciones', // id_menu = 3
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 3,
@@ -33,7 +34,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Asociar',
+				'mnu_texto'     => 'Asociar', // id_menu = 4
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 4,
@@ -41,7 +42,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Cierres',
+				'mnu_texto'     => 'Cierres', // id_menu = 5
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 5,
@@ -49,7 +50,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Modalidades',
+				'mnu_texto'     => 'Modalidades', // id_menu = 6
                 'mnu_link'      => 'admin/modalidades',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
@@ -57,7 +58,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Períodos Lectivos',
+				'mnu_texto'     => 'Períodos Lectivos', // id_menu = 7
                 'mnu_link'      => 'admin/periodos_lectivos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
@@ -65,7 +66,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Perfiles',
+				'mnu_texto'     => 'Perfiles', // id_menu = 8
                 'mnu_link'      => 'admin/perfiles',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
@@ -73,7 +74,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Menús',
+				'mnu_texto'     => 'Menús', // id_menu = 9
                 'mnu_link'      => 'admin/menus',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
@@ -81,7 +82,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Usuarios',
+				'mnu_texto'     => 'Usuarios', // id_menu = 10
                 'mnu_link'      => 'admin/usuarios',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 5,
@@ -89,7 +90,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Niveles de Educación',
+				'mnu_texto'     => 'Niveles de Educación', // id_menu = 11
                 'mnu_link'      => 'admin/tipos_educacion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
@@ -97,7 +98,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Especialidades',
+				'mnu_texto'     => 'Especialidades', // id_menu = 12
                 'mnu_link'      => 'admin/especialidades',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
@@ -105,7 +106,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Cursos',
+				'mnu_texto'     => 'Cursos', // id_menu = 13
                 'mnu_link'      => 'admin/cursos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
@@ -113,7 +114,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Paralelos',
+				'mnu_texto'     => 'Paralelos', // id_menu = 14
                 'mnu_link'      => 'admin/paralelos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
@@ -121,7 +122,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Areas',
+				'mnu_texto'     => 'Areas', // id_menu = 15
                 'mnu_link'      => 'admin/areas',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 5,
@@ -129,7 +130,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Asignaturas',
+				'mnu_texto'     => 'Asignaturas', // id_menu = 16
                 'mnu_link'      => 'admin/asignaturas',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 6,
@@ -137,7 +138,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Institución',
+				'mnu_texto'     => 'Institución', // id_menu = 17
                 'mnu_link'      => 'admin/institucion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 7,
@@ -145,7 +146,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Períodos de Evaluación',
+				'mnu_texto'     => 'Períodos de Evaluación', // id_menu = 18
                 'mnu_link'      => 'admin/periodos_evaluacion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
@@ -153,7 +154,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Aportes de Evaluación',
+				'mnu_texto'     => 'Aportes de Evaluación', // id_menu = 19
                 'mnu_link'      => 'admin/aportes_evaluacion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
@@ -161,7 +162,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Insumos de Evaluación',
+				'mnu_texto'     => 'Insumos de Evaluación', // id_menu = 20
                 'mnu_link'      => 'admin/rubricas_evaluacion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
@@ -169,7 +170,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Escalas de Calificaciones',
+				'mnu_texto'     => 'Escalas de Calificaciones', // id_menu = 21
                 'mnu_link'      => 'admin/escalas_calificaciones',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
@@ -177,7 +178,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Asignaturas Cursos',
+				'mnu_texto'     => 'Asignaturas Cursos', // id_menu = 22
                 'mnu_link'      => 'admin/asignaturas_cursos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
@@ -185,7 +186,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Curso Superior',
+				'mnu_texto'     => 'Curso Superior', // id_menu = 23
                 'mnu_link'      => 'admin/curso_superior',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
@@ -193,7 +194,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Paralelos Tutores',
+				'mnu_texto'     => 'Paralelos Tutores', // id_menu = 24
                 'mnu_link'      => 'admin/paralelos_tutores',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
@@ -201,7 +202,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Paralelos Inspectores',
+				'mnu_texto'     => 'Paralelos Inspectores', // id_menu = 25
                 'mnu_link'      => 'admin/paralelos_inspectores',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
@@ -209,7 +210,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Periodos',
+				'mnu_texto'     => 'Periodos', // id_menu = 26
                 'mnu_link'      => 'admin/cierre_periodos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
@@ -218,117 +219,23 @@ class MenuAdministradorSeeder extends Seeder
 			]
 		];
 
-		$builder = $this->db->table('sw_menu');
-		$builder->insertBatch($menus);
+        $menuModel = new MenusModel();
+        $menuPerfilModel = new MenusPerfilesModel();
 
-        $menus_perfiles = [
-            [
-                'id_perfil' => 1,
-                'id_menu' => 1
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 2
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 3
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 4
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 5
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 6
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 7
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 8
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 9
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 10
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 11
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 12
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 13
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 14
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 15
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 16
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 17
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 18
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 19
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 20
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 21
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 22
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 23
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 24
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 25
-            ],
-            [
-                'id_perfil' => 1,
-                'id_menu' => 26
-            ],
-        ];
-
-        $builder = $this->db->table('sw_menu_perfil');
-		$builder->insertBatch($menus_perfiles);
+        foreach ($menus as $menu) {
+            $menuModel->save([
+                'mnu_texto'     => $menu['mnu_texto'],
+                'mnu_link'      => $menu['mnu_link'],
+                'mnu_nivel'     => $menu['mnu_nivel'],
+                'mnu_orden'     => $menu['mnu_orden'],
+                'mnu_padre'     => $menu['mnu_padre'],
+                'mnu_publicado' => $menu['mnu_publicado']
+            ]);
+            $id_menu = $menuModel->getInsertID();
+            $menuPerfilModel->save([
+                'id_menu' => $id_menu,
+                'id_perfil' => 1
+            ]);
+        }
 	}
 }

@@ -11,6 +11,7 @@ class MenusModel extends Model
     protected $primaryKey = 'id_menu';
 
     protected $useAutoIncrement = true;
+    protected $returnType     = 'object';
 
     protected $allowedFields = [
         'mnu_texto',
