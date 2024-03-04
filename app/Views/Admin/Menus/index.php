@@ -34,7 +34,7 @@ Menus
         <div class="card-body">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <button id="btn_nuevo_menu" class="btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> Nuevo Menú</button>
+                    <button id="btn_nuevo_menu" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#nuevoMenuModal"><i class="fa fa-plus-circle"></i> Nuevo Menú</button>
                     <menu id="nestable-menu">
                         <button class="btn btn-sm btn-success" data-action="expand-all"><i class="fa-solid fa-chevron-down"></i> Expandir Todo</button>
                         <button class="btn btn-sm btn-danger" data-action="collapse-all"><i class="fa-solid fa-chevron-up"></i> Colapsar Todo</button>
@@ -71,6 +71,8 @@ Menus
         </div>
     </div>
 </div>
+
+<div class="viewmodal" style="display: none;"></div>
 <?= $this->endsection('content') ?>
 
 <?= $this->section('scripts') ?>
@@ -107,7 +109,24 @@ Menus
                 });
 
                 $("#btn_nuevo_menu").attr('disabled', true);
+                $(".viewdata").html("");
             }
+        });
+
+        $('#btn_nuevo_menu').click(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "<?= base_url(route_to('menus_form_crear')) ?>",
+                dataType: "json",
+                success: function(response) {
+                    $('.viewmodal').html(response.data).show();
+                    $('#nuevoMenuModal').modal('show');
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
         });
     });
 

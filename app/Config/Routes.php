@@ -44,4 +44,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     //RUTAS PARA MENUS
 	$routes->get('menus', 'Menus::index', ['as' => 'menus']);
     $routes->post('menus/dataMenus', 'Menus::dataMenus', ['as' => 'menus_data']);
+    $routes->get('menus/formAgregar', 'Menus::formAgregar', ['as' => 'menus_form_crear']);
+    $routes->post('menus/guardar', 'Menus::store', ['as' => 'menus_store']);
 });

@@ -30,11 +30,13 @@ class SwMenu extends Migration
 				'type'           => 'INT',
 				'constraint'     => 11,
 				'unsigned'       => true,
+				'default'        => 0
 			],
 			'mnu_padre' => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 				'unsigned'       => true,
+				'default'        => 0
 			],
 			'mnu_publicado' => [
 				'type'           => 'INT',
