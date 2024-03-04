@@ -41,4 +41,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('perfiles/editar/(:any)', 'Perfiles::edit/$1', ['as' => 'perfiles_edit']);
     $routes->post('perfiles/actualizar', 'Perfiles::update', ['as' => 'perfiles_update']);
     $routes->post('perfiles/eliminar', 'Perfiles::delete', ['as' => 'perfiles_delete']);
+    //RUTAS PARA MENUS
+	$routes->get('menus', 'Menus::index', ['as' => 'menus']);
+    $routes->post('menus/dataMenus', 'Menus::dataMenus', ['as' => 'menus_data']);
 });

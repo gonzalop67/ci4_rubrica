@@ -29,10 +29,6 @@
 </table>
 
 <script>
-    $(document).ready(function() {
-        
-    });
-
     function eliminar(id) {
         Swal.fire({
             title: "Eliminar",

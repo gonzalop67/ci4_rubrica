@@ -25,10 +25,12 @@ class MenusModel extends Model
 
     public function listarMenusNivel1($id_perfil)
     {
-        $menus = $this->db->query("SELECT m.*
+        $menus = $this->db->query("SELECT m.*, pe_nombre
                                      FROM sw_menu m,
-                                          sw_menu_perfil mp 
-                                    WHERE m.id_menu = mp.id_menu
+                                          sw_menu_perfil mp,
+                                          sw_perfil p 
+                                    WHERE m.id_menu = mp.id_menu 
+                                      AND p.id_perfil = mp.id_perfil 
                                       AND mp.id_perfil = $id_perfil 
                                       AND mnu_padre = 0
                                     ORDER BY mnu_orden");
@@ -44,5 +46,10 @@ class MenusModel extends Model
                                     ORDER BY mnu_orden");
 
         return $menus->getResult();
+    }
+
+    public function listarMenus($id_perfil)
+    {
+        return "listarMenus";
     }
 }
