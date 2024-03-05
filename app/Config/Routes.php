@@ -49,4 +49,5 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('menus/guardarOrden', 'Menus::guardarOrden', ['as' => 'menus_guardar_orden']);
     $routes->post('menus/editar', 'Menus::edit', ['as' => 'menus_edit']);
     $routes->post('menus/actualizar', 'Menus::update', ['as' => 'menus_update']);
+    $routes->post('menus/eliminar', 'Menus::delete', ['as' => 'menus_delete']);
 });

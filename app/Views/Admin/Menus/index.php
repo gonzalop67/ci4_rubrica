@@ -186,5 +186,49 @@ Menus
             }
         });
     }
+
+    function eliminar(e, obj, id_menu) {
+        e.preventDefault();
+
+        const id_perfil = $("#id_perfil").val();
+
+        const url = $(obj).attr("href");
+
+        Swal.fire({
+            title: "Eliminar",
+            text: "¿Está seguro de eliminar este registro?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, elimínelo!",
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    data: {
+                        id_menu: id_menu
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: response.icon,
+                                title: "Eliminar",
+                                text: response.message,
+                            });
+                            
+                            listarMenus(id_perfil);
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    }
+                });
+            }
+        });
+    }
 </script>
 <?= $this->endsection('scripts') ?>

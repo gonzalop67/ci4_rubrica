@@ -197,6 +197,32 @@ class Menus extends BaseController
         }
     }
 
+    public function delete()
+    {
+        if ($this->request->isAJAX()) {
+            $id_menu = $this->request->getVar('id_menu');
+
+            try {
+                $this->menuModel->delete($id_menu);
+
+                $msg = [
+                    'success' => true,
+                    'icon'    => "success",
+                    'message' => "El Menú fue eliminado correctamente."
+                ];
+            } catch (\Exception $e) {
+                $msg = [
+                    'icon'    => "error",
+                    'message' => "El Menú no se puede eliminar porque tiene registros asociados en otras tablas."
+                ];
+            }
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
+
     public function guardarOrden()
     {
         if ($this->request->isAJAX()) {
