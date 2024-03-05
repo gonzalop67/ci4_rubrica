@@ -148,6 +148,7 @@ class Modalidad extends BaseController
                 $this->modalidadModel->delete($id);
 
                 $msg = [
+                    'success' => true,
                     'icon'    => "success",
                     'message' => "La Modalidad fue eliminada correctamente."
                 ];

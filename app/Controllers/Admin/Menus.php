@@ -55,7 +55,7 @@ class Menus extends BaseController
     {
         if ($this->request->isAJAX()) {
             $msg = [
-                'data' => view('Admin/Menus/modalInsert.php')
+                'data' => view('Admin/Menus/modalInsert')
             ];
 
             echo json_encode($msg);
@@ -114,6 +114,80 @@ class Menus extends BaseController
 
                 $msg = [
                     'success' => 'El Menú fue insertado exitosamente.'
+                ];
+            }
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
+
+    public function edit()
+    {
+        if ($this->request->isAJAX()) {
+            $id_menu = $this->request->getVar('id_menu');
+
+            $row = $this->menuModel->find($id_menu);
+
+            $data = [
+                'id_menu' => $row->id_menu,
+                'texto' => $row->mnu_texto,
+                'enlace' => $row->mnu_link,
+                'publicado' => $row->mnu_publicado,
+            ];
+
+            $msg = [
+                'success' => view('Admin/Menus/modalEdit', $data)
+            ];
+
+            echo json_encode($msg);
+        }
+    }
+
+    public function update()
+    {
+        if ($this->request->isAJAX()) {
+            $validation = \Config\Services::validation();
+
+            $valid = $this->validate([
+                'texto' => [
+                    'label' => 'Texto',
+                    'rules' => 'required|max_length[32]',
+                    'errors' => [
+                        'required' => 'El campo {field} es obligatorio.',
+                        'max_length' => 'El campo {field} no debe exceder los 32 caracteres.',
+                    ]
+                ],
+                'enlace' => [
+                    'label' => 'Enlace',
+                    'rules' => 'required|max_length[64]',
+                    'errors' => [
+                        'required' => 'El campo {field} es obligatorio.',
+                        'max_length' => 'El campo {field} no debe exceder los 64 caracteres.',
+                    ]
+                ]
+            ]);
+
+            if (!$valid) {
+                $msg = [
+                    'error' => [
+                        'texto' => $validation->getError('texto'),
+                        'enlace' => $validation->getError('enlace')
+                    ]
+                ];
+            } else {
+                $data = [
+                    'id_menu' => $this->request->getVar('id_menu'),
+                    'mnu_texto' => trim($this->request->getVar('texto')),
+                    'mnu_link' => trim($this->request->getVar('enlace')),
+                    'mnu_publicado' => $this->request->getVar('publicado'),
+                ];
+
+                $this->menuModel->save($data);
+
+                $msg = [
+                    'success' => 'El Menú fue actualizado exitosamente.'
                 ];
             }
 

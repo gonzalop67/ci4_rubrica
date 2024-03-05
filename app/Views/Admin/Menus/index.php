@@ -162,5 +162,29 @@ Menus
             }
         });
     }
+
+    function edit(e, obj, id_menu) {
+        e.preventDefault();
+
+        const url = $(obj).attr("href");
+
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {
+                id_menu: id_menu
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response.success) {
+                    $('.viewmodal').html(response.success).show();
+                    $('#editarMenuModal').modal('show');
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
 </script>
 <?= $this->endsection('scripts') ?>
