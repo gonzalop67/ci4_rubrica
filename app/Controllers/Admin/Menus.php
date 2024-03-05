@@ -122,4 +122,15 @@ class Menus extends BaseController
             exit('Lo siento, no se puede procesar.');
         }
     }
+
+    public function guardarOrden()
+    {
+        if ($this->request->isAJAX()) {
+            $this->menuModel->guardarOrden($this->request->getVar('menu'));
+
+            echo json_encode(['respuesta' => 'ok']);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
 }

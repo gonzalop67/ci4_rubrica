@@ -83,7 +83,23 @@ Menus
         $("#btn_nuevo_menu").attr('disabled', true);
 
         // activate Nestable
-        $('#nestable').nestable();
+        $('#nestable').nestable().on('change', function() {
+            const id_perfil = $("#id_perfil").val();
+            $.ajax({
+                url: "<?= base_url(route_to('menus_guardar_orden')) ?>",
+                type: 'POST',
+                data: {
+                    menu: JSON.stringify($('#nestable').nestable('serialize'))
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    listarMenus(id_perfil);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        });
 
         $('#nestable-menu').on('click', function(e) {
             var target = $(e.target),

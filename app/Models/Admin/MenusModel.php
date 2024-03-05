@@ -48,8 +48,32 @@ class MenusModel extends Model
         return $menus->getResult();
     }
 
-    public function listarMenus($id_perfil)
+    public function guardarOrden($menu)
     {
-        return "listarMenus";
+        $menus = json_decode($menu);
+        foreach ($menus as $var => $menu) {
+            $this->update($menu->id, [
+                'mnu_padre' => 0,
+                'mnu_orden' => $var + 1
+            ]);
+            // self::where('id', $menu->id)->update(['menu_id' => null, 'orden' => $var + 1]);
+            if (!empty($menu->children)) {
+                $this->guardarOrdenHijos($menu->children, $menu);
+            }
+        }
+    }
+
+    public function guardarOrdenHijos($hijos, $padre)
+    {
+        foreach ($hijos as $key => $hijo) {
+            $this->update($hijo->id, [
+                'mnu_padre' => $padre->id,
+                'mnu_orden' => $key + 1
+            ]);
+            // self::where('id_menu', $hijo['id'])->update(['mnu_padre' => $padre['id'], ',mnu_orden' => $key + 1]);
+            if (!empty($hijo->children)) {
+                $this->guardarOrdenHijos($hijo->children, $hijo);
+            }
+        }
     }
 }
