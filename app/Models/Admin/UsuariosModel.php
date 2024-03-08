@@ -27,4 +27,19 @@ class UsuariosModel extends Model
         'us_activo'
     ];
 
+    public function getRols($id_usuario)
+    {
+        $perfiles = $this->db->query("SELECT u.id_usuario, 
+                                             p.pe_nombre 
+                                        FROM sw_usuario u, 
+                                             sw_perfil p, 
+                                             sw_usuario_perfil up 
+                                       WHERE u.id_usuario = up.id_usuario 
+                                         AND p.id_perfil = up.id_perfil 
+                                         AND u.id_usuario = $id_usuario 
+                                       ORDER BY p.pe_nombre ASC");
+
+        return $perfiles->getResult();
+    }
+
 }

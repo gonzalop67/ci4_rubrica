@@ -36,8 +36,8 @@ Menus
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                     <button id="btn_nuevo_menu" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#nuevoMenuModal"><i class="fa fa-plus-circle"></i> Nuevo Menú</button>
                     <menu id="nestable-menu">
-                        <button class="btn btn-sm btn-success" data-action="expand-all"><i class="fa-solid fa-chevron-down"></i> Expandir Todo</button>
-                        <button class="btn btn-sm btn-danger" data-action="collapse-all"><i class="fa-solid fa-chevron-up"></i> Colapsar Todo</button>
+                        <button id="btn_expandir_todo" class="btn btn-sm btn-success" data-action="expand-all"><i class="fa-solid fa-chevron-down"></i> Expandir Todo</button>
+                        <button id="btn_colapsar_todo" class="btn btn-sm btn-danger" data-action="collapse-all"><i class="fa-solid fa-chevron-up"></i> Colapsar Todo</button>
                     </menu>
                     <form>
                         <div class="mb-3">
@@ -62,7 +62,7 @@ Menus
                     <div id="menu">
                         <div class="dd" id="nestable">
                             <ol class="dd-list viewdata">
-                                
+
                             </ol>
                         </div>
                     </div>
@@ -81,6 +81,8 @@ Menus
     $(document).ready(function() {
         // deshabilitar el botón nuevo menú
         $("#btn_nuevo_menu").attr('disabled', true);
+        $("#btn_expandir_todo").attr('disabled', true);
+        $("#btn_colapsar_todo").attr('disabled', true);
 
         // activate Nestable
         $('#nestable').nestable().on('change', function() {
@@ -116,6 +118,8 @@ Menus
             const id_perfil = $(this).val();
             if (id_perfil !== "") {
                 $("#btn_nuevo_menu").attr('disabled', false);
+                $("#btn_expandir_todo").attr('disabled', false);
+                $("#btn_colapsar_todo").attr('disabled', false);
                 listarMenus(id_perfil);
             } else {
                 Swal.fire({
@@ -125,6 +129,8 @@ Menus
                 });
 
                 $("#btn_nuevo_menu").attr('disabled', true);
+                $("#btn_expandir_todo").attr('disabled', true);
+                $("#btn_colapsar_todo").attr('disabled', true);
                 $(".viewdata").html("");
             }
         });
@@ -154,7 +160,7 @@ Menus
                 id_perfil: id_perfil
             },
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 $('.viewdata').html(response.data);
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -219,7 +225,7 @@ Menus
                                 title: "Eliminar",
                                 text: response.message,
                             });
-                            
+
                             listarMenus(id_perfil);
                         }
                     },

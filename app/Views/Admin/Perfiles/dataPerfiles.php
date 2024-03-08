@@ -7,8 +7,12 @@
             <th>Acciones</th>
         </tr>
     </thead>
-    <tbody class="viewdata">
+    <tbody>
         <?php
+
+        use Hashids\Hashids;
+
+        $hash = new Hashids();
         $contador = 0;
         foreach ($perfiles as $v) {
             $contador++;
@@ -20,7 +24,7 @@
                 <td>
                     <div class="btn-group">
                         <a href="<?= base_url(route_to('perfiles_edit', $v->id_perfil)) ?>" class="btn btn-warning btn-sm" title="Editar"><span class="fa fa-pencil"></span></a>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(<?= $v->id_perfil ?>)"><i class="fa fa-trash"></i></button>
+                        <a href="<?= base_url(route_to('perfiles_delete', $hash->encode($v->id_perfil))) ?>" class="btn btn-danger btn-sm perfiles_delete" title="Eliminar"><span class="fa fa-trash"></span></a>
                     </div>
                 </td>
             </tr>
@@ -29,7 +33,9 @@
 </table>
 
 <script>
-    function eliminar(id) {
+    $(".perfiles_delete").click(function(e) {
+        e.preventDefault();
+        url = $(this).attr('href');
         Swal.fire({
             title: "Eliminar",
             text: "¿Está seguro de eliminar este registro?",
@@ -43,10 +49,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "post",
-                    url: "<?= base_url(route_to('perfiles_delete')) ?>",
-                    data: {
-                        id: id
-                    },
+                    url: url,
                     dataType: "json",
                     success: function(response) {
                         if (response.icon === "success") {
@@ -65,5 +68,5 @@
                 });
             }
         });
-    }
+    });
 </script>

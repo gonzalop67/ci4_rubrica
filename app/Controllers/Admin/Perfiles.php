@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\Admin\PerfilesModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use Hashids\Hashids;
 
 class Perfiles extends BaseController
 {
@@ -118,10 +119,13 @@ class Perfiles extends BaseController
         ]);
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $hash = new Hashids();
+
         if ($this->request->isAJAX()) {
-            $id = $this->request->getVar('id');
+            // $id = $this->request->getVar('id');
+            $id = $hash->decode($id);
 
             try {
                 $this->perfilModel->delete($id);

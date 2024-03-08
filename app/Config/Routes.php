@@ -40,7 +40,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('perfiles/guardar', 'Perfiles::store', ['as' => 'perfiles_store']);
     $routes->get('perfiles/editar/(:any)', 'Perfiles::edit/$1', ['as' => 'perfiles_edit']);
     $routes->post('perfiles/actualizar', 'Perfiles::update', ['as' => 'perfiles_update']);
-    $routes->post('perfiles/eliminar', 'Perfiles::delete', ['as' => 'perfiles_delete']);
+    $routes->post('perfiles/eliminar/(:any)', 'Perfiles::delete/$1', ['as' => 'perfiles_delete']);
     //RUTAS PARA MENUS
 	$routes->get('menus', 'Menus::index', ['as' => 'menus']);
     $routes->post('menus/dataMenus', 'Menus::dataMenus', ['as' => 'menus_data']);
@@ -50,4 +50,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('menus/editar', 'Menus::edit', ['as' => 'menus_edit']);
     $routes->post('menus/actualizar', 'Menus::update', ['as' => 'menus_update']);
     $routes->post('menus/eliminar', 'Menus::delete', ['as' => 'menus_delete']);
+    //RUTAS PARA USUARIOS
+	$routes->get('usuarios', 'Usuarios::index', ['as' => 'usuarios']);
+    $routes->get('usuarios/dataUsuarios', 'Usuarios::dataUsuarios', ['as' => 'usuarios_data']);
+    $routes->get('usuarios/create', 'Usuarios::create', ['as' => 'usuarios_create']);
 });

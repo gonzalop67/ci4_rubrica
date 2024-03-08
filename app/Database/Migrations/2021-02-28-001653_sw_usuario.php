@@ -17,6 +17,10 @@ class SwUsuario extends Migration
 				'type'       => 'VARCHAR',
 				'constraint' => '8',
 			],
+			'us_titulo_descripcion' => [
+				'type'       => 'VARCHAR',
+				'constraint' => '96',
+			],
 			'us_apellidos' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '32',

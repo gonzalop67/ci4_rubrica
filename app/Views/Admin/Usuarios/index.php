@@ -1,17 +1,13 @@
 <?= $this->extend('layouts/layout') ?>
 
 <?= $this->section('title') ?>
-Perfiles
+Usuarios
 <?= $this->endsection('title') ?>
-
-<?= $this->section('css') ?>
-<link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
-<?= $this->endsection('css') ?>
 
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Administración de Perfiles</li>
+        <li class="breadcrumb-item active">Administración de Usuarios</li>
     </ol>
 
     <div class="card mb-4">
@@ -26,8 +22,8 @@ Perfiles
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
-            <a href="<?= base_url(route_to('perfiles_create')) ?>" class="btn btn-block btn-success btn-sm">
-                <i class="fa fa-fw fa-plus-circle"></i> Nuevo Perfil
+            <a href="<?= base_url(route_to('usuarios_create')) ?>" class="btn btn-block btn-success btn-sm">
+                <i class="fa fa-fw fa-plus-circle"></i> Nuevo Usuario
             </a>
             <hr>
             <div class="row">
@@ -40,47 +36,22 @@ Perfiles
 <?= $this->endsection('content') ?>
 
 <?= $this->section('scripts') ?>
-<script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
 <script>
-    let table;
-    let tableInitialized = false;
-
     $(document).ready(function() {
-        dataPerfiles();
-        
+        dataUsuarios();
+
         //Autoclose
         window.setTimeout(function() {
             $(".alert").fadeOut(1500, 0);
         }, 3000); //3 segundos y desaparece
     });
 
-    function dataPerfiles() {
+    function dataUsuarios() {
         $.ajax({
-            url: "<?= base_url(route_to('perfiles_data')) ?>",
+            url: "<?= base_url(route_to('usuarios_data')) ?>",
             dataType: "json",
             success: function(response) {
                 $('.viewdata').html(response.data);
-
-                if (tableInitialized) {
-                    table.destroy();
-                }
-
-                table = new DataTable('#tbl_perfiles', {
-                    columnDefs: [
-                        { orderable: false, targets: [0, 3]}
-                    ],
-                    destroy: true,
-                    pageLength: 5,
-                    lengthMenu: [5, 10, 15, {
-                        label: 'Todos',
-                        value: -1
-                    }],
-                    language: {
-                        url: '//cdn.datatables.net/plug-ins/2.0.1/i18n/es-ES.json',
-                    },
-                });
-
-                tableInitialized = true;
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

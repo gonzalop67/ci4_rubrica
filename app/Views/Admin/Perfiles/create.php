@@ -7,7 +7,7 @@ Crear Un Perfil
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Crear un nuevo Perfil</li>
+        <li class="breadcrumb-item">Crear un nuevo Perfil</li>
     </ol>
 
     <div class="card mb-4">

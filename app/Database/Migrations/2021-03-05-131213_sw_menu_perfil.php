@@ -19,7 +19,7 @@ class SwMenuPerfil extends Migration
 				'unsigned'       => true,
 			],
 		]);
-		$this->forge->addForeignKey('id_perfil','sw_perfil','id_perfil', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('id_perfil','sw_perfil','id_perfil', 'CASCADE', 'RESTRICT');
 		$this->forge->addForeignKey('id_menu','sw_menu','id_menu', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('sw_menu_perfil');
 		$this->db->enableForeignKeyChecks();
