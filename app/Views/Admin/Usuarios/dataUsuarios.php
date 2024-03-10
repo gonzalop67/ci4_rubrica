@@ -1,4 +1,4 @@
-<table id="tbl_perfiles" class="table table-hover table-striped">
+<table id="tbl_usuarios" class="table table-hover table-striped">
     <thead>
         <tr>
             <th>#</th>
@@ -49,7 +49,7 @@
                 </td>
                 <td>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-warning btn-sm" onclick="editar(<?= $v->id_usuario ?>)"><i class="fa fa-pencil"></i></button>
+                        <a href="<?= base_url(route_to('usuarios_edit', $v->id_usuario)) ?>" class="btn btn-warning btn-sm" title="Editar"><span class="fa fa-pencil"></span></a>
                         <button type="button" class="btn btn-danger btn-sm" onclick="eliminar(<?= $v->id_usuario ?>)"><i class="fa fa-trash"></i></button>
                     </div>
                 </td>

@@ -6,16 +6,19 @@ use App\Controllers\BaseController;
 use App\Models\Admin\UsuariosModel;
 use App\Models\Admin\PerfilesModel;
 use App\Models\Admin\UsuariosPerfilesModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Usuarios extends BaseController
 {
     private $usuariosModel;
     private $perfilesModel;
+    private $usuariosPerfilesModel;
 
     public function __construct()
     {
         $this->usuariosModel = new UsuariosModel();
         $this->perfilesModel = new PerfilesModel();
+        $this->usuariosPerfilesModel = new UsuariosPerfilesModel();
     }
 
     public function index()
@@ -104,7 +107,14 @@ class Usuarios extends BaseController
                 ]
             ],
             'perfiles.*' => 'permit_empty|is_not_unique[sw_perfil.id_perfil]',
-            'foto' => 'uploaded[foto]|is_image[foto]'
+            'foto' => [
+                'label'  => 'Avatar',
+                'rules'  => 'uploaded[foto]|is_image[foto]',
+                'errors' => [
+                    'uploaded' => 'El campo {field} es obligatorio.',
+                    'is_image' => 'Debe subir un archivo de imagen.'
+                ]
+            ]
         ])) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
@@ -147,6 +157,22 @@ class Usuarios extends BaseController
             'type' => 'success',
             'icon' => 'check',
             'body' => 'El Usuario fue ingresado correctamente.'
+        ]);
+    }
+
+    public function edit($id)
+    {
+        if (!$usuario = $this->usuariosModel->find($id)) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $perfiles = $this->perfilesModel->orderBy('pe_nombre')->findAll();
+        $perfilesUsuario = $this->usuariosPerfilesModel->where('id_usuario', $id)->findAll();
+
+        return view('Admin/Usuarios/edit', [
+            'usuario' => $usuario,
+            'perfiles' => $perfiles,
+            'perfilesUsuario' => $perfilesUsuario
         ]);
     }
 }

@@ -4,6 +4,10 @@
 Usuarios
 <?= $this->endSection('title') ?>
 
+<?= $this->section('css') ?>
+<link rel="stylesheet" href="//cdn.datatables.net/2.0.1/css/dataTables.dataTables.min.css">
+<?= $this->endsection('css') ?>
+
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
     <ol class="breadcrumb mb-4">
@@ -36,7 +40,11 @@ Usuarios
 <?= $this->endSection('content') ?>
 
 <?= $this->section('scripts') ?>
+<script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
 <script>
+    let table;
+    let tableInitialized = false;
+
     $(document).ready(function() {
         dataUsuarios();
 
@@ -52,6 +60,27 @@ Usuarios
             dataType: "json",
             success: function(response) {
                 $('.viewdata').html(response.data);
+
+                if (tableInitialized) {
+                    table.destroy();
+                }
+
+                table = new DataTable('#tbl_usuarios', {
+                    columnDefs: [
+                        { orderable: false, targets: [0, 5, 6, 7]}
+                    ],
+                    destroy: true,
+                    pageLength: 4,
+                    lengthMenu: [4, 8, 12, {
+                        label: 'Todos',
+                        value: -1
+                    }],
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/2.0.1/i18n/es-ES.json',
+                    },
+                });
+
+                tableInitialized = true;
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

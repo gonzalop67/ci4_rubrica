@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/layout') ?>
 
 <?= $this->section('title') ?>
-Crear Un Usuario
+Editar Un Usuario
 <?= $this->endsection('title') ?>
 
 <?= $this->section('css') ?>
@@ -17,38 +17,39 @@ Crear Un Usuario
     <div class="card mt-2 mb-4">
         <div class="card-header">
             <i class="fa fa-graduation-cap me-1"></i>
-            Crear Nuevo Usuario
+            Editar Usuario
         </div>
         <div class="card-body">
-            <form action="<?= base_url(route_to('usuarios_store')) ?>" enctype="multipart/form-data" method="post">
+            <form action="<?= base_url(route_to('usuarios_update')) ?>" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="id_usuario" value="<?= $usuario->id_usuario ?>">
                 <div class="mb-3">
                     <label for="abreviatura" class="form-label">Título Abreviatura:</label>
-                    <input type="text" class="form-control <?= session('errors.abreviatura') ? 'is-invalid' : '' ?>" value="<?= old('abreviatura') ?>" name="abreviatura" id="abreviatura" placeholder="Abreviatura del Título" autofocus>
+                    <input type="text" class="form-control <?= session('errors.abreviatura') ? 'is-invalid' : '' ?>" value="<?= old('abreviatura') ?? $usuario->us_titulo ?>" name="abreviatura" id="abreviatura" placeholder="Abreviatura del Título" autofocus>
                     <p class="invalid-feedback"><?= session('errors.abreviatura') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Título Descripcion:</label>
-                    <input type="text" class="form-control <?= session('errors.descripcion') ? 'is-invalid' : '' ?>" value="<?= old('descripcion') ?>" name="descripcion" id="descripcion" placeholder="Descripción del Título">
+                    <input type="text" class="form-control <?= session('errors.descripcion') ? 'is-invalid' : '' ?>" value="<?= old('descripcion') ?? $usuario->us_titulo_descripcion ?>" name="descripcion" id="descripcion" placeholder="Descripción del Título">
                     <p class="invalid-feedback"><?= session('errors.descripcion') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="apellidos" class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control <?= session('errors.apellidos') ? 'is-invalid' : '' ?>" value="<?= old('apellidos') ?>" name="apellidos" id="apellidos" placeholder="Apellidos del Usuario">
+                    <input type="text" class="form-control <?= session('errors.apellidos') ? 'is-invalid' : '' ?>" value="<?= old('apellidos') ?? $usuario->us_apellidos ?>" name="apellidos" id="apellidos" placeholder="Apellidos del Usuario">
                     <p class="invalid-feedback"><?= session('errors.apellidos') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="nombres" class="form-label">Nombres:</label>
-                    <input type="text" class="form-control <?= session('errors.nombres') ? 'is-invalid' : '' ?>" value="<?= old('nombres') ?>" name="nombres" id="nombres" placeholder="Nombres del Usuario">
+                    <input type="text" class="form-control <?= session('errors.nombres') ? 'is-invalid' : '' ?>" value="<?= old('nombres') ?? $usuario->us_nombres ?>" name="nombres" id="nombres" placeholder="Nombres del Usuario">
                     <p class="invalid-feedback"><?= session('errors.nombres') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="nombre_corto" class="form-label">Nombre Corto:</label>
-                    <input type="text" class="form-control <?= session('errors.nombre_corto') ? 'is-invalid' : '' ?>" value="<?= old('nombre_corto') ?>" name="nombre_corto" id="nombre_corto" placeholder="Nombre Corto del Usuario">
+                    <input type="text" class="form-control <?= session('errors.nombre_corto') ? 'is-invalid' : '' ?>" value="<?= old('nombre_corto') ?? $usuario->us_shortname ?>" name="nombre_corto" id="nombre_corto" placeholder="Nombre Corto del Usuario">
                     <p class="invalid-feedback"><?= session('errors.nombre_corto') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="usuario" class="form-label">Usuario:</label>
-                    <input type="text" class="form-control <?= session('errors.usuario') ? 'is-invalid' : '' ?>" value="<?= old('usuario') ?>" name="usuario" id="usuario" placeholder="Nombre de Usuario">
+                    <input type="text" class="form-control <?= session('errors.usuario') ? 'is-invalid' : '' ?>" value="<?= old('usuario') ?? $usuario->us_login ?>" name="usuario" id="usuario" placeholder="Nombre de Usuario">
                     <p class="invalid-feedback"><?= session('errors.usuario') ?></p>
                 </div>
                 <div class="mb-3">
@@ -59,16 +60,16 @@ Crear Un Usuario
                 <div class="mb-3">
                     <label for="genero" class="form-label">Género:</label>
                     <select class="form-select" id="genero" name="genero">
-                        <option value="F">Femenino</option>
-                        <option value="M">Masculino</option>
+                        <option value="F" <?= $usuario->us_genero == 'F' ? 'selected' : '' ?>>Femenino</option>
+                        <option value="M" <?= $usuario->us_genero == 'M' ? 'selected' : '' ?>>Masculino</option>
                     </select>
                     <p class="invalid-feedback"><?= session('errors.genero') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="activo" class="form-label">Activo:</label>
                     <select class="form-select" id="activo" name="activo">
-                        <option value="1">Sí</option>
-                        <option value="0">No</option>
+                        <option value="1" <?= $usuario->us_activo == '1' ? 'selected' : '' ?>>Sí</option>
+                        <option value="0" <?= $usuario->us_activo == '0' ? 'selected' : '' ?>>No</option>
                     </select>
                     <p class="invalid-feedback"><?= session('errors.activo') ?></p>
                 </div>
@@ -86,6 +87,14 @@ Crear Un Usuario
                                                 : '')
                                         : ''
                                 ?>
+                                <?php
+                                foreach ($perfilesUsuario as $perfilUsuario) {
+                                    if ($v->id_perfil == $perfilUsuario->id_perfil) {
+                                        echo 'checked';
+                                        break;
+                                    }
+                                }
+                                ?>
                                 >
                                 <?= $v->pe_nombre ?>
                             </label>
@@ -96,17 +105,22 @@ Crear Un Usuario
                 <div id="img_upload">
                     <div class="mb-3">
                         <label for="avatar" class="form-label">Avatar</label>
-                        <div id="img_div" class="hide">
-                            <img id="avatar" name="avatar" class="img-thumbnail" width="75">
-                        </div>
+                        <?php if ($usuario->us_foto != ''): ?>
+                            <div id="img_div">
+                                <img src="<?= base_url() . "avatars/" . $usuario->us_foto; ?>" id="avatar" name="avatar" class="img-thumbnail" width="75">
+                            </div>
+                        <?php else: ?>
+                            <div id="img_div" class="hide">
+                                <img id="avatar" name="avatar" class="img-thumbnail" width="75">
+                            </div>
+                        <?php endif ?> 
+                        <input type="hidden" name="imagen_usuario_oculta" value="<?= $usuario->us_foto ?>" />
                     </div>
                     <div class="mb-3">
-                        <!-- <label for="foto" class="form-label"></label> -->
-                        <input type="file" name="foto" id="foto" class="<?= session('errors.foto') ? 'is-invalid' : '' ?>">
+                        <input type="file" name="foto" id="foto">
                         <p class="invalid-feedback"><?= session('errors.foto') ?></p>
                     </div>
                 </div>
-                <!-- <?php var_dump(session('errors.foto')) ?> -->
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a href="<?= base_url(route_to('usuarios')) ?>" class="btn btn-secondary">Regresar</a>
             </form>
