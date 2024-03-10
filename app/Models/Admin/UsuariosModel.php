@@ -16,6 +16,7 @@ class UsuariosModel extends Model
 
     protected $allowedFields = [
         'us_titulo',
+        'us_titulo_descripcion',
         'us_apellidos',
         'us_nombres',
         'us_shortname',

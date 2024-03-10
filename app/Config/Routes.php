@@ -54,4 +54,5 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
 	$routes->get('usuarios', 'Usuarios::index', ['as' => 'usuarios']);
     $routes->get('usuarios/dataUsuarios', 'Usuarios::dataUsuarios', ['as' => 'usuarios_data']);
     $routes->get('usuarios/create', 'Usuarios::create', ['as' => 'usuarios_create']);
+    $routes->post('usuarios/guardar', 'Usuarios::store', ['as' => 'usuarios_store']);
 });

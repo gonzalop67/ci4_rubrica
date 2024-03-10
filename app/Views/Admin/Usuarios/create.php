@@ -6,9 +6,8 @@ Crear Un Usuario
 
 <?= $this->section('css') ?>
 <style>
-.img-thumbnail {
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
-          box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+.hide {
+    display: none;
 }
 </style>
 <?= $this->endsection('css') ?>
@@ -28,37 +27,37 @@ Crear Un Usuario
             <form action="<?= base_url(route_to('usuarios_store')) ?>" enctype="multipart/form-data" method="post">
                 <div class="mb-3">
                     <label for="abreviatura" class="form-label">Título Abreviatura:</label>
-                    <input type="text" class="form-control <?= session('errors.abreviatura') ? 'is-invalid' : '' ?>" value="<?= old('abreviatura') ?>" name="abreviatura" id="abreviatura" placeholder="Abreviatura del Título" autofocus required>
+                    <input type="text" class="form-control <?= session('errors.abreviatura') ? 'is-invalid' : '' ?>" value="<?= old('abreviatura') ?>" name="abreviatura" id="abreviatura" placeholder="Abreviatura del Título" autofocus>
                     <p class="invalid-feedback"><?= session('errors.abreviatura') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Título Descripcion:</label>
-                    <input type="text" class="form-control <?= session('errors.descripcion') ? 'is-invalid' : '' ?>" value="<?= old('descripcion') ?>" name="descripcion" id="descripcion" placeholder="Descripción del Título" required>
+                    <input type="text" class="form-control <?= session('errors.descripcion') ? 'is-invalid' : '' ?>" value="<?= old('descripcion') ?>" name="descripcion" id="descripcion" placeholder="Descripción del Título">
                     <p class="invalid-feedback"><?= session('errors.descripcion') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="apellidos" class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control <?= session('errors.apellidos') ? 'is-invalid' : '' ?>" value="<?= old('apellidos') ?>" name="apellidos" id="apellidos" placeholder="Apellidos del Usuario" required>
+                    <input type="text" class="form-control <?= session('errors.apellidos') ? 'is-invalid' : '' ?>" value="<?= old('apellidos') ?>" name="apellidos" id="apellidos" placeholder="Apellidos del Usuario">
                     <p class="invalid-feedback"><?= session('errors.apellidos') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="nombres" class="form-label">Nombres:</label>
-                    <input type="text" class="form-control <?= session('errors.nombres') ? 'is-invalid' : '' ?>" value="<?= old('nombres') ?>" name="nombres" id="nombres" placeholder="Nombres del Usuario" required>
+                    <input type="text" class="form-control <?= session('errors.nombres') ? 'is-invalid' : '' ?>" value="<?= old('nombres') ?>" name="nombres" id="nombres" placeholder="Nombres del Usuario">
                     <p class="invalid-feedback"><?= session('errors.nombres') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="nombre_corto" class="form-label">Nombre Corto:</label>
-                    <input type="text" class="form-control <?= session('errors.nombre_corto') ? 'is-invalid' : '' ?>" value="<?= old('nombre_corto') ?>" name="nombre_corto" id="nombre_corto" placeholder="Nombre Corto del Usuario" required>
+                    <input type="text" class="form-control <?= session('errors.nombre_corto') ? 'is-invalid' : '' ?>" value="<?= old('nombre_corto') ?>" name="nombre_corto" id="nombre_corto" placeholder="Nombre Corto del Usuario">
                     <p class="invalid-feedback"><?= session('errors.nombre_corto') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="usuario" class="form-label">Usuario:</label>
-                    <input type="text" class="form-control <?= session('errors.usuario') ? 'is-invalid' : '' ?>" value="<?= old('usuario') ?>" name="usuario" id="usuario" placeholder="Nombre de Usuario" required>
+                    <input type="text" class="form-control <?= session('errors.usuario') ? 'is-invalid' : '' ?>" value="<?= old('usuario') ?>" name="usuario" id="usuario" placeholder="Nombre de Usuario">
                     <p class="invalid-feedback"><?= session('errors.usuario') ?></p>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password:</label>
-                    <input type="text" class="form-control <?= session('errors.password') ? 'is-invalid' : '' ?>" value="<?= old('password') ?>" name="password" id="password" placeholder="Clave del Usuario" required>
+                    <input type="text" class="form-control <?= session('errors.password') ? 'is-invalid' : '' ?>" value="<?= old('password') ?>" name="password" id="password" placeholder="Clave del Usuario">
                     <p class="invalid-feedback"><?= session('errors.password') ?></p>
                 </div>
                 <div class="mb-3">
@@ -70,7 +69,15 @@ Crear Un Usuario
                     <p class="invalid-feedback"><?= session('errors.genero') ?></p>
                 </div>
                 <div class="mb-3">
-                    <label for="id_perfil" class="form-label">Perfil:</label>
+                    <label for="activo" class="form-label">Activo:</label>
+                    <select class="form-select" id="activo" name="activo">
+                        <option value="1">Sí</option>
+                        <option value="0">No</option>
+                    </select>
+                    <p class="invalid-feedback"><?= session('errors.activo') ?></p>
+                </div>
+                <div class="mb-3">
+                    <label for="perfiles" class="form-label">Perfil:</label>
                     <?php foreach ($perfiles as $v) : ?>
                         <div class="control">
                             <label class="checkbox">
@@ -92,19 +99,72 @@ Crear Un Usuario
                 </div>
                 <div id="img_upload">
                     <div class="mb-3">
-                        <label for="us_avatar" class="form-label">Avatar</label>
-                        <div id="img_div" style="display: none;">
-                            <img id="us_avatar" name="us_avatar" class="img-thumbnail" width="75">
+                        <label for="avatar" class="form-label">Avatar</label>
+                        <div id="img_div" class="hide">
+                            <img id="avatar" name="avatar" class="img-thumbnail" width="75">
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="us_foto" class="form-label"></label>
-                        <input type="file" name="us_foto" id="us_foto">
-                        <p class="invalid-feedback"><?= session('errors.us_foto') ?></p>
+                        <!-- <label for="foto" class="form-label"></label> -->
+                        <input type="file" name="foto" id="foto">
+                        <p class="invalid-feedback"><?= session('errors.foto') ?></p>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="<?= base_url(route_to('usuarios')) ?>" class="btn btn-secondary">Regresar</a>
             </form>
         </div>
     </div>
 </div>
 <?= $this->endsection('content') ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    $(document).ready(function() {
+        $("#foto").change(function() {
+            $("#img_div").removeClass("hide");
+            filePreview(this);
+        });
+
+        $("#abreviatura").blur(function() {
+            let abreviatura = $(this).val();
+            let apellidos = $("#apellidos").val();
+            let nombres = $("#nombres").val();
+
+            let vec_apellidos = apellidos.split(" ");
+            let vec_nombres = nombres.split(" ");
+            $("#nombre_corto").val(abreviatura + " " + vec_nombres[0] + " " + vec_apellidos[0]);
+        });
+
+        $("#apellidos").blur(function() {
+            let abreviatura = $("#abreviatura").val();
+            let apellidos = $(this).val();
+            let nombres = $("#nombres").val();
+
+            let vec_apellidos = apellidos.split(" ");
+            let vec_nombres = nombres.split(" ");
+            $("#nombre_corto").val(abreviatura + " " + vec_nombres[0] + " " + vec_apellidos[0]);
+        });
+
+        $("#nombres").blur(function() {
+            let abreviatura = $("#abreviatura").val();
+            let apellidos = $("#apellidos").val();
+            let nombres = $(this).val();
+
+            let vec_apellidos = apellidos.split(" ");
+            let vec_nombres = nombres.split(" ");
+            $("#nombre_corto").val(abreviatura + " " + vec_nombres[0] + " " + vec_apellidos[0]);
+        });
+    });
+
+    function filePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.readAsDataURL(input.files[0]);
+            reader.onload = function(e) {
+                $("#avatar").attr("src", e.target.result);
+            }
+        }
+    }
+</script>
+<?= $this->endsection('scripts') ?>

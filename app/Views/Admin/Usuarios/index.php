@@ -2,7 +2,7 @@
 
 <?= $this->section('title') ?>
 Usuarios
-<?= $this->endsection('title') ?>
+<?= $this->endSection('title') ?>
 
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
@@ -33,7 +33,7 @@ Usuarios
         </div>
     </div>
 </div>
-<?= $this->endsection('content') ?>
+<?= $this->endSection('content') ?>
 
 <?= $this->section('scripts') ?>
 <script>
@@ -59,4 +59,4 @@ Usuarios
         });
     }
 </script>
-<?= $this->endsection('scripts') ?>
+<?= $this->endSection('scripts') ?>

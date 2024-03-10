@@ -24,7 +24,9 @@
             <tr>
                 <td><?= $contador; ?></td>
                 <td><?= $v->id_usuario; ?></td>
-                <td><?= $v->us_foto; ?></td>
+                <td>
+                    <img src="<?= base_url() . "avatars/" . $v->us_foto; ?>" class="img-thumbnail" width="50" alt="Avatar del Usuario">
+                </td>
                 <td><?= $v->us_apellidos . " " . $v->us_nombres; ?></td>
                 <td><?= $v->us_login; ?></td>
                 <td>
