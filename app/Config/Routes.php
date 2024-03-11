@@ -65,4 +65,5 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('niveles_educacion/editar/(:any)', 'Niveles_educacion::edit/$1', ['as' => 'niveles_educacion_edit']);
     $routes->post('niveles_educacion/actualizar', 'Niveles_educacion::update', ['as' => 'niveles_educacion_update']);
     $routes->post('niveles_educacion/eliminar', 'Niveles_educacion::delete', ['as' => 'niveles_educacion_delete']);
+    $routes->post('niveles_educacion/saveNewPositions', 'Niveles_educacion::saveNewPositions', ['as' => 'niveles_educacion_saveNewPositions']);
 });

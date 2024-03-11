@@ -27,4 +27,13 @@ class NivelesEducacionModel extends Model
 
         return $nivel_educacion == null ? 1 : $nivel_educacion->secuencial + 1;
     }
+
+    public function actualizarOrden($id_nivel_educacion, $orden)
+    {
+        $data = [
+            'orden' => $orden
+        ];
+
+        $this->update($id_nivel_educacion, $data);
+    }
 }
