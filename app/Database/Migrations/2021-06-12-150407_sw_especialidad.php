@@ -14,7 +14,7 @@ class SwEspecialidad extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'id_tipo_educacion' => [
+			'id_nivel_educacion' => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 				'unsigned'       => true,
@@ -39,7 +39,7 @@ class SwEspecialidad extends Migration
 			],
 		]);
 		$this->forge->addKey('id_especialidad', true);
-		$this->forge->addForeignKey('id_tipo_educacion','sw_tipo_educacion','id_tipo_educacion');
+		$this->forge->addForeignKey('id_nivel_educacion','sw_nivel_educacion','id_nivel_educacion');
 		$this->forge->createTable('sw_especialidad');
 		$this->db->enableForeignKeyChecks();
 	}

@@ -57,4 +57,12 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('usuarios/guardar', 'Usuarios::store', ['as' => 'usuarios_store']);
     $routes->get('usuarios/editar/(:any)', 'Usuarios::edit/$1', ['as' => 'usuarios_edit']);
     $routes->post('usuarios/actualizar', 'Usuarios::update', ['as' => 'usuarios_update']);
+    //RUTAS PARA NIVELES DE EDUCACION
+	$routes->get('niveles_educacion', 'Niveles_educacion::index', ['as' => 'niveles_educacion']);
+    $routes->get('niveles_educacion/dataNivelesEducacion', 'Niveles_educacion::dataNivelesEducacion', ['as' => 'niveles_educacion_data']);
+    $routes->get('niveles_educacion/create', 'Niveles_educacion::create', ['as' => 'niveles_educacion_create']);
+    $routes->post('niveles_educacion/guardar', 'Niveles_educacion::store', ['as' => 'niveles_educacion_store']);
+    $routes->get('niveles_educacion/editar/(:any)', 'Niveles_educacion::edit/$1', ['as' => 'niveles_educacion_edit']);
+    $routes->post('niveles_educacion/actualizar', 'Niveles_educacion::update', ['as' => 'niveles_educacion_update']);
+    $routes->post('niveles_educacion/eliminar', 'Niveles_educacion::delete', ['as' => 'niveles_educacion_delete']);
 });

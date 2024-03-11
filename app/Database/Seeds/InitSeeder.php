@@ -25,7 +25,7 @@ class InitSeeder extends Seeder
             'sw_tipo_aporte',
             'sw_tipo_asignatura',
             'sw_tipo_documento',
-            'sw_tipo_educacion',
+            'sw_nivel_educacion',
             'sw_tipo_periodo',
             'sw_usuario',
             'sw_usuario_perfil'

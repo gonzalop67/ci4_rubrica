@@ -8,38 +8,33 @@ class NivelEducacionSeeder extends Seeder
 	{
 		$niveles_educacion = [
 			[
-				'id_periodo_lectivo' => 1,
-				'te_nombre' => 'Educación General Básica Preparatoria',
-				'te_bachillerato' => 0,
-                'te_orden' => 1
+				'nombre' => 'Educación General Básica Preparatoria',
+				'es_bachillerato' => 0,
+                'orden' => 1
 			],
 			[
-				'id_periodo_lectivo' => 1,
-				'te_nombre' => 'Educación General Básica Elemental',
-				'te_bachillerato' => 0,
-                'te_orden' => 2
+				'nombre' => 'Educación General Básica Elemental',
+				'es_bachillerato' => 0,
+                'orden' => 2
 			],
 			[
-				'id_periodo_lectivo' => 1,
-				'te_nombre' => 'Educación General Básica Media',
-				'te_bachillerato' => 0,
-                'te_orden' => 3
+				'nombre' => 'Educación General Básica Media',
+				'es_bachillerato' => 0,
+                'orden' => 3
             ],
             [
-				'id_periodo_lectivo' => 1,
-				'te_nombre' => 'Educación General Básica Superior',
-				'te_bachillerato' => 0,
-                'te_orden' => 4
+				'nombre' => 'Educación General Básica Superior',
+				'es_bachillerato' => 0,
+                'orden' => 4
             ],
             [
-				'id_periodo_lectivo' => 1,
-				'te_nombre' => 'Bachillerato General Unificado',
-				'te_bachillerato' => 1,
-                'te_orden' => 5
+				'nombre' => 'Bachillerato General Unificado',
+				'es_bachillerato' => 1,
+                'orden' => 5
             ],
 		];
 
-		$builder = $this->db->table('sw_tipo_educacion');
+		$builder = $this->db->table('sw_nivel_educacion');
 		$builder->insertBatch($niveles_educacion);
 	}
 }
