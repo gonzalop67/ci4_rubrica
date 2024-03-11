@@ -56,4 +56,5 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('usuarios/create', 'Usuarios::create', ['as' => 'usuarios_create']);
     $routes->post('usuarios/guardar', 'Usuarios::store', ['as' => 'usuarios_store']);
     $routes->get('usuarios/editar/(:any)', 'Usuarios::edit/$1', ['as' => 'usuarios_edit']);
+    $routes->post('usuarios/actualizar', 'Usuarios::update', ['as' => 'usuarios_update']);
 });

@@ -119,6 +119,17 @@ class Usuarios extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
+        // Comprobar que se han pasado los perfiles a asociar al nuevo usuario
+        $perfiles = $this->request->getVar('perfiles');
+
+        if ($perfiles == null) {
+            return redirect()->back()->withInput()->with('msg', [
+                'type' => 'danger',
+                'icon' => 'exclamation-triangle',
+                'body' => 'Debe seleccionar al menos un perfil a relacionar...'
+            ]);
+        }
+
         $file = $this->request->getFile('foto');
         $foto = $file->getRandomName();
 
@@ -139,7 +150,6 @@ class Usuarios extends BaseController
         $this->usuariosModel->save($data);
 
         // Relacionar los perfiles con el nuevo usuario
-        $perfiles = $this->request->getVar('perfiles');
         $id_usuario = $this->usuariosModel->getInsertID();
 
         $usuariosPerfilesModel = new UsuariosPerfilesModel();
@@ -173,6 +183,115 @@ class Usuarios extends BaseController
             'usuario' => $usuario,
             'perfiles' => $perfiles,
             'perfilesUsuario' => $perfilesUsuario
+        ]);
+    }
+
+    public function update()
+    {
+        $id_usuario = $this->request->getVar('id_usuario');
+        if (!$this->validate([
+            'abreviatura' => [
+                'label'  => 'Abreviatura',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ],
+            'descripcion' => [
+                'label'  => 'Descripción del Título',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ],
+            'apellidos' => [
+                'label'  => 'Apellidos',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ],
+            'nombres' => [
+                'label'  => 'Nombres',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ],
+            'nombre_corto' => [
+                'label'  => 'Nombre Corto',
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ],
+            'usuario' => [
+                'label'  => 'Usuario',
+                'rules'  => "required|is_unique[sw_usuario.us_login,id_usuario,{$id_usuario}]",
+                'errors' => [
+                    'required'  => 'El campo {field} es obligatorio',
+                    'is_unique' => 'El campo {field} tiene que contener un valor único'
+                ]
+            ],
+            'perfiles.*' => 'permit_empty|is_not_unique[sw_perfil.id_perfil]',
+            'foto' => [
+                'label'  => 'Avatar',
+                'rules'  => 'permit_empty|is_image[foto]',
+                'errors' => [
+                    'is_image' => 'Debe subir un archivo de imagen.'
+                ]
+            ]
+        ])) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        // Comprobar que se han pasado los perfiles a asociar al nuevo usuario
+        $perfiles = $this->request->getVar('perfiles');
+
+        if ($perfiles == null) {
+            return redirect()->back()->withInput()->with('msg', [
+                'type' => 'danger',
+                'icon' => 'exclamation-triangle',
+                'body' => 'Debe seleccionar al menos un perfil a relacionar...'
+            ]);
+        }
+
+        $file = $this->request->getFile('foto');
+
+        if ($file->getClientName() != "") {
+            $foto = $file->getRandomName();
+
+            $file->store("avatars/", $foto);
+        } else {
+            $foto = $this->request->getVar('imagen_usuario_oculta');
+        }
+
+        $data = [
+            'id_usuario' => $id_usuario,
+            'us_titulo' => $this->request->getVar('abreviatura'),
+            'us_titulo_descripcion' => $this->request->getVar('descripcion'),
+            'us_apellidos' => $this->request->getVar('apellidos'),
+            'us_nombres' => $this->request->getVar('nombres'),
+            'us_shortname' => $this->request->getVar('nombre_corto'),
+            'us_fullname' => $this->request->getVar('apellidos') . " " . $this->request->getVar('nombres'),
+            'us_login' => $this->request->getVar('usuario'),
+            'us_foto' => $foto,
+            'us_genero' => $this->request->getVar('genero'),
+            'us_activo' => $this->request->getVar('activo')
+        ];
+
+        $this->usuariosModel->save($data);
+
+        if ($this->request->getVar('password') != '') {
+            $this->usuariosModel->update($id_usuario, [
+                'us_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+            ]);
+        }
+
+        return redirect('usuarios')->with('msg', [
+            'type' => 'success',
+            'icon' => 'check',
+            'body' => 'El Usuario fue actualizado correctamente.'
         ]);
     }
 }

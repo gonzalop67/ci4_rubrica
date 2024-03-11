@@ -20,6 +20,12 @@ Editar Un Usuario
             Editar Usuario
         </div>
         <div class="card-body">
+            <?php if (session('msg')) : ?>
+                <div class="alert alert-<?= session('msg.type') ?> alert-dismissible fade show" role="alert">
+                    <p><i class="icon fa fa-<?= session('msg.icon') ?>"></i> <?= session('msg.body') ?></p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif ?>
             <form action="<?= base_url(route_to('usuarios_update')) ?>" enctype="multipart/form-data" method="post">
                 <input type="hidden" name="id_usuario" value="<?= $usuario->id_usuario ?>">
                 <div class="mb-3">
@@ -117,10 +123,11 @@ Editar Un Usuario
                         <input type="hidden" name="imagen_usuario_oculta" value="<?= $usuario->us_foto ?>" />
                     </div>
                     <div class="mb-3">
-                        <input type="file" name="foto" id="foto">
+                        <input type="file" name="foto" id="foto" class="<?= session('errors.foto') ? 'is-invalid' : '' ?>">
                         <p class="invalid-feedback"><?= session('errors.foto') ?></p>
                     </div>
                 </div>
+                <!-- <?php var_dump(session('errors')) ?> -->
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a href="<?= base_url(route_to('usuarios')) ?>" class="btn btn-secondary">Regresar</a>
             </form>
