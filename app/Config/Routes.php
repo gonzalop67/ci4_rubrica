@@ -69,4 +69,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     //RUTAS PARA ESPECIALIDADES
     $routes->get('especialidades', 'Especialidades::index', ['as' => 'especialidades']);
     $routes->get('especialidades/dataEspecialidades', 'Especialidades::dataEspecialidades', ['as' => 'especialidades_data']);
+    $routes->get('especialidades/create', 'Especialidades::create', ['as' => 'especialidades_create']);
+    $routes->post('especialidades/guardar', 'Especialidades::store', ['as' => 'especialidades_store']);
 });

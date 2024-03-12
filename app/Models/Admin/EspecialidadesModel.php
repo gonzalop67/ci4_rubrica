@@ -22,4 +22,22 @@ class EspecialidadesModel extends Model
         'es_orden'
     ];
 
+    public function getNivelEducacion($id_especialidad)
+    {
+        $registro = $this->db->query("SELECT ni.nombre 
+                                        FROM sw_nivel_educacion ni,
+                                             sw_especialidad es
+                                       WHERE ni.id_nivel_educacion = es.id_nivel_educacion 
+                                         AND id_especialidad = $id_especialidad");
+
+        return $registro->getRow()->nombre;
+    }
+
+    public function getNextOrderNumber()
+    {
+        $query = $this->db->query("SELECT MAX(es_orden) AS secuencial FROM sw_especialidad");
+        $especialidad = $query->getRow();
+
+        return $especialidad == null ? 1 : $especialidad->secuencial + 1;
+    }
 }

@@ -30,6 +30,7 @@ Especialidades
             <table id="tbl_nivel_educacion" class="table table-hover table-striped">
                 <thead>
                     <th>Id</th>
+                    <th>Nivel Educación</th>
                     <th>Nombre</th>
                     <th>Figura</th>
                     <th>Acciones</th>
@@ -49,6 +50,10 @@ Especialidades
     $(document).ready(function() {
         dataEspecialidades();
 
+        //Autoclose
+        window.setTimeout(function() {
+            $(".alert").fadeOut(1500, 0);
+        }, 3000); //3 segundos y desaparece
     });
 
     function dataEspecialidades() {

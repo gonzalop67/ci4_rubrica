@@ -1,6 +1,17 @@
-<?php foreach ($especialidades as $especialidad) { ?>
+<?php
+
+use App\Models\Admin\EspecialidadesModel;
+
+$especialidadModel = new EspecialidadesModel();
+
+foreach ($especialidades as $especialidad) { ?>
     <tr data-index='<?= $especialidad->id_especialidad ?>' data-orden='<?= $especialidad->es_orden ?>'>
         <td><?= $especialidad->id_especialidad ?></td>
+        <td>
+            <?php
+            echo $especialidadModel->getNivelEducacion($especialidad->id_especialidad);
+            ?>
+        </td>
         <td><?= $especialidad->es_nombre ?></td>
         <td><?= $especialidad->es_figura ?></td>
         <td>
