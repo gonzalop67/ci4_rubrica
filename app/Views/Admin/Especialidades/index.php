@@ -68,5 +68,44 @@ Especialidades
             }
         });
     }
+
+    function eliminar(id) {
+        Swal.fire({
+            title: "Eliminar",
+            text: "¿Está seguro de eliminar este registro?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, elimínelo!",
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "<?= base_url(route_to('especialidades_delete')) ?>",
+                    data: {
+                        id: id
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response)
+                        if (response.success) {
+                            Swal.fire({
+                                icon: response.icon,
+                                title: "Eliminar",
+                                text: response.message,
+                            });
+                            
+                            dataEspecialidades();
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    }
+                });
+            }
+        });
+    }
 </script>
 <?= $this->endsection('scripts') ?>

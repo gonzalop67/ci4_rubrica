@@ -170,4 +170,31 @@ class Especialidades extends BaseController
             'body' => 'La especialidad fue actualizada correctamente.'
         ]);
     }
+
+    public function delete()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+
+            try {
+                $this->especialidadModel->delete($id);
+
+                $msg = [
+                    'success' => true,
+                    'icon'    => "success",
+                    'message' => "La especialidad fue eliminada correctamente."
+                ];
+            } catch (\Exception $e) {
+                $msg = [
+                    'success' => false,
+                    'icon'    => "error",
+                    'message' => "No se puede eliminar la Especialidad porque tiene registros relacionados en otras tablas."
+                ];
+            }
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
 }
