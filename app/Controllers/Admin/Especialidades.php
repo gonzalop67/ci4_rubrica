@@ -102,4 +102,72 @@ class Especialidades extends BaseController
             'body' => 'La especialidad fue guardada correctamente.'
         ]);
     }
+
+    public function edit(string $id)
+    {
+        if (!$especialidad = $this->especialidadModel->find($id)) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $niveles_educacion = $this->nivelEducacionModel->orderBy('orden')->findAll();
+        return view('Admin/Especialidades/edit', [
+            'especialidad' => $especialidad,
+            'niveles_educacion' => $niveles_educacion
+        ]);
+    }
+
+    public function update()
+    {
+        $id_especialidad = $this->request->getVar('id_especialidad');
+
+        if (!$this->validate([
+            'nombre' => [
+                'label' => 'Nombre',
+                'rules' => "required|max_length[48]|is_unique[sw_especialidad.es_nombre,id_especialidad,{$id_especialidad}]",
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 48 caracteres.',
+                    'is_unique' => 'El campo {field} debe ser único'
+                ]
+            ],
+            'figura' => [
+                'label' => 'Figura',
+                'rules' => "required|max_length[50]|is_unique[sw_especialidad.es_figura,id_especialidad,{$id_especialidad}]",
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 50 caracteres.',
+                    'is_unique' => 'El campo {field} debe ser único'
+                ]
+            ],
+            'abreviatura' => [
+                'label' => 'Abreviatura',
+                'rules' => "required|max_length[15]|is_unique[sw_especialidad.es_abreviatura,id_especialidad,{$id_especialidad}]",
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 15 caracteres.',
+                    'is_unique' => 'El campo {field} debe ser único'
+                ]
+            ],
+            'id_nivel_educacion' => 'is_not_unique[sw_nivel_educacion.id_nivel_educacion]'
+        ])) {
+            return redirect()->back()->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $datos = [
+            'id_especialidad' => $id_especialidad,
+            'id_nivel_educacion' => $this->request->getVar('id_nivel_educacion'),
+            'es_nombre' => trim($this->request->getVar('nombre')),
+            'es_figura' => trim($this->request->getVar('figura')),
+            'es_abreviatura' => trim($this->request->getVar('abreviatura'))
+        ];
+
+        $this->especialidadModel->save($datos);
+
+        return redirect('especialidades')->with('msg', [
+            'type' => 'success',
+            'icon' => 'check',
+            'body' => 'La especialidad fue actualizada correctamente.'
+        ]);
+    }
 }
