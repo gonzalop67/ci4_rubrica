@@ -74,4 +74,5 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('especialidades/editar/(:any)', 'Especialidades::edit/$1', ['as' => 'especialidades_edit']);
     $routes->post('especialidades/actualizar', 'Especialidades::update', ['as' => 'especialidades_update']);
     $routes->post('especialidades/eliminar', 'Especialidades::delete', ['as' => 'especialidades_delete']);
+    $routes->post('especialidades/saveNewPositions', 'Especialidades::saveNewPositions', ['as' => 'especialidades_saveNewPositions']);
 });

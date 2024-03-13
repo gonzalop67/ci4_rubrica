@@ -126,7 +126,8 @@ Modalidades
                 positions: positions
             },
             success: function(response) {
-                window.location.href = "<?= base_url(route_to('modalidades'));; ?>";
+                // window.location.href = "<?= base_url(route_to('modalidades'));; ?>";
+                dataModalidades();
             }
         });
     }

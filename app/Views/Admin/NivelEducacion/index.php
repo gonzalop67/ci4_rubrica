@@ -134,7 +134,8 @@ Niveles de Educación
                 positions: positions
             },
             success: function(response) {
-                window.location.href = "<?= base_url(route_to('niveles_educacion'));; ?>";
+                // window.location.href = "<?= base_url(route_to('niveles_educacion'));; ?>";
+                dataNivelesEducacion();
             }
         });
     }

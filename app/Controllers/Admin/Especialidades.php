@@ -197,4 +197,18 @@ class Especialidades extends BaseController
             exit('Lo siento, no se puede procesar.');
         }
     }
+
+    public function saveNewPositions()
+    {
+        if ($this->request->isAJAX()) {
+            foreach ($_POST['positions'] as $position) {
+                $index = $position[0];
+                $newPosition = $position[1];
+
+                $this->especialidadModel->actualizarOrden($index, $newPosition);
+            }
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
 }

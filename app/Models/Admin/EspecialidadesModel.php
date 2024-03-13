@@ -40,4 +40,13 @@ class EspecialidadesModel extends Model
 
         return $especialidad == null ? 1 : $especialidad->secuencial + 1;
     }
+
+    public function actualizarOrden($id_especialidad, $orden)
+    {
+        $data = [
+            'es_orden' => $orden
+        ];
+
+        $this->update($id_especialidad, $data);
+    }
 }

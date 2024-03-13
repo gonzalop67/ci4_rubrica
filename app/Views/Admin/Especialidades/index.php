@@ -54,6 +54,18 @@ Especialidades
         window.setTimeout(function() {
             $(".alert").fadeOut(1500, 0);
         }, 3000); //3 segundos y desaparece
+
+        $('table tbody').sortable({
+            update: function(event, ui) {
+                $(this).children().each(function(index) {
+                    if ($(this).attr('data-orden') != (index + 1)) {
+                        $(this).attr('data-orden', (index + 1)).addClass('updated');
+                    }
+                });
+
+                saveNewPositions();
+            }
+        });
     });
 
     function dataEspecialidades() {
@@ -104,6 +116,27 @@ Especialidades
                         alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
                     }
                 });
+            }
+        });
+    }
+
+    function saveNewPositions() {
+        var positions = [];
+        $('.updated').each(function() {
+            positions.push([$(this).attr('data-index'), $(this).attr('data-orden')]);
+            $(this).removeClass('updated');
+        });
+
+        $.ajax({
+            url: "<?= base_url(route_to('especialidades_saveNewPositions')); ?>",
+            method: 'POST',
+            dataType: 'text',
+            data: {
+                positions: positions
+            },
+            success: function(response) {
+                // window.location.href = "<?= base_url(route_to('especialidades'));; ?>";
+                dataEspecialidades();
             }
         });
     }
