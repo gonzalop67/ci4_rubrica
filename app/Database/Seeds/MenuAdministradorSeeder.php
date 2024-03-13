@@ -91,7 +91,7 @@ class MenuAdministradorSeeder extends Seeder
 			],
 			[
 				'mnu_texto'     => 'Niveles de Educación', // id_menu = 11
-                'mnu_link'      => 'admin/tipos_educacion',
+                'mnu_link'      => 'admin/niveles_educacion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
                 'mnu_padre'     => 2,
