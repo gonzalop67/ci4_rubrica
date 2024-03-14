@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\Admin\CursosModel;
 use App\Models\Admin\EspecialidadesModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Cursos extends BaseController
 {
@@ -83,7 +84,7 @@ class Cursos extends BaseController
         }
 
         $datos = [
-            'id_especialidad' => $this->request->getVar('id_especialidad'),
+            'id_curso' => $this->request->getVar('id_curso'),
             'cu_nombre' => trim($this->request->getVar('nombre')),
             'cu_abreviatura' => trim($this->request->getVar('abreviatura')),
             'cu_shortname' => trim($this->request->getVar('nombre_corto')),
@@ -99,5 +100,113 @@ class Cursos extends BaseController
             'icon' => 'check',
             'body' => 'El Curso fue guardado correctamente.'
         ]);
+    }
+
+    public function edit(string $id)
+    {
+        if (!$curso = $this->cursoModel->find($id)) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $especialidades = $this->especialidadModel->orderBy('es_orden')->findAll();
+        return view('Admin/Cursos/edit', [
+            'curso' => $curso,
+            'especialidades' => $especialidades
+        ]);
+    }
+
+    public function update()
+    {
+        $id_curso = $this->request->getVar('id_curso');
+
+        if (!$this->validate([
+            'nombre' => [
+                'label' => 'Nombre',
+                'rules' => "required|max_length[64]",
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 64 caracteres.'
+                ]
+            ],
+            'abreviatura' => [
+                'label' => 'Abreviatura',
+                'rules' => 'required|max_length[15]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 15 caracteres.'
+                ]
+            ],
+            'nombre_corto' => [
+                'label' => 'Nombre Corto',
+                'rules' => 'required|max_length[64]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 64 caracteres.'
+                ]
+            ],
+            'id_especialidad' => 'is_not_unique[sw_especialidad.id_especialidad]'
+        ])) {
+            return redirect()->back()->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $datos = [
+            'id_curso' => $id_curso,
+            'id_especialidad' => $this->request->getVar('id_especialidad'),
+            'cu_nombre' => trim($this->request->getVar('nombre')),
+            'cu_abreviatura' => trim($this->request->getVar('abreviatura')),
+            'cu_shortname' => trim($this->request->getVar('nombre_corto')),
+            'es_bach_tecnico' => $this->request->getVar('es_bach_tecnico'),
+            'es_intensivo' => $this->request->getVar('es_intensivo')
+        ];
+
+        $this->cursoModel->save($datos);
+
+        return redirect('cursos')->with('msg', [
+            'type' => 'success',
+            'icon' => 'check',
+            'body' => 'El Curso fue actualizado correctamente.'
+        ]);
+    }
+
+    public function delete()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+
+            try {
+                $this->cursoModel->delete($id);
+
+                $msg = [
+                    'success' => true,
+                    'icon'    => "success",
+                    'message' => "El Curso fue eliminado correctamente."
+                ];
+            } catch (\Exception $e) {
+                $msg = [
+                    'success' => false,
+                    'icon'    => "error",
+                    'message' => "No se puede eliminar El Curso porque tiene registros relacionados en otras tablas."
+                ];
+            }
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
+
+    public function saveNewPositions()
+    {
+        if ($this->request->isAJAX()) {
+            foreach ($_POST['positions'] as $position) {
+                $index = $position[0];
+                $newPosition = $position[1];
+
+                $this->cursoModel->actualizarOrden($index, $newPosition);
+            }
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
     }
 }

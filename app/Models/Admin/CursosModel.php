@@ -43,4 +43,13 @@ class CursosModel extends Model
 
         return $curso == null ? 1 : $curso->secuencial + 1;
     }
+
+    public function actualizarOrden($id_curso, $orden)
+    {
+        $data = [
+            'cu_orden' => $orden
+        ];
+
+        $this->update($id_curso, $data);
+    }
 }

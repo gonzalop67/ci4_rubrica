@@ -80,4 +80,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('cursos/dataEspecialidades', 'Cursos::dataCursos', ['as' => 'cursos_data']);
     $routes->get('cursos/create', 'Cursos::create', ['as' => 'cursos_create']);
     $routes->post('cursos/guardar', 'Cursos::store', ['as' => 'cursos_store']);
+    $routes->get('cursos/editar/(:any)', 'Cursos::edit/$1', ['as' => 'cursos_edit']);
+    $routes->post('cursos/actualizar', 'Cursos::update', ['as' => 'cursos_update']);
+    $routes->post('cursos/eliminar', 'Cursos::delete', ['as' => 'cursos_delete']);
+    $routes->post('cursos/saveNewPositions', 'Cursos::saveNewPositions', ['as' => 'cursos_saveNewPositions']);
 });
