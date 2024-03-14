@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -47,10 +49,20 @@ class SwCurso extends Migration
 				'constraint' => 1,
 				'unsigned'   => true,
 				'default'    => 0,
-			],			
+			],
+			'es_bach_tecnico' => [
+				'type'       => 'INT',
+				'constraint' => 1,
+				'unsigned'   => true,
+			],
+			'es_intensivo' => [
+				'type'       => 'INT',
+				'constraint' => 1,
+				'unsigned'   => true,
+			]
 		]);
 		$this->forge->addKey('id_curso', true);
-		$this->forge->addForeignKey('id_especialidad','sw_especialidad','id_especialidad');
+		$this->forge->addForeignKey('id_especialidad', 'sw_especialidad', 'id_especialidad');
 		$this->forge->createTable('sw_curso');
 		$this->db->enableForeignKeyChecks();
 	}

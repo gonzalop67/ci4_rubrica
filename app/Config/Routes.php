@@ -77,4 +77,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('especialidades/saveNewPositions', 'Especialidades::saveNewPositions', ['as' => 'especialidades_saveNewPositions']);
     //RUTAS PARA CURSOS
     $routes->get('cursos', 'Cursos::index', ['as' => 'cursos']);
+    $routes->get('cursos/dataEspecialidades', 'Cursos::dataCursos', ['as' => 'cursos_data']);
+    $routes->get('cursos/create', 'Cursos::create', ['as' => 'cursos_create']);
 });
