@@ -20,6 +20,7 @@ class InitSeeder extends Seeder
             'sw_modalidad',
 			'sw_perfil',
             'sw_periodo_estado',
+            'sw_quien_inserta_comp',
             'sw_periodo_lectivo',
             'sw_periodo_evaluacion',
             'sw_tipo_aporte',
@@ -37,6 +38,7 @@ class InitSeeder extends Seeder
 		$this->call('JornadaSeeder');
         $this->call('ModalidadSeeder');
 		$this->call('PeriodoEstadoSeeder');
+        $this->call('QuienInsertaComportamientoSeeder');
         $this->call('PrimerPeriodoLectivoSeeder');
         $this->call('DiaSemanaSeeder');
         $this->call('EscalaCalificacionesSeeder');

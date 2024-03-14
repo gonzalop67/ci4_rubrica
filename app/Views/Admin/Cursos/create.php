@@ -34,18 +34,34 @@ Crear Un Curso
                     <p class="invalid-feedback"><?= session('errors.nombre_corto') ?></p>
                 </div>
                 <div class="mb-3">
-                    <label for="quien_inserta_comp" class="form-label">Nivel Educación:</label>
-                    <select class="form-select" id="id_nivel_educacion" name="id_nivel_educacion">
+                    <label for="es_bach_tecnico" class="form-label">¿Bachillerato Técnico?</label>
+                    <select class="form-select <?= session('errors.es_bach_tecnico') ? 'is-invalid' : '' ?>" id="es_bach_tecnico" name="es_bach_tecnico">
+                        <option value="0">No</option>
+                        <option value="1">Sí</option>
+                    </select>
+                    <p class="invalid-feedback"><?= session('errors.es_bach_tecnico') ?></p>
+                </div>
+                <div class="mb-3">
+                    <label for="es_intensivo" class="form-label">¿Es Intensivo?</label>
+                    <select class="form-select <?= session('errors.es_intensivo') ? 'is-invalid' : '' ?>" id="es_intensivo" name="es_intensivo">
+                        <option value="0">No</option>
+                        <option value="1">Sí</option>
+                    </select>
+                    <p class="invalid-feedback"><?= session('errors.es_intensivo') ?></p>
+                </div>
+                <div class="mb-3">
+                    <label for="id_especialidad" class="form-label">Especialidad:</label>
+                    <select class="form-select" id="id_especialidad" name="id_especialidad">
                         <?php
-                        foreach ($niveles_educacion as $nivel) :
+                        foreach ($especialidades as $especialidad) :
                         ?>
-                            <option value="<?= $nivel->id_nivel_educacion ?>"><?= $nivel->nombre ?></option>
+                            <option value="<?= $especialidad->id_especialidad ?>"><?= $especialidad->es_nombre ?></option>
                         <?php endforeach ?>
                     </select>
-                    <p class="invalid-feedback"><?= session('errors.id_nivel_educacion') ?></p>
+                    <p class="invalid-feedback"><?= session('errors.id_especialidad') ?></p>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="<?= base_url(route_to('especialidades')) ?>" class="btn btn-secondary">Regresar</a>
+                <a href="<?= base_url(route_to('cursos')) ?>" class="btn btn-secondary">Regresar</a>
             </form>
         </div>
     </div>

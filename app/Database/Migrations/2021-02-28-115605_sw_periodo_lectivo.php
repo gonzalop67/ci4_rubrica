@@ -45,11 +45,18 @@ class SwPeriodoLectivo extends Migration
 			],
 			'pe_nota_aprobacion' => [
 				'type' => 'FLOAT'
-			]
+			],
+			'quien_inserta_comp_id' => [
+				'type'       => 'INT',
+				'constraint' => 1,
+				'unsigned'   => true,
+				'default'    => 1,
+			],
 		]);
 		$this->forge->addKey('id_periodo_lectivo', true);
 		$this->forge->addForeignKey('id_periodo_estado','sw_periodo_estado','id_periodo_estado');
 		$this->forge->addForeignKey('id_modalidad','sw_modalidad','id_modalidad');
+		$this->forge->addForeignKey('quien_inserta_comp_id','sw_quien_inserta_comp','id');
 		$this->forge->createTable('sw_periodo_lectivo');
 		$this->db->enableForeignKeyChecks();
 	}

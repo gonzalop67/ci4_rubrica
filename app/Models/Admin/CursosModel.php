@@ -21,7 +21,8 @@ class CursosModel extends Model
         'cu_shortname',
         'cu_abreviatura',
         'cu_orden',
-        'quien_inserta_comp'
+        'es_bach_tecnico',
+        'es_intensivo'
     ];
 
     public function getEspecialidad($id_curso)
@@ -33,5 +34,13 @@ class CursosModel extends Model
                                          AND id_curso = $id_curso");
 
         return $registro->getRow()->es_nombre;
+    }
+
+    public function getNextOrderNumber()
+    {
+        $query = $this->db->query("SELECT MAX(cu_orden) AS secuencial FROM sw_curso");
+        $curso = $query->getRow();
+
+        return $curso == null ? 1 : $curso->secuencial + 1;
     }
 }

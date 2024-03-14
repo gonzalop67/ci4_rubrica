@@ -79,4 +79,5 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('cursos', 'Cursos::index', ['as' => 'cursos']);
     $routes->get('cursos/dataEspecialidades', 'Cursos::dataCursos', ['as' => 'cursos_data']);
     $routes->get('cursos/create', 'Cursos::create', ['as' => 'cursos_create']);
+    $routes->post('cursos/guardar', 'Cursos::store', ['as' => 'cursos_store']);
 });

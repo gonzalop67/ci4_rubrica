@@ -28,25 +28,19 @@ class SwCurso extends Migration
 			],
 			'cu_nombre' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '128',
+				'constraint' => '64',
 			],
 			'cu_shortname' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '45',
+				'constraint' => '64',
 			],
 			'cu_abreviatura' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '5',
+				'constraint' => '15',
 			],
 			'cu_orden' => [
 				'type'       => 'INT',
 				'constraint' => 11,
-				'unsigned'   => true,
-				'default'    => 0,
-			],
-			'quien_inserta_comp' => [
-				'type'       => 'INT',
-				'constraint' => 1,
 				'unsigned'   => true,
 				'default'    => 0,
 			],

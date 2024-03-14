@@ -4,14 +4,17 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\CursosModel;
+use App\Models\Admin\EspecialidadesModel;
 
 class Cursos extends BaseController
 {
     private $cursoModel;
+    private $especialidadModel;
 
     public function __construct()
     {
         $this->cursoModel = new CursosModel();
+        $this->especialidadModel = new EspecialidadesModel();
     }
 
     public function index()
@@ -40,6 +43,61 @@ class Cursos extends BaseController
 
     public function create()
     {
-        return view('Admin/Cursos/create');
+        $especialidades = $this->especialidadModel->orderBy('es_orden')->findAll();
+        return view('Admin/Cursos/create', [
+            'especialidades' => $especialidades
+        ]);
+    }
+
+    public function store()
+    {
+        if (!$this->validate([
+            'nombre' => [
+                'label' => 'Nombre',
+                'rules' => 'required|max_length[64]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 64 caracteres.'
+                ]
+            ],
+            'abreviatura' => [
+                'label' => 'Abreviatura',
+                'rules' => 'required|max_length[15]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 15 caracteres.'
+                ]
+            ],
+            'nombre_corto' => [
+                'label' => 'Nombre Corto',
+                'rules' => 'required|max_length[64]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio',
+                    'max_length' => 'El campo {field} no debe exceder los 64 caracteres.'
+                ]
+            ],
+            'id_especialidad' => 'is_not_unique[sw_especialidad.id_especialidad]'
+        ])) {
+            return redirect()->back()->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $datos = [
+            'id_especialidad' => $this->request->getVar('id_especialidad'),
+            'cu_nombre' => trim($this->request->getVar('nombre')),
+            'cu_abreviatura' => trim($this->request->getVar('abreviatura')),
+            'cu_shortname' => trim($this->request->getVar('nombre_corto')),
+            'es_bach_tecnico' => $this->request->getVar('es_bach_tecnico'),
+            'es_intensivo' => $this->request->getVar('es_intensivo'),
+            'cu_orden'  => $this->cursoModel->getNextOrderNumber()
+        ];
+
+        $this->cursoModel->save($datos);
+
+        return redirect('cursos')->with('msg', [
+            'type' => 'success',
+            'icon' => 'check',
+            'body' => 'El Curso fue guardado correctamente.'
+        ]);
     }
 }
