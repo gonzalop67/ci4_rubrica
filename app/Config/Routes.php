@@ -84,4 +84,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('cursos/actualizar', 'Cursos::update', ['as' => 'cursos_update']);
     $routes->post('cursos/eliminar', 'Cursos::delete', ['as' => 'cursos_delete']);
     $routes->post('cursos/saveNewPositions', 'Cursos::saveNewPositions', ['as' => 'cursos_saveNewPositions']);
+    //RUTAS PARA PARALELOS
+    $routes->get('paralelos', 'Paralelos::index', ['as' => 'paralelos']);
 });
