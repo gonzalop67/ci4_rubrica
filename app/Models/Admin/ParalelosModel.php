@@ -15,6 +15,7 @@ class ParalelosModel extends Model
     protected $returnType     = 'object';
 
     protected $allowedFields = [
+        'id_periodo_lectivo',
         'id_curso',
         'id_periodo_lectivo',
         'id_jornada',
@@ -48,5 +49,56 @@ class ParalelosModel extends Model
         ];
 
         $this->update($id_paralelo, $data);
+    }
+
+    public function existeParalelo($nombre, $id_curso, $id_periodo_lectivo)
+    {
+        $query = $this->db->query("SELECT * 
+                                     FROM sw_paralelo 
+                                    WHERE pa_nombre = '$nombre' 
+                                      AND id_curso = $id_curso 
+                                      AND id_periodo_lectivo = $id_periodo_lectivo");
+
+        $num_rows = count($query->getResultObject());
+
+        return $num_rows > 0;
+    }
+
+    public function getEspecialidadByIdParalelo($id_paralelo)
+    {
+        $query = $this->db->query("SELECT es_nombre 
+                                     FROM sw_paralelo pa, 
+                                          sw_curso cu, 
+                                          sw_especialidad es 
+                                    WHERE cu.id_curso = pa.id_curso 
+                                      AND es.id_especialidad = cu.id_especialidad 
+                                      AND id_paralelo = $id_paralelo");
+        $paralelo = $query->getRow();
+
+        return $paralelo->es_nombre;
+    }
+
+    public function getCursoByIdParalelo($id_paralelo)
+    {
+        $query = $this->db->query("SELECT cu_nombre 
+                                     FROM sw_paralelo pa, 
+                                          sw_curso cu, 
+                                    WHERE cu.id_curso = pa.id_curso 
+                                      AND id_paralelo = $id_paralelo");
+        $paralelo = $query->getRow();
+
+        return $paralelo->cu_nombre;
+    }
+
+    public function getJornadoByIdParalelo($id_paralelo)
+    {
+        $query = $this->db->query("SELECT jo_nombre 
+                                     FROM sw_paralelo pa, 
+                                          sw_jornada jo, 
+                                    WHERE jo.id_jornada = pa.id_jornada 
+                                      AND id_paralelo = $id_paralelo");
+        $paralelo = $query->getRow();
+
+        return $paralelo->jo_nombre;
     }
 }

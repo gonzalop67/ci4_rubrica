@@ -86,4 +86,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('cursos/saveNewPositions', 'Cursos::saveNewPositions', ['as' => 'cursos_saveNewPositions']);
     //RUTAS PARA PARALELOS
     $routes->get('paralelos', 'Paralelos::index', ['as' => 'paralelos']);
+    $routes->get('paralelos/dataEspecialidades', 'Paralelos::dataParalelos', ['as' => 'paralelos_data']);
+    $routes->get('paralelos/create', 'Paralelos::create', ['as' => 'paralelos_create']);
 });
