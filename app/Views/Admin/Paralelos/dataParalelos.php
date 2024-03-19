@@ -12,22 +12,10 @@ if ($paralelos != NULL) {
         <tr data-index='<?= $paralelo->id_paralelo ?>' data-orden='<?= $paralelo->pa_orden ?>'>
             <td><?= $contador ?></td>
             <td><?= $paralelo->id_paralelo ?></td>
-            <td>
-                <?php
-                echo $paraleloModel->getEspecialidadByIdParalelo($paralelo->id_paralelo);
-                ?>
-            </td>
-            <td>
-                <?php
-                echo $paraleloModel->getCursoByIdParalelo($paralelo->id_paralelo);
-                ?>
-            </td>
-            <td><?= $paralelo->nombre ?></td>
-            <td>
-                <?php
-                echo $paraleloModel->getJornadaByIdParalelo($paralelo->id_paralelo);
-                ?>
-            </td>
+            <td><?= $paralelo->es_figura ?></td>
+            <td><?= $paralelo->cu_nombre ?></td>
+            <td><?= $paralelo->pa_nombre ?></td>
+            <td><?= $paralelo->jo_nombre ?></td>
             <td>
                 <div class="btn-group">
                     <a href="<?= base_url(route_to('paralelos_edit', $paralelo->id_paralelo)) ?>" class="btn btn-warning btn-sm" title="Editar"><span class="fa fa-pencil"></span></a>

@@ -28,10 +28,14 @@ class Paralelos extends BaseController
 
     public function dataParalelos()
     {
-        $id_periodo_lectivo = $this->request->getVar('id_periodo_lectivo');
+        $id_periodo_lectivo = session('id_periodo_lectivo');
 
         if ($this->request->isAJAX()) {
-            $paralelos = $this->paraleloModel->where('id_periodo_lectivo', $id_periodo_lectivo)->orderBy('pa_orden')->findAll();
+            $paralelos = $this->paraleloModel
+                                ->join('sw_curso', 'sw_curso.id_curso = sw_paralelo.id_curso')
+                                ->join('sw_especialidad', 'sw_especialidad.id_especialidad = sw_curso.id_especialidad')
+                                ->join('sw_jornada', 'sw_jornada.id_jornada = sw_paralelo.id_jornada')
+                                ->where('id_periodo_lectivo', $id_periodo_lectivo)->orderBy('pa_orden')->findAll();
 
             $data = [
                 'paralelos' => $paralelos
@@ -91,7 +95,7 @@ class Paralelos extends BaseController
             'id_periodo_lectivo' => $id_periodo_lectivo,
             'id_curso' => $id_curso,
             'id_jornada' => $this->request->getVar('id_jornada'),
-            'pa_nombre' => $nombre,
+            'pa_nombre' => strtoupper($nombre),
             'pa_orden'  => $this->paraleloModel->getNextOrderNumber($id_periodo_lectivo)
         ];
 

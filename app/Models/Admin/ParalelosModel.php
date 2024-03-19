@@ -20,7 +20,7 @@ class ParalelosModel extends Model
         'id_periodo_lectivo',
         'id_jornada',
         'pa_nombre',
-        'cu_orden'
+        'pa_orden'
     ];
 
     public function getCurso($id_paralelo)
@@ -39,7 +39,7 @@ class ParalelosModel extends Model
         $query = $this->db->query("SELECT MAX(pa_orden) AS secuencial FROM sw_paralelo WHERE id_periodo_lectivo = $id_periodo_lectivo");
         $paralelo = $query->getRow();
 
-        return $paralelo == null ? 1 : $paralelo->secuencial + 1;
+        return $paralelo->secuencial == null ? 1 : $paralelo->secuencial + 1;
     }
 
     public function actualizarOrden($id_paralelo, $orden)
@@ -64,33 +64,7 @@ class ParalelosModel extends Model
         return $num_rows > 0;
     }
 
-    public function getEspecialidadByIdParalelo($id_paralelo)
-    {
-        $query = $this->db->query("SELECT es_nombre 
-                                     FROM sw_paralelo pa, 
-                                          sw_curso cu, 
-                                          sw_especialidad es 
-                                    WHERE cu.id_curso = pa.id_curso 
-                                      AND es.id_especialidad = cu.id_especialidad 
-                                      AND id_paralelo = $id_paralelo");
-        $paralelo = $query->getRow();
-
-        return $paralelo->es_nombre;
-    }
-
-    public function getCursoByIdParalelo($id_paralelo)
-    {
-        $query = $this->db->query("SELECT cu_nombre 
-                                     FROM sw_paralelo pa, 
-                                          sw_curso cu, 
-                                    WHERE cu.id_curso = pa.id_curso 
-                                      AND id_paralelo = $id_paralelo");
-        $paralelo = $query->getRow();
-
-        return $paralelo->cu_nombre;
-    }
-
-    public function getJornadoByIdParalelo($id_paralelo)
+    public function getJornadaByIdParalelo($id_paralelo)
     {
         $query = $this->db->query("SELECT jo_nombre 
                                      FROM sw_paralelo pa, 

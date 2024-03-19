@@ -75,6 +75,7 @@ Paralelos
             url: "<?= base_url(route_to('paralelos_data')) ?>",
             dataType: "json",
             success: function(response) {
+                console.log(response.data);
                 $('.viewdata').html(response.data);
             },
             error: function(xhr, ajaxOptions, thrownError) {
