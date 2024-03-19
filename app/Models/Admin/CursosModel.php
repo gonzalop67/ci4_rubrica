@@ -36,6 +36,29 @@ class CursosModel extends Model
         return $registro->getRow()->es_nombre;
     }
 
+    public function getFigura($id_curso)
+    {
+        $registro = $this->db->query("SELECT es.es_figura 
+                                        FROM sw_especialidad es, 
+                                             sw_curso cu
+                                       WHERE es.id_especialidad = cu.id_especialidad 
+                                         AND id_curso = $id_curso");
+
+        return $registro->getRow()->es_figura;
+    }
+
+    public function existeCurso($nombre, $id_especialidad)
+    {
+        $query = $this->db->query("SELECT * 
+                                     FROM sw_curso 
+                                    WHERE cu_nombre = '$nombre' 
+                                      AND id_especialidad = $id_especialidad");
+
+        $num_rows = count($query->getResultObject());
+
+        return $num_rows > 0;
+    }
+
     public function getNextOrderNumber()
     {
         $query = $this->db->query("SELECT MAX(cu_orden) AS secuencial FROM sw_curso");

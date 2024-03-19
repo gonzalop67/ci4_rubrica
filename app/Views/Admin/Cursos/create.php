@@ -50,12 +50,12 @@ Crear Un Curso
                     <p class="invalid-feedback"><?= session('errors.es_intensivo') ?></p>
                 </div>
                 <div class="mb-3">
-                    <label for="id_especialidad" class="form-label">Especialidad:</label>
+                    <label for="id_especialidad" class="form-label">Figura:</label>
                     <select class="form-select" id="id_especialidad" name="id_especialidad">
                         <?php
                         foreach ($especialidades as $especialidad) :
                         ?>
-                            <option value="<?= $especialidad->id_especialidad ?>"><?= $especialidad->es_nombre ?></option>
+                            <option value="<?= $especialidad->id_especialidad ?>"><?= $especialidad->es_figura ?></option>
                         <?php endforeach ?>
                     </select>
                     <p class="invalid-feedback"><?= session('errors.id_especialidad') ?></p>

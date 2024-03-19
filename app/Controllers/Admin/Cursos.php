@@ -83,11 +83,22 @@ class Cursos extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        // Validar si se repite el nombre del curso para la misma especialidad
+        $nombre = trim($this->request->getVar('nombre'));
+        $id_especialidad = $this->request->getVar('id_especialidad');
+
+        if ($this->cursoModel->existeCurso($nombre, $id_especialidad)) {
+            return redirect()->back()->withInput()
+                ->with('errors', [
+                    'nombre' => 'El nombre del curso ya se encuentra utilizado para la figura elegida.'
+                ]);
+        }
+
         $datos = [
-            'id_curso' => $this->request->getVar('id_curso'),
-            'cu_nombre' => trim($this->request->getVar('nombre')),
-            'cu_abreviatura' => trim($this->request->getVar('abreviatura')),
+            'id_especialidad' => $this->request->getVar('id_especialidad'),
+            'cu_nombre' => $nombre,
             'cu_shortname' => trim($this->request->getVar('nombre_corto')),
+            'cu_abreviatura' => trim($this->request->getVar('abreviatura')),
             'es_bach_tecnico' => $this->request->getVar('es_bach_tecnico'),
             'es_intensivo' => $this->request->getVar('es_intensivo'),
             'cu_orden'  => $this->cursoModel->getNextOrderNumber()

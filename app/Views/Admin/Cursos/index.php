@@ -31,6 +31,7 @@ Cursos
                 <thead>
                     <th>Id</th>
                     <th>Especialidad</th>
+                    <th>Figura</th>
                     <th>Nombre</th>
                     <th>Acciones</th>
                 </thead>

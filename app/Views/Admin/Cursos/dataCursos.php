@@ -13,6 +13,11 @@ if ($cursos != NULL) {
                 echo $cursoModel->getEspecialidad($curso->id_curso);
                 ?>
             </td>
+            <td>
+                <?php
+                echo $cursoModel->getFigura($curso->id_curso);
+                ?>
+            </td>
             <td><?= $curso->cu_nombre ?></td>
             <td>
                 <div class="btn-group">
