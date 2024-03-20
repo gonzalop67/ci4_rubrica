@@ -93,4 +93,20 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('paralelos/actualizar', 'Paralelos::update', ['as' => 'paralelos_update']);
     $routes->post('paralelos/eliminar', 'Paralelos::delete', ['as' => 'paralelos_delete']);
     $routes->post('paralelos/saveNewPositions', 'Paralelos::saveNewPositions', ['as' => 'paralelos_saveNewPositions']);
+    //RUTAS PARA AREAS
+    $routes->get('areas', 'Areas::index', ['as' => 'areas']);
+    $routes->get('areas/dataAreas', 'Areas::dataAreas', ['as' => 'areas_data']);
+    $routes->get('areas/create', 'Areas::create', ['as' => 'areas_create']);
+    $routes->post('areas/guardar', 'Areas::store', ['as' => 'areas_store']);
+    $routes->get('areas/editar/(:any)', 'Areas::edit/$1', ['as' => 'areas_edit']);
+    $routes->post('areas/actualizar', 'Areas::update', ['as' => 'areas_update']);
+    $routes->post('areas/eliminar/(:any)', 'Areas::delete/$1', ['as' => 'areas_delete']);
+    //RUTAS PARA ASIGANTURAS
+    $routes->get('asignaturas', 'Asignaturas::index', ['as' => 'asignaturas']);
+    $routes->get('asignaturas/dataAsignaturas', 'Asignaturas::dataAsignaturas', ['as' => 'asignaturas_data']);
+    $routes->get('asignaturas/create', 'Asignaturas::create', ['as' => 'asignaturas_create']);
+    $routes->post('asignaturas/guardar', 'Asignaturas::store', ['as' => 'asignaturas_store']);
+    $routes->get('asignaturas/editar/(:any)', 'Asignaturas::edit/$1', ['as' => 'asignaturas_edit']);
+    $routes->post('asignaturas/actualizar', 'Asignaturas::update', ['as' => 'asignaturas_update']);
+    $routes->post('asignaturas/eliminar/(:any)', 'Asignaturas::delete/$1', ['as' => 'asignaturas_delete']);
 });

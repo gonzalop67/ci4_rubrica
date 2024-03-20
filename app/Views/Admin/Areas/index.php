@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/layout') ?>
 
 <?= $this->section('title') ?>
-Perfiles
+Areas
 <?= $this->endsection('title') ?>
 
 <?= $this->section('css') ?>
@@ -11,7 +11,7 @@ Perfiles
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Administración de Perfiles</li>
+        <li class="breadcrumb-item active">Administración de Areas</li>
     </ol>
 
     <div class="card mb-4">
@@ -26,8 +26,8 @@ Perfiles
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
-            <a href="<?= base_url(route_to('perfiles_create')) ?>" class="btn btn-block btn-success btn-sm">
-                <i class="fa fa-fw fa-plus-circle"></i> Nuevo Perfil
+            <a href="<?= base_url(route_to('areas_create')) ?>" class="btn btn-block btn-success btn-sm">
+                <i class="fa fa-fw fa-plus-circle"></i> Nueva Area
             </a>
             <hr>
             <div class="row">
@@ -46,7 +46,7 @@ Perfiles
     let tableInitialized = false;
 
     $(document).ready(function() {
-        dataPerfiles();
+        dataAreas();
         
         //Autoclose
         window.setTimeout(function() {
@@ -54,9 +54,9 @@ Perfiles
         }, 3000); //3 segundos y desaparece
     });
 
-    function dataPerfiles() {
+    function dataAreas() {
         $.ajax({
-            url: "<?= base_url(route_to('perfiles_data')) ?>",
+            url: "<?= base_url(route_to('areas_data')) ?>",
             dataType: "json",
             success: function(response) {
                 $('.viewdata').html(response.data);
@@ -65,9 +65,9 @@ Perfiles
                     table.destroy();
                 }
 
-                table = new DataTable('#tbl_perfiles', {
+                table = new DataTable('#tbl_areas', {
                     columnDefs: [
-                        { orderable: false, targets: [0, 2]}
+                        { orderable: false, targets: [0, 3]}
                     ],
                     destroy: true,
                     pageLength: 5,
