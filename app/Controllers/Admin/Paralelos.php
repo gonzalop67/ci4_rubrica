@@ -53,7 +53,10 @@ class Paralelos extends BaseController
 
     public function create()
     {
-        $cursos = $this->cursoModel->orderBy('cu_orden')->findAll();
+        $cursos = $this->cursoModel
+                        ->join('sw_especialidad', 'sw_especialidad.id_especialidad = sw_curso.id_especialidad')
+                        ->orderBy('cu_orden')
+                        ->findAll();
         $jornadas = $this->jornadaModel->orderBy('id_jornada')->findAll();
         return view('Admin/Paralelos/create', [
             'cursos' => $cursos,
@@ -110,68 +113,68 @@ class Paralelos extends BaseController
 
     public function edit(string $id)
     {
-        /* if (!$curso = $this->cursoModel->find($id)) {
+        if (!$paralelo = $this->paraleloModel->find($id)) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $especialidades = $this->especialidadModel->orderBy('es_orden')->findAll();
-        return view('Admin/Cursos/edit', [
-            'curso' => $curso,
-            'especialidades' => $especialidades
-        ]); */
+        $cursos = $this->cursoModel
+                        ->join('sw_especialidad', 'sw_especialidad.id_especialidad = sw_curso.id_especialidad')
+                        ->orderBy('cu_orden')
+                        ->findAll();
+        $jornadas = $this->jornadaModel->orderBy('id_jornada')->findAll();
+        return view('Admin/Paralelos/edit', [
+            'paralelo' => $paralelo,
+            'cursos' => $cursos,
+            'jornadas' => $jornadas
+        ]);
     }
 
     public function update()
     {
-        $id_curso = $this->request->getVar('id_curso');
-
         if (!$this->validate([
             'nombre' => [
                 'label' => 'Nombre',
-                'rules' => "required|max_length[64]",
+                'rules' => 'required|max_length[16]',
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio',
-                    'max_length' => 'El campo {field} no debe exceder los 64 caracteres.'
+                    'max_length' => 'El campo {field} no debe exceder los 16 caracteres.'
                 ]
             ],
-            'abreviatura' => [
-                'label' => 'Abreviatura',
-                'rules' => 'required|max_length[15]',
-                'errors' => [
-                    'required' => 'El campo {field} es obligatorio',
-                    'max_length' => 'El campo {field} no debe exceder los 15 caracteres.'
-                ]
-            ],
-            'nombre_corto' => [
-                'label' => 'Nombre Corto',
-                'rules' => 'required|max_length[64]',
-                'errors' => [
-                    'required' => 'El campo {field} es obligatorio',
-                    'max_length' => 'El campo {field} no debe exceder los 64 caracteres.'
-                ]
-            ],
-            'id_especialidad' => 'is_not_unique[sw_especialidad.id_especialidad]'
+            'id_curso' => 'is_not_unique[sw_curso.id_curso]',
+            'id_jornada' => 'is_not_unique[sw_jornada.id_jornada]'
         ])) {
             return redirect()->back()->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
 
+        // Validar si ya existe el nombre del paralelo para el mismo curso y periodo lectivo
+        $nombre = trim($this->request->getVar('nombre'));
+        $id_curso = $this->request->getVar('id_curso');
+        $id_periodo_lectivo = session('id_periodo_lectivo');
+
+        $id_paralelo = $this->request->getVar('id_paralelo');
+        $paralelo = $this->paraleloModel->find($id_paralelo);
+
+        if ($paralelo->pa_nombre != $nombre && $this->paraleloModel->existeParalelo($nombre, $id_curso, $id_periodo_lectivo)) {
+            return redirect()->back()->withInput()
+                ->with('errors', [
+                    'nombre' => 'El nombre del paralelo ya se encuentra utilizado en la base de datos.'
+                ]);
+        }
+
         $datos = [
+            'id_paralelo' => $id_paralelo,
             'id_curso' => $id_curso,
-            'id_especialidad' => $this->request->getVar('id_especialidad'),
-            'cu_nombre' => trim($this->request->getVar('nombre')),
-            'cu_abreviatura' => trim($this->request->getVar('abreviatura')),
-            'cu_shortname' => trim($this->request->getVar('nombre_corto')),
-            'es_bach_tecnico' => $this->request->getVar('es_bach_tecnico'),
-            'es_intensivo' => $this->request->getVar('es_intensivo')
+            'id_jornada' => $this->request->getVar('id_jornada'),
+            'pa_nombre' => strtoupper($nombre)
         ];
 
-        $this->cursoModel->save($datos);
+        $this->paraleloModel->save($datos);
 
-        return redirect('cursos')->with('msg', [
+        return redirect('paralelos')->with('msg', [
             'type' => 'success',
             'icon' => 'check',
-            'body' => 'El Curso fue actualizado correctamente.'
+            'body' => 'El Paralelo fue actualizado correctamente.'
         ]);
     }
 

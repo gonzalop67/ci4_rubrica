@@ -89,4 +89,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('paralelos/dataParalelos', 'Paralelos::dataParalelos', ['as' => 'paralelos_data']);
     $routes->get('paralelos/create', 'Paralelos::create', ['as' => 'paralelos_create']);
     $routes->post('paralelos/guardar', 'Paralelos::store', ['as' => 'paralelos_store']);
+    $routes->get('paralelos/editar/(:any)', 'Paralelos::edit/$1', ['as' => 'paralelos_edit']);
+    $routes->post('paralelos/actualizar', 'Paralelos::update', ['as' => 'paralelos_update']);
 });
