@@ -184,18 +184,18 @@ class Paralelos extends BaseController
             $id = $this->request->getVar('id');
 
             try {
-                $this->cursoModel->delete($id);
+                $this->paraleloModel->delete($id);
 
                 $msg = [
                     'success' => true,
                     'icon'    => "success",
-                    'message' => "El Curso fue eliminado correctamente."
+                    'message' => "El Paralelo fue eliminado correctamente."
                 ];
             } catch (\Exception $e) {
                 $msg = [
                     'success' => false,
                     'icon'    => "error",
-                    'message' => "No se puede eliminar El Curso porque tiene registros relacionados en otras tablas."
+                    'message' => "No se puede eliminar El Paralelo porque tiene registros relacionados en otras tablas."
                 ];
             }
 
@@ -212,7 +212,7 @@ class Paralelos extends BaseController
                 $index = $position[0];
                 $newPosition = $position[1];
 
-                $this->cursoModel->actualizarOrden($index, $newPosition);
+                $this->paraleloModel->actualizarOrden($index, $newPosition);
             }
         } else {
             exit('Lo siento, no se puede procesar.');

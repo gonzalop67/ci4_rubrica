@@ -63,16 +63,5 @@ class ParalelosModel extends Model
 
         return $num_rows > 0;
     }
-
-    public function getJornadaByIdParalelo($id_paralelo)
-    {
-        $query = $this->db->query("SELECT jo_nombre 
-                                     FROM sw_paralelo pa, 
-                                          sw_jornada jo, 
-                                    WHERE jo.id_jornada = pa.id_jornada 
-                                      AND id_paralelo = $id_paralelo");
-        $paralelo = $query->getRow();
-
-        return $paralelo->jo_nombre;
-    }
+    
 }

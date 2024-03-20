@@ -91,4 +91,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('paralelos/guardar', 'Paralelos::store', ['as' => 'paralelos_store']);
     $routes->get('paralelos/editar/(:any)', 'Paralelos::edit/$1', ['as' => 'paralelos_edit']);
     $routes->post('paralelos/actualizar', 'Paralelos::update', ['as' => 'paralelos_update']);
+    $routes->post('paralelos/eliminar', 'Paralelos::delete', ['as' => 'paralelos_delete']);
+    $routes->post('paralelos/saveNewPositions', 'Paralelos::saveNewPositions', ['as' => 'paralelos_saveNewPositions']);
 });
