@@ -133,12 +133,12 @@ class Areas extends BaseController
 
                 $msg = [
                     'icon'    => "success",
-                    'message' => "El Perfil fue eliminado correctamente."
+                    'message' => "El Area fue eliminada correctamente."
                 ];
             } catch (\Exception $e) {
                 $msg = [
                     'icon'    => "error",
-                    'message' => "No se puede eliminar el Perfil porque tiene registros relacionados en otras tablas."
+                    'message' => "No se puede eliminar el Area porque tiene registros relacionados en otras tablas."
                 ];
             }
 

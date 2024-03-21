@@ -63,7 +63,7 @@
                                 text: response.message,
                             });
 
-                            dataAreas();
+                            dataAsignaturas();
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
