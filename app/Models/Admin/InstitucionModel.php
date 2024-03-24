@@ -28,4 +28,12 @@ class InstitucionModel extends Model
         'in_copiar_y_pegar'
     ];
 
+    public function actualizar_copiar_y_pegar($in_copiar_y_pegar)
+    {
+        $data = [
+            'in_copiar_y_pegar' => $in_copiar_y_pegar
+        ];
+
+        $this->update(1, $data);
+    }
 }

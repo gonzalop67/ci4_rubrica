@@ -26,6 +26,10 @@
     <script src="<?= base_url() ?>Assets/js/jquery-3.7.0.min.js"></script>
     <!-- jquery-ui -->
     <script src="<?= base_url() ?>Assets/plugins/jquery-ui/jquery-ui.js"></script>
+
+    <!-- Toastr -->
+	<link rel="stylesheet" href="<?= base_url() ?>Assets/plugins/toastr/toastr.min.css">
+	<script src="<?= base_url() ?>Assets/plugins/toastr/toastr.min.js"></script>
 </head>
 
 <body class="sb-nav-fixed">

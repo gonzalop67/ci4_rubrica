@@ -16,7 +16,13 @@ Datos de la IE
             Datos de la Institución Educativa
         </div>
         <div class="card-body">
-            <form action="<?= base_url(route_to('institucion_update')) ?>" method="post">
+            <?php if (session('msg')) : ?>
+                <div class="alert alert-<?= session('msg.type') ?> alert-dismissible fade show" role="alert">
+                    <p><i class="icon fa fa-<?= session('msg.icon') ?>"></i> <?= session('msg.body') ?></p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif ?>
+            <form action="<?= base_url(route_to('institucion_update')) ?>" enctype="multipart/form-data" method="post">
                 <div class="row mb-2">
                     <div class="col-12">
                         <label for="nombre" class="form-label">Nombre:</label>
@@ -113,15 +119,21 @@ Datos de la IE
                 </div>
                 <div id="img_upload">
                     <div class="mb-3">
-                        <label for="avatar" class="form-label">Avatar</label>
-                        <div id="img_div" class="hide">
-                            <img src="<?= base_url() . "avatars/" . $institucion->in_logo; ?>" id="avatar" name="avatar" class="img-thumbnail" width="75">
-                        </div>
+                        <label for="logo" class="form-label">Logo</label>
+                        <?php if ($institucion->in_logo != '') : ?>
+                            <div id="img_div">
+                                <img src="<?= base_url() . "avatars/" . $institucion->in_logo; ?>" id="avatar" name="avatar" class="img-thumbnail" width="75">
+                            </div>
+                        <?php else : ?>
+                            <div id="img_div" class="hide">
+                                <img id="avatar" name="avatar" class="img-thumbnail" width="75">
+                            </div>
+                        <?php endif ?>
+                        <input type="hidden" name="imagen_institucion_oculta" value="<?= $institucion->in_logo ?>" />
                     </div>
                     <div class="mb-3">
-                        <!-- <label for="foto" class="form-label"></label> -->
-                        <input type="file" name="foto" id="foto" class="<?= session('errors.foto') ? 'is-invalid' : '' ?>">
-                        <p class="invalid-feedback"><?= session('errors.foto') ?></p>
+                        <input type="file" name="logo" id="logo" class="<?= session('errors.logo') ? 'is-invalid' : '' ?>">
+                        <p class="invalid-feedback"><?= session('errors.logo') ?></p>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar los datos de la institución</button>
@@ -130,3 +142,43 @@ Datos de la IE
     </div>
 </div>
 <?= $this->endsection('content') ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    $(document).ready(function() {
+        $("#logo").change(function() {
+            $("#img_div").removeClass("hide");
+            filePreview(this);
+        });
+
+    });
+
+    function filePreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.readAsDataURL(input.files[0]);
+            reader.onload = function(e) {
+                $("#avatar").attr("src", e.target.result);
+            }
+        }
+    }
+
+    function actualizar_estado_copiar_y_pegar(obj) {
+        if (obj.checked) estado_copiar_y_pegar = "1";
+        else estado_copiar_y_pegar = "0";
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url(route_to('institucion_actualizar_estado_copiar_y_pegar')) ?>",
+            data: "in_copiar_y_pegar=" + estado_copiar_y_pegar,
+            dataType: "json",
+            success: function(response) {
+                console.log(response.mensaje);
+                toastr[response.tipo_mensaje](response.mensaje, response.titulo);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
+</script>
+<?= $this->endsection('scripts') ?>
