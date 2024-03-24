@@ -25,17 +25,33 @@ class SwInstitucion extends Migration
 				'type'       => 'VARCHAR',
 				'constraint' => '64',
 			],
+			'in_regimen' => [
+				'type'       => 'VARCHAR',
+				'constraint' => '45',
+			],
 			'in_nom_rector' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '45',
+			],
+			'in_genero_rector' => [
+				'type'       => 'VARCHAR',
+				'constraint' => '1',
 			],
 			'in_nom_vicerrector' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '45',
 			],
+			'in_genero_vicerrector' => [
+				'type'       => 'VARCHAR',
+				'constraint' => '1',
+			],
 			'in_nom_secretario' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '45',
+			],
+			'in_genero_secretario' => [
+				'type'       => 'VARCHAR',
+				'constraint' => '1',
 			],
 			'in_url' => [
 				'type'       => 'VARCHAR',

@@ -33,6 +33,7 @@ class InitSeeder extends Seeder
             'sw_usuario_perfil'
         ]);
         $this->call('AreaSeeder');
+        $this->call('TipoAsignaturaSeeder');
         $this->call('AsignaturaSeeder');
         $this->call('DefGeneroSeeder');
         $this->call('DefNacionalidadSeeder');
@@ -47,7 +48,6 @@ class InitSeeder extends Seeder
         $this->call('NivelEducacionSeeder');
         $this->call('EspecialidadSeeder');
 		$this->call('PerfilSeeder');
-        $this->call('TipoAsignaturaSeeder');
         $this->call('TipoDocumentoSeeder');
         $this->call('TipoPeriodoSeeder');
         $this->call('PeriodoEvaluacionSeeder');

@@ -109,4 +109,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('asignaturas/editar/(:any)', 'Asignaturas::edit/$1', ['as' => 'asignaturas_edit']);
     $routes->post('asignaturas/actualizar', 'Asignaturas::update', ['as' => 'asignaturas_update']);
     $routes->post('asignaturas/eliminar/(:any)', 'Asignaturas::delete/$1', ['as' => 'asignaturas_delete']);
+    //RUTAS PARA INSTITUCION
+    $routes->get('institucion', 'Institucion::index', ['as' => 'institucion']);
 });
