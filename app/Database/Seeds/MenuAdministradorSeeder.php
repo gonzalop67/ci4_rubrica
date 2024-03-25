@@ -49,48 +49,56 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_padre'     => 0,
                 'mnu_publicado' => 1
 			],
-			[
-				'mnu_texto'     => 'Modalidades', // id_menu = 6
-                'mnu_link'      => 'admin/modalidades',
+            [
+				'mnu_texto'     => 'Institución', // id_menu = 6
+                'mnu_link'      => 'admin/institucion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
                 'mnu_padre'     => 1,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Períodos Lectivos', // id_menu = 7
-                'mnu_link'      => 'admin/periodos_lectivos',
+				'mnu_texto'     => 'Modalidades', // id_menu = 7
+                'mnu_link'      => 'admin/modalidades',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
                 'mnu_padre'     => 1,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Perfiles', // id_menu = 8
-                'mnu_link'      => 'admin/perfiles',
+				'mnu_texto'     => 'Períodos Lectivos', // id_menu = 8
+                'mnu_link'      => 'admin/periodos_lectivos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
                 'mnu_padre'     => 1,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Menús', // id_menu = 9
-                'mnu_link'      => 'admin/menus',
+				'mnu_texto'     => 'Perfiles', // id_menu = 9
+                'mnu_link'      => 'admin/perfiles',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
                 'mnu_padre'     => 1,
                 'mnu_publicado' => 1
 			],
-            [
-				'mnu_texto'     => 'Usuarios', // id_menu = 10
-                'mnu_link'      => 'admin/usuarios',
+			[
+				'mnu_texto'     => 'Menús', // id_menu = 10
+                'mnu_link'      => 'admin/menus',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 5,
                 'mnu_padre'     => 1,
                 'mnu_publicado' => 1
 			],
+            [
+				'mnu_texto'     => 'Usuarios', // id_menu = 11
+                'mnu_link'      => 'admin/usuarios',
+                'mnu_nivel'     => 2,
+                'mnu_orden'     => 6,
+                'mnu_padre'     => 1,
+                'mnu_publicado' => 1
+			],
 			[
-				'mnu_texto'     => 'Niveles de Educación', // id_menu = 11
+				'mnu_texto'     => 'Niveles de Educación', // id_menu = 12
                 'mnu_link'      => 'admin/niveles_educacion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
@@ -98,7 +106,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Especialidades', // id_menu = 12
+				'mnu_texto'     => 'Especialidades', // id_menu = 13
                 'mnu_link'      => 'admin/especialidades',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
@@ -106,7 +114,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Cursos', // id_menu = 13
+				'mnu_texto'     => 'Cursos', // id_menu = 14
                 'mnu_link'      => 'admin/cursos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
@@ -114,7 +122,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Paralelos', // id_menu = 14
+				'mnu_texto'     => 'Paralelos', // id_menu = 15
                 'mnu_link'      => 'admin/paralelos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
@@ -122,7 +130,7 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Areas', // id_menu = 15
+				'mnu_texto'     => 'Areas', // id_menu = 16
                 'mnu_link'      => 'admin/areas',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 5,
@@ -130,18 +138,10 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Asignaturas', // id_menu = 16
+				'mnu_texto'     => 'Asignaturas', // id_menu = 17
                 'mnu_link'      => 'admin/asignaturas',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 6,
-                'mnu_padre'     => 2,
-                'mnu_publicado' => 1
-			],
-            [
-				'mnu_texto'     => 'Institución', // id_menu = 17
-                'mnu_link'      => 'admin/institucion',
-                'mnu_nivel'     => 2,
-                'mnu_orden'     => 7,
                 'mnu_padre'     => 2,
                 'mnu_publicado' => 1
 			],

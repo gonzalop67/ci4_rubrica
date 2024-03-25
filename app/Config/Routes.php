@@ -113,4 +113,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('institucion', 'Institucion::index', ['as' => 'institucion']);
     $routes->post('institucion/actualizar', 'Institucion::update', ['as' => 'institucion_update']);
     $routes->post('institucion/actualizar_estado_copiar_y_pegar', 'Institucion::actualizar_estado_copiar_y_pegar', ['as' => 'institucion_actualizar_estado_copiar_y_pegar']);
+    //RUTAS PARA PERIODOS DE EVALUACION
+	$routes->get('periodos_evaluacion', 'Periodos_evaluacion::index', ['as' => 'periodos_evaluacion']);
+    $routes->get('periodos_evaluacion/create', 'Periodos_evaluacion::create', ['as' => 'periodos_evaluacion_create']);
+    $routes->post('periodos_evaluacion/guardar', 'Periodos_evaluacion::store', ['as' => 'periodos_evaluacion_store']);
 });

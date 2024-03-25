@@ -10,34 +10,39 @@ class PeriodoEvaluacionSeeder extends Seeder
 		//TIPOS DE PERIODO
 		$periodos_evaluacion = [
 			[
-				'pe_nombre'       => 'PRIMER QUIMESTRE', 
-                'pe_abreviatura'  => '1ER.Q.',
+				'pe_nombre'       => 'PRIMER TRIMESTRE', 
+                'pe_abreviatura'  => '1ER.T.',
                 'id_tipo_periodo' => 1,
-				'id_periodo_lectivo' => 1
+				'id_periodo_lectivo' => 1,
+				'pe_ponderacion' => 0.3
 			],
 			[
-				'pe_nombre'       => 'SEGUNDO QUIMESTRE', 
-                'pe_abreviatura'  => '2DO.Q.',
+				'pe_nombre'       => 'SEGUNDO TRIMESTRE', 
+                'pe_abreviatura'  => '2DO.T.',
                 'id_tipo_periodo' => 1,
-				'id_periodo_lectivo' => 1
+				'id_periodo_lectivo' => 1,
+				'pe_ponderacion' => 0.3
+			],
+			[
+				'pe_nombre'       => 'TERCER TRIMESTRE', 
+                'pe_abreviatura'  => '3ER.T.',
+                'id_tipo_periodo' => 1,
+				'id_periodo_lectivo' => 1,
+				'pe_ponderacion' => 0.3
+			],
+			[
+				'pe_nombre'       => 'PROYECTO INTEGRADOR', 
+                'pe_abreviatura'  => 'PRI',
+                'id_tipo_periodo' => 6,
+				'id_periodo_lectivo' => 1,
+				'pe_ponderacion' => 0.1
 			],
 			[
 				'pe_nombre'       => 'EXAMEN SUPLETORIO', 
                 'pe_abreviatura'  => 'SUP.',
                 'id_tipo_periodo' => 2,
-				'id_periodo_lectivo' => 1
-			],
-			[
-				'pe_nombre'       => 'EXAMEN REMEDIAL', 
-                'pe_abreviatura'  => 'REM.',
-                'id_tipo_periodo' => 3,
-				'id_periodo_lectivo' => 1
-			],
-			[
-				'pe_nombre'       => 'EXAMEN DE GRACIA', 
-                'pe_abreviatura'  => 'GRA.',
-                'id_tipo_periodo' => 4,
-				'id_periodo_lectivo' => 1
+				'id_periodo_lectivo' => 1,
+				'pe_ponderacion' => 0
 			],
 		];
         $builder = $this->db->table('sw_periodo_evaluacion');

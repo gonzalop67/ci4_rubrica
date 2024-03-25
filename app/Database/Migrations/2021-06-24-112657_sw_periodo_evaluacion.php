@@ -31,6 +31,9 @@ class SwPeriodoEvaluacion extends Migration
 			'pe_abreviatura' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '6',
+			],
+			'pe_ponderacion' => [
+				'type'       => 'FLOAT'
 			]			
 		]);
 		$this->forge->addKey('id_periodo_evaluacion', true);

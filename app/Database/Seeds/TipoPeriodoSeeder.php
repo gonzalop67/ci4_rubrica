@@ -8,7 +8,8 @@ class TipoPeriodoSeeder extends \CodeIgniter\Database\Seeder{
             'SUPLETORIO',
             'REMEDIAL',
             'DE GRACIA',
-            'REFUERZO'
+            'REFUERZO',
+            'PROYECTO FINAL'
         ];
         foreach ($tipos_periodo as $key) {
             $this->db->table('sw_tipo_periodo')->insert([
