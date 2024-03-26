@@ -17,7 +17,8 @@ class PeriodosEvaluacionModel extends Model
         'id_tipo_periodo',
         'pe_nombre',
         'pe_abreviatura',
-        'pe_ponderacion'
+        'pe_ponderacion',
+        'pe_orden'
     ];
 
     public function existeCampoPeriodoEvaluacion($campo, $nombre, $id_periodo_lectivo)
@@ -43,5 +44,14 @@ class PeriodosEvaluacionModel extends Model
         $num_rows = count($query->getResultObject());
 
         return $num_rows > 0;
+    }
+
+    public function actualizarOrden($id_periodo_evaluacion, $orden)
+    {
+        $data = [
+            'pe_orden' => $orden
+        ];
+
+        $this->update($id_periodo_evaluacion, $data);
     }
 }

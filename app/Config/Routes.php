@@ -101,7 +101,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('areas/editar/(:any)', 'Areas::edit/$1', ['as' => 'areas_edit']);
     $routes->post('areas/actualizar', 'Areas::update', ['as' => 'areas_update']);
     $routes->post('areas/eliminar/(:any)', 'Areas::delete/$1', ['as' => 'areas_delete']);
-    //RUTAS PARA ASIGANTURAS
+    //RUTAS PARA ASIGNATURAS
     $routes->get('asignaturas', 'Asignaturas::index', ['as' => 'asignaturas']);
     $routes->get('asignaturas/dataAsignaturas', 'Asignaturas::dataAsignaturas', ['as' => 'asignaturas_data']);
     $routes->get('asignaturas/create', 'Asignaturas::create', ['as' => 'asignaturas_create']);
@@ -120,4 +120,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->get('periodos_evaluacion/dataPeriodosEvaluacion', 'Periodos_evaluacion::dataPeriodosEvaluacion', ['as' => 'periodos_evaluacion_data']);
     $routes->get('periodos_evaluacion/editar/(:any)', 'Periodos_evaluacion::edit/$1', ['as' => 'periodos_evaluacion_edit']);
     $routes->post('periodos_evaluacion/actualizar', 'Periodos_evaluacion::update', ['as' => 'periodos_evaluacion_update']);
+    $routes->post('periodos_evaluacion/saveNewPositions', 'Periodos_evaluacion::saveNewPositions', ['as' => 'periodos_evaluacion_saveNewPositions']);
+    $routes->post('periodos_evaluacion/eliminar/(:any)', 'Periodos_evaluacion::delete/$1', ['as' => 'periodos_evaluacion_delete']);
 });

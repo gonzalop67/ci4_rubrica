@@ -102,6 +102,7 @@ class Periodos_evaluacion extends BaseController
         if ($this->request->isAJAX()) {
             $periodos_evaluacion = $this->periodoEvaluacionModel
                 ->where('id_periodo_lectivo', session()->id_periodo_lectivo)
+                ->orderBy('pe_orden')
                 ->findAll();
 
             $data = [
@@ -196,5 +197,47 @@ class Periodos_evaluacion extends BaseController
             'icon' => 'check',
             'body' => 'El Periodo de Evaluación fue actualizado correctamente.'
         ]);
+    }
+
+    public function saveNewPositions()
+    {
+        if ($this->request->isAJAX()) {
+            foreach ($_POST['positions'] as $position) {
+                $index = $position[0];
+                $newPosition = $position[1];
+
+                $this->periodoEvaluacionModel->actualizarOrden($index, $newPosition);
+            }
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
+
+    public function delete($id)
+    {
+        $hash = new Hashids();
+
+        if ($this->request->isAJAX()) {
+            // $id = $this->request->getVar('id');
+            $id = $hash->decode($id);
+
+            try {
+                $this->periodoEvaluacionModel->delete($id);
+
+                $msg = [
+                    'icon'    => "success",
+                    'message' => "El Periodo de Evaluación fue eliminado correctamente."
+                ];
+            } catch (\Exception $e) {
+                $msg = [
+                    'icon'    => "error",
+                    'message' => "No se puede eliminar el Periodo de Evaluación porque tiene registros relacionados en otras tablas."
+                ];
+            }
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
     }
 }

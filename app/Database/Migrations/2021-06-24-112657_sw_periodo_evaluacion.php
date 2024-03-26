@@ -34,7 +34,12 @@ class SwPeriodoEvaluacion extends Migration
 			],
 			'pe_ponderacion' => [
 				'type'       => 'FLOAT'
-			]			
+			],
+			'pe_orden' => [
+				'type'           => 'INT',
+				'constraint'     => 2,
+				'unsigned'       => true,
+			]
 		]);
 		$this->forge->addKey('id_periodo_evaluacion', true);
 		$this->forge->addForeignKey('id_periodo_lectivo','sw_periodo_lectivo','id_periodo_lectivo');
