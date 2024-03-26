@@ -8,18 +8,18 @@ class ModalidadSeeder extends Seeder
 	{
 		$modalidades = [
 			[
-				'mo_nombre' => 'SEMIPRESENCIAL',
+				'mo_nombre' => 'EGB SUPERIOR INTENSIVA',
 				'mo_activo' => 1,
 				'mo_orden'  => 1
 			],
 			[
-				'mo_nombre' => 'EGB SUPERIOR INTENSIVA',
-				'mo_activo' => 0,
+				'mo_nombre' => 'BGU INTENSIVO',
+				'mo_activo' => 1,
 				'mo_orden'  => 2
 			],
 			[
-				'mo_nombre' => 'BGU INTENSIVO',
-				'mo_activo' => 0,
+				'mo_nombre' => 'SEMIPRESENCIAL',
+				'mo_activo' => 1,
 				'mo_orden'  => 3
 			]
 		];

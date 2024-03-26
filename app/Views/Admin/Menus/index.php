@@ -39,7 +39,7 @@ Menus
                         <button id="btn_expandir_todo" class="btn btn-sm btn-success" data-action="expand-all"><i class="fa-solid fa-chevron-down"></i> Expandir Todo</button>
                         <button id="btn_colapsar_todo" class="btn btn-sm btn-danger" data-action="collapse-all"><i class="fa-solid fa-chevron-up"></i> Colapsar Todo</button>
                     </menu>
-                    <form>
+                    <!-- <form> -->
                         <div class="mb-3">
                             <label for="id_perfil" class="form-label">Elegir perfil:</label>
                             <select class="form-select" id="id_perfil" name="id_perfil">
@@ -53,7 +53,7 @@ Menus
                                 ?>
                             </select>
                         </div>
-                    </form>
+                    <!-- </form> -->
                 </div>
             </div>
             <div class="row">
@@ -219,7 +219,7 @@ Menus
                     },
                     dataType: "json",
                     success: function(response) {
-                        if (response.success) {
+                        // if (response.success) {
                             Swal.fire({
                                 icon: response.icon,
                                 title: "Eliminar",
@@ -227,7 +227,7 @@ Menus
                             });
 
                             listarMenus(id_perfil);
-                        }
+                        // }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

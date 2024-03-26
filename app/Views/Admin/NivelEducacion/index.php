@@ -23,8 +23,8 @@ Niveles de Educación
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
-            <a href="<?= base_url(route_to('niveles_educacion_create')) ?>" class="btn btn-block btn-success btn-sm">
-                <i class="fa fa-fw fa-plus-circle"></i> Nuevo Nivel de Educación
+            <a href="<?= base_url(route_to('niveles_educacion_create')) ?>" class="btn btn-block btn-primary btn-sm">
+                <i class="fa fa-fw fa-plus-circle"></i> Nuevo Registro
             </a>
             <hr>
             <table id="tbl_nivel_educacion" class="table table-hover table-striped">

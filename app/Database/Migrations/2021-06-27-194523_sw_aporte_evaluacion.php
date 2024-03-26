@@ -28,20 +28,35 @@ class SwAporteEvaluacion extends Migration
 				'type'       => 'VARCHAR',
 				'constraint' => '24',
 			],
-			'ap_shortname' => [
+			'ap_descripcion' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '45',
+				'constraint' => '256',
 			],
 			'ap_abreviatura' => [
 				'type'       => 'VARCHAR',
 				'constraint' => '8',
 			],
+			'ap_tipo' => [
+				'type' => 'INT',
+				'constraint' => 4
+			],
+			'ap_estado' => [
+				'type'       => 'VARCHAR',
+				'constraint' => '1',
+			],
 			'ap_fecha_apertura' => [
-				'type'           => 'DATE',
+				'type'          => 'DATE',
 			],
 			'ap_fecha_cierre' => [
-				'type'           => 'DATE',
+				'type'        => 'DATE',
 			],
+			'ap_ponderacion' => [
+				'type'       => 'FLOAT'
+			],
+			'ap_orden' => [
+				'type' => 'INT',
+				'constraint' => 4
+			]
 		]);
 		$this->forge->addKey('id_aporte_evaluacion', true);
 		$this->forge->addForeignKey('id_periodo_evaluacion','sw_periodo_evaluacion','id_periodo_evaluacion');

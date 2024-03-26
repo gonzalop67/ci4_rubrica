@@ -202,21 +202,28 @@ class Menus extends BaseController
         if ($this->request->isAJAX()) {
             $id_menu = $this->request->getVar('id_menu');
 
-            try {
-                $this->menuModel->delete($id_menu);
-
-                $msg = [
-                    'success' => true,
-                    'icon'    => "success",
-                    'message' => "El Menú fue eliminado correctamente."
-                ];
-            } catch (\Exception $e) {
+            if (count($this->menuModel->listarMenusHijos($id_menu)) > 0) {
                 $msg = [
                     'icon'    => "error",
-                    'message' => "El Menú no se puede eliminar porque tiene registros asociados en otras tablas."
+                    'message' => "El Menú no se puede eliminar porque tiene menús hijos asociados."
                 ];
+            } else {
+                try {
+                    $this->menuModel->delete($id_menu);
+    
+                    $msg = [
+                        'success' => true,
+                        'icon'    => "success",
+                        'message' => "El Menú fue eliminado correctamente."
+                    ];
+                } catch (\Exception $e) {
+                    $msg = [
+                        'icon'    => "error",
+                        'message' => "El Menú no se puede eliminar porque tiene registros asociados en otras tablas."
+                    ];
+                }
             }
-
+            
             echo json_encode($msg);
         } else {
             exit('Lo siento, no se puede procesar.');

@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/layout') ?>
 
 <?= $this->section('title') ?>
-Periodos de Evaluacion
+Aportes de Evaluacion
 <?= $this->endsection('title') ?>
 
 <?= $this->section('css') ?>
@@ -12,7 +12,7 @@ Periodos de Evaluacion
 <div class="container-fluid px-4">
     <!-- <h2 class="mt-4">Modalidades</h2> -->
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Administración de Periodos de Evaluación</li>
+        <li class="breadcrumb-item active">Administración de Aportes de Evaluación</li>
     </ol>
 
     <div class="card mb-4">
@@ -27,10 +27,21 @@ Periodos de Evaluacion
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
-            <a href="<?= base_url(route_to('periodos_evaluacion_create')) ?>" class="btn btn-block btn-primary btn-sm">
-                <i class="fa fa-fw fa-plus-circle"></i> Nuevo Registro
-            </a>
+            <button id="btn_nuevo_periodo" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#nuevoPeriodoModal"><i class="fa fa-plus-circle"></i> Nuevo Registro</button>
             <hr>
+            <div class="mb-3">
+                <label for="id_periodo_evaluacion" class="form-label">Elegir Periodo de Evaluación:</label>
+                <select class="form-select" id="id_periodo_evaluacion" name="id_periodo_evaluacion">
+                    <option value="">Seleccionar...</option>
+                    <?php
+                    foreach ($periodos_evaluacion as $v) {
+                    ?>
+                        <option value="<?php echo $v->id_periodo_evaluacion; ?>"><?php echo $v->pe_nombre; ?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
+            </div>
             <div class="row">
                 <div class="col-md-12 table-responsive">
                     <table class="table table-hover table-striped">
@@ -51,12 +62,28 @@ Periodos de Evaluacion
         </div>
     </div>
 </div>
+
+<div class="viewmodal" style="display: none;"></div>
 <?= $this->endsection('content') ?>
 
 <?= $this->section('scripts') ?>
 <script>
     $(document).ready(function() {
-        dataPeriodosEvaluacion();
+        // dataAportesEvaluacion();
+
+        $("#id_periodo_evaluacion").change(function(e) {
+            const id_periodo_evaluacion = $(this).val();
+            if (id_periodo_evaluacion !== "") {
+                listarAportes(id_periodo_evaluacion);
+            } else {
+                Swal.fire({
+                    title: "Aportes de Evaluación",
+                    text: "Tiene que elegir un periodo de evaluación...",
+                    icon: "info"
+                });
+
+            }
+        });
 
         //Autoclose
         window.setTimeout(function() {
@@ -76,9 +103,26 @@ Periodos de Evaluacion
         });
     });
 
-    function dataPeriodosEvaluacion() {
+    function dataAportesEvaluacion() {
         $.ajax({
-            url: "<?= base_url(route_to('periodos_evaluacion_data')) ?>",
+            url: "<?= base_url(route_to('aportes_evaluacion_data')) ?>",
+            dataType: "json",
+            success: function(response) {
+                $('.viewdata').html(response.data);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
+
+    function listarAportes(id_periodo_evaluacion) {
+        $.ajax({
+            type: "post",
+            url: "<?= base_url(route_to('aportes_evaluacion_data')) ?>",
+            data: {
+                id_periodo_evaluacion: id_periodo_evaluacion
+            },
             dataType: "json",
             success: function(response) {
                 $('.viewdata').html(response.data);
