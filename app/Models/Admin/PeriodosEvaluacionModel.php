@@ -31,4 +31,17 @@ class PeriodosEvaluacionModel extends Model
 
         return $num_rows > 0;
     }
+
+    public function existeRepetidoPeriodoEvaluacion($campo, $nombre, $id_periodo_lectivo, $id_periodo_evaluacion)
+    {
+        $query = $this->db->query("SELECT * 
+                                     FROM sw_periodo_evaluacion 
+                                    WHERE $campo = '$nombre' 
+                                      AND id_periodo_lectivo = $id_periodo_lectivo
+                                      AND id_periodo_evaluacion <> $id_periodo_evaluacion");
+
+        $num_rows = count($query->getResultObject());
+
+        return $num_rows > 0;
+    }
 }

@@ -117,4 +117,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
 	$routes->get('periodos_evaluacion', 'Periodos_evaluacion::index', ['as' => 'periodos_evaluacion']);
     $routes->get('periodos_evaluacion/create', 'Periodos_evaluacion::create', ['as' => 'periodos_evaluacion_create']);
     $routes->post('periodos_evaluacion/guardar', 'Periodos_evaluacion::store', ['as' => 'periodos_evaluacion_store']);
+    $routes->get('periodos_evaluacion/dataPeriodosEvaluacion', 'Periodos_evaluacion::dataPeriodosEvaluacion', ['as' => 'periodos_evaluacion_data']);
+    $routes->get('periodos_evaluacion/editar/(:any)', 'Periodos_evaluacion::edit/$1', ['as' => 'periodos_evaluacion_edit']);
+    $routes->post('periodos_evaluacion/actualizar', 'Periodos_evaluacion::update', ['as' => 'periodos_evaluacion_update']);
 });
