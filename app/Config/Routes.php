@@ -125,4 +125,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     //RUTAS PARA APORTES DE EVALUACION
 	$routes->get('aportes_evaluacion', 'Aportes_evaluacion::index', ['as' => 'aportes_evaluacion']);
     $routes->post('aportes_evaluacion/dataAportesEvaluacion', 'Aportes_evaluacion::dataAportesEvaluacion', ['as' => 'aportes_evaluacion_data']);
+    //aportes_evaluacion_form_crear
+    $routes->get('aportes_evaluacion/formAgregar', 'Aportes_evaluacion::formAgregar', ['as' => 'aportes_evaluacion_form_crear']);
 });

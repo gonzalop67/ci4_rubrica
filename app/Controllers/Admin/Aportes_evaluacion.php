@@ -32,12 +32,20 @@ class Aportes_evaluacion extends BaseController
         ]);
     }
 
-    public function create()
+    public function formAgregar()
     {
-        $tipos_periodos = $this->tiposPeriodoModel->findAll();
-        return view('Admin/PeriodosEvaluacion/create', [
-            'tipos_periodos' => $tipos_periodos
-        ]);
+        if ($this->request->isAJAX()) {
+            $tipos_aporte = $this->tiposAporteModel->orderBy('id_tipo_aporte')->findAll();
+            $msg = [
+                'data' => view('Admin/AportesEvaluacion/modalInsert',[
+                    'tipos_aporte' => $tipos_aporte
+                ])
+            ];
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
     }
 
     public function store()

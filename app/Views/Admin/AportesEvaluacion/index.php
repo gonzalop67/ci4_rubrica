@@ -27,7 +27,7 @@ Aportes de Evaluacion
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
-            <button id="btn_nuevo_periodo" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#nuevoPeriodoModal"><i class="fa fa-plus-circle"></i> Nuevo Registro</button>
+            <button id="btn_nuevo_aporte" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#nuevoAporteModal"><i class="fa fa-plus-circle"></i> Nuevo Registro</button>
             <hr>
             <div class="mb-3">
                 <label for="id_periodo_evaluacion" class="form-label">Elegir Periodo de Evaluación:</label>
@@ -69,13 +69,15 @@ Aportes de Evaluacion
 <?= $this->section('scripts') ?>
 <script>
     $(document).ready(function() {
-        // dataAportesEvaluacion();
+        $('#btn_nuevo_aporte').attr('disabled', true);
 
         $("#id_periodo_evaluacion").change(function(e) {
             const id_periodo_evaluacion = $(this).val();
             if (id_periodo_evaluacion !== "") {
+                $('#btn_nuevo_aporte').attr('disabled', false);
                 listarAportes(id_periodo_evaluacion);
             } else {
+                $('#btn_nuevo_aporte').attr('disabled', true);
                 Swal.fire({
                     title: "Aportes de Evaluación",
                     text: "Tiene que elegir un periodo de evaluación...",
@@ -83,6 +85,23 @@ Aportes de Evaluacion
                 });
 
             }
+        });
+
+        $('#btn_nuevo_aporte').click(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "<?= base_url(route_to('aportes_evaluacion_form_crear')) ?>",
+                dataType: "json",
+                success: function(response) {
+                    // alert(response.data);
+                    $('.viewmodal').html(response.data).show();
+                    $('#nuevoAporteModal').modal('show');
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
         });
 
         //Autoclose
