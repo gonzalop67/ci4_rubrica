@@ -188,6 +188,8 @@ class Usuarios extends BaseController
 
     public function update()
     {
+        // dd($this->request->getVar('perfiles'));
+
         $id_usuario = $this->request->getVar('id_usuario');
         if (!$this->validate([
             'abreviatura' => [
@@ -286,6 +288,18 @@ class Usuarios extends BaseController
             $this->usuariosModel->update($id_usuario, [
                 'us_password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
             ]);
+        }
+
+        // Actualizar los perfiles asociados
+        // Primero eliminar los perfiles asociados actualmente
+        $this->usuariosPerfilesModel->where('id_usuario', $id_usuario)->delete();
+        // Ahora insertar los perfiles enviados mediante POST
+        for ($i = 0; $i < count($perfiles); $i++) {
+            $datos = [
+                'id_usuario' => $id_usuario,
+                'id_perfil' => $perfiles[$i]
+            ];
+            $this->usuariosPerfilesModel->insert($datos);
         }
 
         return redirect('usuarios')->with('msg', [

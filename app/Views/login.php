@@ -27,12 +27,49 @@
                                     <form id="frmLogin" action="<?= base_url(route_to('signin')) ?>" method="POST" autocomplete="off">
                                         <?= csrf_field() ?>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Ingrese usuario">
+                                            <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Ingrese usuario" value="<?= old('usuario') ?>">
                                             <label for="usuario"><i class="fas fa-user"></i> Usuario</label>
+                                            <p id="error-usuario" class="invalid-feedback"></p>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="clave" name="clave" type="password" placeholder="Ingrese contraseña" />
+                                            <input class="form-control" id="clave" name="clave" type="password" placeholder="Ingrese contraseña" value="<?= old('clave') ?>">
                                             <label for="clave"><i class="fas fa-key"></i> Contraseña</label>
+                                            <p id="error-clave" class="invalid-feedback"></p>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <?php
+
+                                            use App\Models\Admin\PeriodosLectivosModel;
+
+                                            $periodoLectivoModel = new PeriodosLectivosModel();
+                                            ?>
+                                            <select class="form-select" name="periodo" id="periodo">
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($modalidades as $modalidad) : ?>
+                                                    <optgroup label="<?= $modalidad->mo_nombre; ?>">
+                                                        <?php $periodos_lectivos = $periodoLectivoModel->listarPeriodosPorModalidad($modalidad->id_modalidad); ?>
+                                                        <?php foreach ($periodos_lectivos as $periodo_lectivo) : ?>
+                                                            <?php
+                                                            $nombrePeriodoLectivo = fecha_corta($periodo_lectivo->pe_fecha_inicio) . " - " . fecha_corta($periodo_lectivo->pe_fecha_fin) . " [" . $periodo_lectivo->pe_descripcion . "]";
+                                                            ?>
+
+                                                            <option value="<?= $periodo_lectivo->id_periodo_lectivo ?>" <?= old('periodo') == $periodo_lectivo->id_periodo_lectivo ? 'selected' : '' ?>><?= $nombrePeriodoLectivo; ?></option>
+                                                        <?php endforeach ?>
+                                                    </optgroup>
+                                                <?php endforeach ?>
+                                            </select>
+                                            <label for="periodo"><i class="fa-solid fa-calendar"></i> Periodo Lectivo</label>
+                                            <p id="error-periodo" class="invalid-feedback"></p>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" name="perfil" id="perfil">
+                                                <option value="">Seleccione...</option>
+                                                <?php foreach ($perfiles as $perfil) : ?>
+                                                    <option value="<?= $perfil->id_perfil ?>" <?= old('perfil') == $perfil->id_perfil ? 'selected' : '' ?>><?= $perfil->pe_nombre; ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                            <label for="perfil"><i class="fa-solid fa-user-gear"></i></i> Perfil</label>
+                                            <p id="error-perfil" class="invalid-feedback"></p>
                                         </div>
 
                                         <?php if (session('msg')) : ?>
@@ -69,14 +106,43 @@
             e.preventDefault();
             const usuario = document.getElementById("usuario");
             const clave = document.getElementById("clave");
-            if (usuario.value == "") {
-                clave.classList.remove("is-invalid");
-                usuario.classList.add("is-invalid");
-                usuario.focus();
-            } else if (clave.value == "") {
-                usuario.classList.remove("is-invalid");
-                clave.classList.add("is-invalid");
-                clave.focus();
+            const periodo = document.getElementById("periodo");
+            const perfil = document.getElementById("perfil");
+
+            if (usuario.value == "" || clave.value == "" || periodo.value == "" || perfil.value == "") {
+
+                if (usuario.value == "") {
+                    usuario.classList.add("is-invalid");
+                    document.getElementById("error-usuario").innerHTML = "El campo Usuario es obligatorio.";
+                } else {
+                    usuario.classList.remove("is-invalid");
+                    document.getElementById("error-usuario").innerHTML = "";
+                }
+
+                if (clave.value == "") {
+                    clave.classList.add("is-invalid");
+                    document.getElementById("error-clave").innerHTML = "El campo Contraseña es obligatorio.";
+                } else {
+                    clave.classList.remove("is-invalid");
+                    document.getElementById("error-clave").innerHTML = "";
+                } 
+                
+                if (periodo.value == "") {
+                    periodo.classList.add("is-invalid");
+                    document.getElementById("error-periodo").innerHTML = "El campo Periodo Lectivo es obligatorio.";
+                } else {
+                    periodo.classList.remove("is-invalid");
+                    document.getElementById("error-periodo").innerHTML = "";
+                }
+
+                if (perfil.value == "") {
+                    perfil.classList.add("is-invalid");
+                    document.getElementById("error-perfil").innerHTML = "El campo Perfil es obligatorio.";
+                } else {
+                    perfil.classList.remove("is-invalid");
+                    document.getElementById("error-perfil").innerHTML = "";
+                }
+
             } else {
                 const frm = document.getElementById("frmLogin");
                 frm.submit();
