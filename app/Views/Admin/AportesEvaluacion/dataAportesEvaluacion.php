@@ -24,7 +24,7 @@ if (count($aportes_evaluacion) > 0) {
     <?php }
 } else { ?>
     <tr>
-        <td colspan="4" class="text-center">No se han ingresado Aportes de Evaluación todavía...</td>
+        <td colspan="5" class="text-center">No se han ingresado Aportes de Evaluación todavía...</td>
     </tr>
 <?php
 }

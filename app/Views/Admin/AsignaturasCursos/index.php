@@ -72,7 +72,7 @@ Asociar Asignaturas con Cursos
                     <label class="control-label" style="position:relative; top:7px;">Total Asignaturas:</label>
                 </div>
                 <div class="col-2" style="margin-top: 2px;">
-                    <input type="text" class="form-control" id="total_asignaturas" value="0" disabled>
+                    <input type="text" class="form-control text-end" id="total_asignaturas" value="0" disabled>
                 </div>
             </div>
         </div>

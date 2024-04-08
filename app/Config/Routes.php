@@ -169,3 +169,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('paralelos_inspectores/dataParalelosInspectores', 'Paralelos_inspectores::dataParalelosInspectores', ['as' => 'paralelos_inspectores_data']);
     $routes->post('paralelos_inspectores/eliminar', 'Paralelos_inspectores::delete', ['as' => 'paralelos_inspectores_delete']);
 });
+
+$routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter' => 'auth'], function ($routes) {
+    //RUTAS PARA MALLAS CURRICULARES
+    $routes->get('mallas_curriculares', 'Mallas_curriculares::index', ['as' => 'mallas_curriculares']);
+});

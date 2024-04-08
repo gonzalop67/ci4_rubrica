@@ -26,7 +26,7 @@ Asignaturas
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
-            <a href="<?= base_url(route_to('asignaturas_create')) ?>" class="btn btn-block btn-success btn-sm">
+            <a href="<?= base_url(route_to('asignaturas_create')) ?>" class="btn btn-block btn-primary btn-sm">
                 <i class="fa fa-fw fa-plus-circle"></i> Nueva Asignatura
             </a>
             <hr>
