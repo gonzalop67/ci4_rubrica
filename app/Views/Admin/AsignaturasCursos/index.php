@@ -176,12 +176,6 @@ Asociar Asignaturas con Cursos
                         $('#id_asignatura').removeClass('is-invalid');
                         $('.error-id-asignatura').html('');
 
-                        /* Swal.fire({
-                            title: "Logrado!",
-                            text: response.success,
-                            icon: "success"
-                        }); */
-
                         toastr["success"](response.success, "Logrado!");
 
                         listarAsignaturasAsociadas(id_curso);

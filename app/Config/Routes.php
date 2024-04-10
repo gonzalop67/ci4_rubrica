@@ -168,6 +168,11 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('paralelos_inspectores/guardar', 'Paralelos_inspectores::store', ['as' => 'paralelos_inspectores_store']);
     $routes->post('paralelos_inspectores/dataParalelosInspectores', 'Paralelos_inspectores::dataParalelosInspectores', ['as' => 'paralelos_inspectores_data']);
     $routes->post('paralelos_inspectores/eliminar', 'Paralelos_inspectores::delete', ['as' => 'paralelos_inspectores_delete']);
+    //RUTAS PARA PERIODOS LECTIVOS NIVELES DE EDUCACION
+    $routes->get('periodos_niveles', 'Periodos_niveles::index', ['as' => 'periodos_niveles']);
+    $routes->post('periodos_niveles/guardar', 'Periodos_niveles::store', ['as' => 'periodos_niveles_store']);
+    $routes->post('periodos_niveles/dataPeriodosNiveles', 'Periodos_niveles::dataPeriodosNiveles', ['as' => 'periodos_niveles_data']);
+    $routes->post('periodos_niveles/eliminar', 'Periodos_niveles::delete', ['as' => 'periodos_niveles_delete']);
 });
 
 $routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter' => 'auth'], function ($routes) {
