@@ -26,7 +26,7 @@ class SwRubricaEvaluacion extends Migration
 			],
 			'ru_nombre' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '24',
+				'constraint' => '36',
 			],
 			'ru_abreviatura' => [
 				'type'       => 'VARCHAR',

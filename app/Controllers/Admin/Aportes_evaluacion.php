@@ -24,7 +24,10 @@ class Aportes_evaluacion extends BaseController
 
     public function index()
     {
-        $periodos_evaluacion = $this->periodoEvaluacionModel->orderBy('pe_orden')->findAll();
+        $periodos_evaluacion = $this->periodoEvaluacionModel
+            ->where('id_periodo_lectivo', session('id_periodo_lectivo'))
+            ->orderBy('pe_orden')
+            ->findAll();
 
         return view('Admin/AportesEvaluacion/index', [
             'periodos_evaluacion' => $periodos_evaluacion

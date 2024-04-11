@@ -29,7 +29,7 @@ class SwPeriodoEvaluacion extends Migration
 			],
 			'pe_abreviatura' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '6',
+				'constraint' => '8',
 			],
 			'pe_ponderacion' => [
 				'type'       => 'FLOAT'

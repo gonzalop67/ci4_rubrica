@@ -46,10 +46,10 @@ class Periodos_evaluacion extends BaseController
             ],
             'abreviatura' => [
                 'label' => 'Abreviatura',
-                'rules' => 'required|max_length[6]',
+                'rules' => 'required|max_length[8]',
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio',
-                    'max_length' => 'El campo {field} no debe exceder los 6 caracteres.'
+                    'max_length' => 'El campo {field} no debe exceder los 8 caracteres.'
                 ]
             ],
             'ponderacion' => [

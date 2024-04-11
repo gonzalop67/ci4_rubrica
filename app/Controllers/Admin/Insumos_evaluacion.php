@@ -8,6 +8,7 @@ use App\Models\Admin\PeriodosEvaluacionModel;
 use App\Models\Admin\TiposAsignaturaModel;
 
 use Hashids\Hashids;
+
 class Insumos_evaluacion extends BaseController
 {
     private $insumoEvaluacionModel;
@@ -23,7 +24,9 @@ class Insumos_evaluacion extends BaseController
 
     public function index()
     {
-        $periodos_evaluacion = $this->periodoEvaluacionModel->orderBy('pe_orden')->findAll();
+        $periodos_evaluacion = $this->periodoEvaluacionModel
+            ->where('id_periodo_lectivo', session('id_periodo_lectivo'))
+            ->orderBy('pe_orden')->findAll();
         $tipos_asignatura = $this->tipoAsignaturaModel->orderBy('id_tipo_asignatura')->findAll();
 
         return view('Admin/InsumosEvaluacion/index', [
@@ -44,15 +47,15 @@ class Insumos_evaluacion extends BaseController
                 ->orderBy('id_rubrica_evaluacion')
                 ->findAll();
 
-                $data = [
-                    'insumos_evaluacion' => $insumos_evaluacion
-                ];
-    
-                $msg = [
-                    'data' => view('Admin/InsumosEvaluacion/dataInsumosEvaluacion', $data)
-                ];
-    
-                echo json_encode($msg);
+            $data = [
+                'insumos_evaluacion' => $insumos_evaluacion
+            ];
+
+            $msg = [
+                'data' => view('Admin/InsumosEvaluacion/dataInsumosEvaluacion', $data)
+            ];
+
+            echo json_encode($msg);
         } else {
             exit('Lo siento, no se puede procesar.');
         }
@@ -77,10 +80,10 @@ class Insumos_evaluacion extends BaseController
             if (!$this->validate([
                 'nombre' => [
                     'label' => 'Nombre',
-                    'rules' => "required|max_length[24]",
+                    'rules' => "required|max_length[36]",
                     'errors' => [
                         'required' => 'El campo {field} es obligatorio',
-                        'max_length' => 'El campo {field} no debe exceder los 24 caracteres.'
+                        'max_length' => 'El campo {field} no debe exceder los 36 caracteres.'
                     ]
                 ],
                 'abreviatura' => [
