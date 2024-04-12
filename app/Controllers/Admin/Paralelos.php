@@ -32,10 +32,10 @@ class Paralelos extends BaseController
 
         if ($this->request->isAJAX()) {
             $paralelos = $this->paraleloModel
-                                ->join('sw_curso', 'sw_curso.id_curso = sw_paralelo.id_curso')
-                                ->join('sw_especialidad', 'sw_especialidad.id_especialidad = sw_curso.id_especialidad')
-                                ->join('sw_jornada', 'sw_jornada.id_jornada = sw_paralelo.id_jornada')
-                                ->where('id_periodo_lectivo', $id_periodo_lectivo)->orderBy('pa_orden')->findAll();
+                ->join('sw_curso', 'sw_curso.id_curso = sw_paralelo.id_curso')
+                ->join('sw_especialidad', 'sw_especialidad.id_especialidad = sw_curso.id_especialidad')
+                ->join('sw_jornada', 'sw_jornada.id_jornada = sw_paralelo.id_jornada')
+                ->where('id_periodo_lectivo', $id_periodo_lectivo)->orderBy('pa_orden')->findAll();
 
             $data = [
                 'paralelos' => $paralelos
@@ -54,9 +54,21 @@ class Paralelos extends BaseController
     public function create()
     {
         $cursos = $this->cursoModel
-                        ->join('sw_especialidad', 'sw_especialidad.id_especialidad = sw_curso.id_especialidad')
-                        ->orderBy('cu_orden')
-                        ->findAll();
+            ->join(
+                'sw_especialidad',
+                'sw_especialidad.id_especialidad = sw_curso.id_especialidad'
+            )
+            ->join(
+                'sw_nivel_educacion',
+                'sw_nivel_educacion.id_nivel_educacion = sw_especialidad.id_nivel_educacion'
+            )
+            ->join(
+                'sw_periodo_nivel',
+                'sw_nivel_educacion.id_nivel_educacion = sw_periodo_nivel.id_nivel_educacion'
+            )
+            ->where('sw_periodo_nivel.id_periodo_lectivo', session('id_periodo_lectivo'))
+            ->orderBy('cu_orden')
+            ->findAll();
         $jornadas = $this->jornadaModel->orderBy('id_jornada')->findAll();
         return view('Admin/Paralelos/create', [
             'cursos' => $cursos,
@@ -118,9 +130,9 @@ class Paralelos extends BaseController
         }
 
         $cursos = $this->cursoModel
-                        ->join('sw_especialidad', 'sw_especialidad.id_especialidad = sw_curso.id_especialidad')
-                        ->orderBy('cu_orden')
-                        ->findAll();
+            ->join('sw_especialidad', 'sw_especialidad.id_especialidad = sw_curso.id_especialidad')
+            ->orderBy('cu_orden')
+            ->findAll();
         $jornadas = $this->jornadaModel->orderBy('id_jornada')->findAll();
         return view('Admin/Paralelos/edit', [
             'paralelo' => $paralelo,
