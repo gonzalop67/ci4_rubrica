@@ -177,40 +177,48 @@ class MenuAdministradorSeeder extends Seeder
                 'mnu_padre'     => 3,
                 'mnu_publicado' => 1
 			],
-			[
-				'mnu_texto'     => 'Asignaturas Cursos', // id_menu = 22
-                'mnu_link'      => 'admin/asignaturas_cursos',
+            [
+				'mnu_texto'     => 'Periodos Niveles', // id_menu = 22
+                'mnu_link'      => 'admin/periodos_niveles',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
                 'mnu_padre'     => 4,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Curso Superior', // id_menu = 23
-                'mnu_link'      => 'admin/curso_superior',
+				'mnu_texto'     => 'Asignaturas Cursos', // id_menu = 23
+                'mnu_link'      => 'admin/asignaturas_cursos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
                 'mnu_padre'     => 4,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Paralelos Tutores', // id_menu = 24
-                'mnu_link'      => 'admin/paralelos_tutores',
+				'mnu_texto'     => 'Curso Superior', // id_menu = 24
+                'mnu_link'      => 'admin/curso_superior',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
                 'mnu_padre'     => 4,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Paralelos Inspectores', // id_menu = 25
-                'mnu_link'      => 'admin/paralelos_inspectores',
+				'mnu_texto'     => 'Paralelos Tutores', // id_menu = 25
+                'mnu_link'      => 'admin/paralelos_tutores',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
                 'mnu_padre'     => 4,
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Periodos', // id_menu = 26
+				'mnu_texto'     => 'Paralelos Inspectores', // id_menu = 26
+                'mnu_link'      => 'admin/paralelos_inspectores',
+                'mnu_nivel'     => 2,
+                'mnu_orden'     => 5,
+                'mnu_padre'     => 4,
+                'mnu_publicado' => 1
+			],
+			[
+				'mnu_texto'     => 'Periodos', // id_menu = 27
                 'mnu_link'      => 'admin/cierre_periodos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
