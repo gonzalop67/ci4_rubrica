@@ -23,7 +23,7 @@ class MenuDECESeeder extends Seeder
                 'mnu_link'      => 'dece/parciales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 105,
+                'mnu_padre'     => 101,
                 'mnu_publicado' => 1
 			],
             [
@@ -31,7 +31,7 @@ class MenuDECESeeder extends Seeder
                 'mnu_link'      => 'dece/sub_periodos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 105,
+                'mnu_padre'     => 101,
                 'mnu_publicado' => 1
 			],
             [
@@ -39,7 +39,7 @@ class MenuDECESeeder extends Seeder
                 'mnu_link'      => 'dece/periodos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
-                'mnu_padre'     => 105,
+                'mnu_padre'     => 101,
                 'mnu_publicado' => 1
 			],
 		];

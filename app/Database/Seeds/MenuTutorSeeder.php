@@ -11,7 +11,7 @@ class MenuTutorSeeder extends Seeder
 		
         $menus = [
             [
-				'mnu_texto'     => 'Reportes', // id_menu = 79
+				'mnu_texto'     => 'Reportes', // id_menu = 75
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 1,
@@ -19,7 +19,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Comportamiento', // id_menu = 80
+				'mnu_texto'     => 'Comportamiento', // id_menu = 76
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 2,
@@ -27,7 +27,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Consultas', // id_menu = 81
+				'mnu_texto'     => 'Consultas', // id_menu = 77
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 3,
@@ -35,7 +35,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Asistencia', // id_menu = 82
+				'mnu_texto'     => 'Asistencia', // id_menu = 78
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 4,
@@ -47,7 +47,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/parciales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 79,
+                'mnu_padre'     => 75,
                 'mnu_publicado' => 1
 			],
 			[
@@ -55,7 +55,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/quimestrales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 79,
+                'mnu_padre'     => 75,
                 'mnu_publicado' => 1
 			],
 			[
@@ -63,7 +63,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/anuales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
-                'mnu_padre'     => 79,
+                'mnu_padre'     => 75,
                 'mnu_publicado' => 1
 			],
 			[
@@ -71,7 +71,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/supletorios',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
-                'mnu_padre'     => 79,
+                'mnu_padre'     => 75,
                 'mnu_publicado' => 1
 			],
 			[
@@ -79,7 +79,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/comp_parciales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 80,
+                'mnu_padre'     => 76,
                 'mnu_publicado' => 1
 			],
 			[
@@ -87,7 +87,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/comp_sub_periodos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 80,
+                'mnu_padre'     => 76,
                 'mnu_publicado' => 1
 			],
             [
@@ -95,7 +95,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/lista_docentes',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 81,
+                'mnu_padre'     => 77,
                 'mnu_publicado' => 1
 			],
             [
@@ -103,7 +103,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/horario_clases',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 81,
+                'mnu_padre'     => 77,
                 'mnu_publicado' => 1
 			],
             [
@@ -111,7 +111,7 @@ class MenuTutorSeeder extends Seeder
                 'mnu_link'      => 'tutores/justificar_faltas',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 82,
+                'mnu_padre'     => 78,
                 'mnu_publicado' => 1
 			],
 		];

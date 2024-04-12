@@ -19,15 +19,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Libretación', // id_menu = 47
-                'mnu_link'      => 'secretaria/libretacion',
-                'mnu_nivel'     => 1,
-                'mnu_orden'     => 2,
-                'mnu_padre'     => 0,
-                'mnu_publicado' => 1
-			],
-            [
-				'mnu_texto'     => 'Reporte', // id_menu = 48
+				'mnu_texto'     => 'Reporte', // id_menu = 47
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 3,
@@ -35,7 +27,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'A Excel', // id_menu = 49
+				'mnu_texto'     => 'A Excel', // id_menu = 48
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 4,
@@ -43,7 +35,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Promoción', // id_menu = 50
+				'mnu_texto'     => 'Promoción', // id_menu = 49
                 'mnu_link'      => 'secretaria/promocion',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 5,
@@ -51,10 +43,18 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
 			[
-				'mnu_texto'     => 'Paralelos', // id_menu = 51
+				'mnu_texto'     => 'Paralelos', // id_menu = 50
                 'mnu_link'      => 'secretaria/matriculacion',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
+                'mnu_padre'     => 46,
+                'mnu_publicado' => 1
+			],
+            [
+				'mnu_texto'     => 'Libretación', // id_menu = 51
+                'mnu_link'      => 'secretaria/libretacion',
+                'mnu_nivel'     => 2,
+                'mnu_orden'     => 2,
                 'mnu_padre'     => 46,
                 'mnu_publicado' => 1
 			],
@@ -63,7 +63,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_link'      => 'secretaria/nomina_matriculados',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 48,
+                'mnu_padre'     => 47,
                 'mnu_publicado' => 1
 			],
 			[
@@ -71,7 +71,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_link'      => 'secretaria/por_asignatura',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 48,
+                'mnu_padre'     => 47,
                 'mnu_publicado' => 1
 			],
 			[
@@ -79,7 +79,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_link'      => 'secretaria/reporte_parciales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
-                'mnu_padre'     => 48,
+                'mnu_padre'     => 47,
                 'mnu_publicado' => 1
 			],
             [
@@ -87,7 +87,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_link'      => 'secretaria/reporte_quimestral',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 4,
-                'mnu_padre'     => 48,
+                'mnu_padre'     => 47,
                 'mnu_publicado' => 1
 			],
 			[
@@ -95,7 +95,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_link'      => 'secretaria/reporte_anual',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 5,
-                'mnu_padre'     => 48,
+                'mnu_padre'     => 47,
                 'mnu_publicado' => 1
 			],
 			[
@@ -103,7 +103,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_link'      => 'secretaria/reporte_supletorios',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 6,
-                'mnu_padre'     => 48,
+                'mnu_padre'     => 47,
                 'mnu_publicado' => 1
 			],
 			[
@@ -111,7 +111,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_link'      => 'secretaria/padron_electoral',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 49,
+                'mnu_padre'     => 48,
                 'mnu_publicado' => 1
 			],
 			[
@@ -119,7 +119,7 @@ class MenuSecretariaSeeder extends Seeder
                 'mnu_link'      => 'secretaria/cuadro_final',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 49,
+                'mnu_padre'     => 48,
                 'mnu_publicado' => 1
 			]
 		];

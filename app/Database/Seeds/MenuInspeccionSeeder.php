@@ -11,7 +11,7 @@ class MenuInspeccionSeeder extends Seeder
 		
         $menus = [
             [
-				'mnu_texto'     => 'Comportamiento', // id_menu = 92
+				'mnu_texto'     => 'Comportamiento', // id_menu = 88
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 1,
@@ -19,7 +19,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Horarios', // id_menu = 93
+				'mnu_texto'     => 'Horarios', // id_menu = 89
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 2,
@@ -27,7 +27,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Definiciones', // id_menu = 94
+				'mnu_texto'     => 'Definiciones', // id_menu = 90
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 3,
@@ -35,7 +35,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_publicado' => 1
 			],
             [
-				'mnu_texto'     => 'Consultas', // id_menu = 95
+				'mnu_texto'     => 'Consultas', // id_menu = 91
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 4,
@@ -47,7 +47,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/parciales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 92,
+                'mnu_padre'     => 88,
                 'mnu_publicado' => 1
 			],
 			[
@@ -55,7 +55,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/quimestrales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 92,
+                'mnu_padre'     => 88,
                 'mnu_publicado' => 1
 			],
 			[
@@ -63,7 +63,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/anuales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
-                'mnu_padre'     => 92,
+                'mnu_padre'     => 88,
                 'mnu_publicado' => 1
 			],
 			[
@@ -71,7 +71,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/leccionario',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 93,
+                'mnu_padre'     => 89,
                 'mnu_publicado' => 1
 			],
 			[
@@ -79,7 +79,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/horario_docentes',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 93,
+                'mnu_padre'     => 89,
                 'mnu_publicado' => 1
 			],
 			[
@@ -87,7 +87,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/valor_del_mes',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 94,
+                'mnu_padre'     => 90,
                 'mnu_publicado' => 1
 			],
             [
@@ -95,7 +95,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/feriados',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 94,
+                'mnu_padre'     => 90,
                 'mnu_publicado' => 1
 			],
             [
@@ -103,7 +103,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/lista_docentes',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 95,
+                'mnu_padre'     => 91,
                 'mnu_publicado' => 1
 			],
             [
@@ -111,7 +111,7 @@ class MenuInspeccionSeeder extends Seeder
                 'mnu_link'      => 'inspeccion/horario_clases',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 95,
+                'mnu_padre'     => 91,
                 'mnu_publicado' => 1
 			],
 		];

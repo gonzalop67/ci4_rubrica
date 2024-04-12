@@ -87,7 +87,7 @@ class MenuDocenteSeeder extends Seeder
                 'mnu_link'      => 'docentes/informe_parciales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 61,
+                'mnu_padre'     => 62,
                 'mnu_publicado' => 1
 			],
 			[
@@ -95,7 +95,7 @@ class MenuDocenteSeeder extends Seeder
                 'mnu_link'      => 'docentes/informe_anual',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 61,
+                'mnu_padre'     => 62,
                 'mnu_publicado' => 1
 			],
 			[

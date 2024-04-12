@@ -11,7 +11,7 @@ class MenuRepresentanteSeeder extends Seeder
 		
         $menus = [
             [
-				'mnu_texto'     => 'Reportes', // id_menu = 109
+				'mnu_texto'     => 'Reportes', // id_menu = 105
                 'mnu_link'      => '#',
                 'mnu_nivel'     => 1,
                 'mnu_orden'     => 1,
@@ -23,7 +23,7 @@ class MenuRepresentanteSeeder extends Seeder
                 'mnu_link'      => 'dece/parciales',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 1,
-                'mnu_padre'     => 109,
+                'mnu_padre'     => 105,
                 'mnu_publicado' => 1
 			],
             [
@@ -31,7 +31,7 @@ class MenuRepresentanteSeeder extends Seeder
                 'mnu_link'      => 'dece/sub_periodos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 2,
-                'mnu_padre'     => 109,
+                'mnu_padre'     => 105,
                 'mnu_publicado' => 1
 			],
             [
@@ -39,7 +39,7 @@ class MenuRepresentanteSeeder extends Seeder
                 'mnu_link'      => 'dece/periodos',
                 'mnu_nivel'     => 2,
                 'mnu_orden'     => 3,
-                'mnu_padre'     => 109,
+                'mnu_padre'     => 105,
                 'mnu_publicado' => 1
 			],
 		];
