@@ -178,4 +178,5 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
 $routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter' => 'auth'], function ($routes) {
     //RUTAS PARA MALLAS CURRICULARES
     $routes->get('mallas_curriculares', 'Mallas_curriculares::index', ['as' => 'mallas_curriculares']);
+    $routes->post('mallas_curriculares/formAgregar', 'Mallas_curriculares::formAgregar', ['as' => 'mallas_curriculares_form_crear']);
 });

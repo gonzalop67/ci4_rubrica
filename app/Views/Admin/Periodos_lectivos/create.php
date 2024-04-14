@@ -62,14 +62,14 @@ Crear Un Periodo Lectivo
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="pe_nota_minima">Nota mínima:</label>
-                            <input type="number" min="0.01" step="0.01" class="form-control fuente9 <?= session('errors.pe_nota_minima') ? 'is-invalid' : '' ?>" name="pe_nota_minima" id="pe_nota_minima" value="0.01" required>
+                            <input type="number" min="0.01" step="0.01" class="form-control" name="pe_nota_minima" id="pe_nota_minima" value="0.01" required>
                             <span id="span_pe_nota_minima" class="invalid-feedback"><?= session('errors.pe_nota_minima') ?></span>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="pe_nota_aprobacion">Nota aprobación:</label>
-                            <input name="pe_nota_aprobacion" type="number" min="7" max="10" step="0.01" class="form-control fuente9" id="pe_nota_aprobacion" value="7" required>
+                            <input name="pe_nota_aprobacion" type="number" min="7" max="10" step="0.01" class="form-control" id="pe_nota_aprobacion" value="7" required>
                             <span id="span_pe_nota_aprobacion" class="invalid-feedback"><?= session('errors.pe_nota_aprobacion') ?></span>
                         </div>
                     </div>

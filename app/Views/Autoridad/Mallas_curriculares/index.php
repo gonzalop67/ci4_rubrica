@@ -62,6 +62,8 @@ Mallas Curriculares
         </div>
     </div>
 </div>
+
+<div class="viewmodal" style="display: none;"></div>
 <?= $this->endsection('content') ?>
 
 <?= $this->section('scripts') ?>
@@ -70,6 +72,47 @@ Mallas Curriculares
         $('#id_curso').select2();
 
         $(".viewdata").html("<tr><td colspan='7' align='center'>Debe seleccionar un curso...</td></tr>");
+
+        $('#btn_nuevo_item').attr('disabled', true);
+
+        $("#id_curso").change(function(e) {
+            const id_curso = $(this).val();
+            if (id_curso !== "") {
+                $('#btn_nuevo_item').attr('disabled', false);
+                //listarItems(btn_nuevo_item);
+            } else {
+                $('#btn_nuevo_item').attr('disabled', true);
+                Swal.fire({
+                    title: "Mallas Curriculares",
+                    text: "Tiene que elegir un curso...",
+                    icon: "info"
+                });
+            }
+        });
+
+        $('#btn_nuevo_item').click(function(e) {
+            e.preventDefault();
+
+            const id_curso = $("#id_curso").val();
+
+            $.ajax({
+                type: "post",
+                url: "<?= base_url(route_to('mallas_curriculares_form_crear')) ?>",
+                data: {
+                    id_curso: id_curso
+                },
+                dataType: "json",
+                success: function(response) {
+                    // alert(response.data);
+                    $('.viewmodal').html(response.data).show();
+                    $('#nuevoItemModal').modal('show');
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        });
+
     });
 </script>
 <?= $this->endsection('scripts') ?>
