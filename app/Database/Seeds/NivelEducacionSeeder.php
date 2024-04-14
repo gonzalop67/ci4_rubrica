@@ -1,5 +1,7 @@
 <?php namespace App\Database\Seeds;
 
+use App\Models\Admin\NivelesEducacionModel;
+use App\Models\Admin\PeriodosNivelesModel;
 use CodeIgniter\Database\Seeder;
 
 class NivelEducacionSeeder extends Seeder
@@ -34,7 +36,20 @@ class NivelEducacionSeeder extends Seeder
             ],
 		];
 
-		$builder = $this->db->table('sw_nivel_educacion');
-		$builder->insertBatch($niveles_educacion);
+		$nivelModel = new NivelesEducacionModel();
+        $periodoNivelModel = new PeriodosNivelesModel();
+
+        foreach ($niveles_educacion as $nivel) {
+            $nivelModel->save([
+                'nombre'          => $nivel['nombre'],
+                'es_bachillerato' => $nivel['es_bachillerato'],
+                'orden'           => $nivel['orden']
+            ]);
+            $id_nivel_educacion = $nivelModel->getInsertID();
+            $periodoNivelModel->save([
+                'id_nivel_educacion' => $id_nivel_educacion,
+                'id_periodo_lectivo' => 1
+            ]);
+        }
 	}
 }
