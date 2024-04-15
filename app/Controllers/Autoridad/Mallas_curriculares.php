@@ -46,7 +46,8 @@ class Mallas_curriculares extends BaseController
                 )
                 ->join(
                     'sw_asignatura_curso',
-                    'sw_curso.id_curso = sw_asignatura_curso.id_curso')
+                    'sw_curso.id_curso = sw_asignatura_curso.id_curso'
+                )
                 ->join(
                     'sw_asignatura',
                     'sw_asignatura.id_asignatura = sw_asignatura_curso.id_asignatura'
@@ -64,5 +65,58 @@ class Mallas_curriculares extends BaseController
         } else {
             exit('Lo siento, no se puede procesar.');
         }
+    }
+
+    public function store()
+    {
+        if (!$this->validate([
+            'id_asignatura' => [
+                'label'  => 'Asignatura',
+                'rules'  => 'required',
+                'errors' => [
+                    'required'  => 'Debe seleccionar una {field} de la lista.'
+                ],
+                'presenciales' => [
+                    'label'  => 'Horas Presenciales',
+                    'rules'  => 'required|is_natural',
+                    'errors' => [
+                        'required' => 'El campo {field} es obligatorio',
+                        'is_natural'  => 'El campo {field} debe contener un valor entero mayor que cero'
+                    ]
+                ]
+            ]
+        ])) {
+            $msg = [
+                'errors' => $this->validator->getErrors()
+            ];
+        } else {
+            $presenciales = $this->request->getVar('presenciales');
+            $autonomas = $this->request->getVar('autonomas');
+            $tutorias = $this->request->getVar('tutorias');
+            $total_horas = $presenciales + $autonomas + $tutorias;
+            $datos = [
+                'id_periodo_lectivo' => session('id_periodo_lectivo'),
+                'id_curso' => $this->request->getVar('curso_id'),
+                'id_asignatura' => $this->request->getVar('id_asignatura'),
+                'ma_horas_presenciales' => $presenciales,
+                'ma_horas_autonomas' => $autonomas,
+                'ma_horas_tutorias' => $tutorias,
+                'ma_subtotal' => $total_horas
+            ];
+
+            $this->mallaCurricularModel->save($datos);
+
+            $msg = [
+                'success' => 'El Item de la Malla Curricular fue insertado exitosamente.'
+            ];
+        }
+
+        echo json_encode($msg);
+    }
+
+    public function dataMallasCurriculares()
+    {
+        $id_curso = $_POST['id_curso'];
+        echo json_encode($this->mallaCurricularModel->listarAsignaturasAsociadas($id_curso));
     }
 }

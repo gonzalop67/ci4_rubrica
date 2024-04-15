@@ -9,10 +9,11 @@
             </div>
             <form id="form_insert" action="<?= base_url(route_to('mallas_curriculares_store')) ?>" autocomplete="off">
                 <?= csrf_field(); ?>
+                <input type="hidden" name="curso_id" id="curso_id">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="asignaturas" class="form-label fw-bold">Asignaturas:</label>
-                        <select class="form-select" id="asignaturas" name="asignaturas" required>
+                        <label for="id_asignatura" class="form-label fw-bold">Asignaturas:</label>
+                        <select class="form-select" id="id_asignatura" name="id_asignatura">
                             <option value="">Seleccione...</option>
                             <?php 
                             foreach ($asignaturas as $v) { ?>
@@ -54,6 +55,7 @@
         $("#form_insert").submit(function(e) {
             e.preventDefault();
             id_curso = $("#id_curso").val();
+            $("#curso_id").val(id_curso);
             $.ajax({
                 type: "post",
                 url: $(this).attr('action'),
@@ -68,21 +70,22 @@
                     $('.btnAgregar').html('<i class="fa fa-download"></i> Guardar');
                 },
                 success: function(response) {
-                    if (response.error) {
-                        if (response.error.texto) {
-                            $('#texto').addClass('is-invalid');
-                            $('.errorTexto').html(response.error.texto);
+                    // alert(JSON.stringify(response));
+                    if (response.errors) {
+                        if (response.errors.id_asignatura) {
+                            $('#id_asignatura').addClass('is-invalid');
+                            $('.errorAsignaturas').html(response.errors.id_asignatura);
                         } else {
-                            $('#texto').removeClass('is-invalid');
-                            $('.errorTexto').html('');
+                            $('#id_asignatura').removeClass('is-invalid');
+                            $('.errorAsignaturas').html('');
                         }
 
-                        if (response.error.enlace) {
-                            $('#enlace').addClass('is-invalid');
-                            $('.errorEnlace').html(response.error.enlace);
+                        if (response.errors.presenciales) {
+                            $('#presenciales').addClass('is-invalid');
+                            $('.errorPresenciales').html(response.errors.presenciales);
                         } else {
-                            $('#enlace').removeClass('is-invalid');
-                            $('.errorEnlace').html('');
+                            $('#presenciales').removeClass('is-invalid');
+                            $('.errorPresenciales').html('');
                         }
                     } else {
                         Swal.fire({
@@ -91,8 +94,8 @@
                             icon: "success"
                         });
 
-                        $('#nuevoMenuModal').modal('hide');
-                        listarMenus(id_perfil);
+                        $('#nuevoItemModal').modal('hide');
+                        listarItems(id_curso);
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

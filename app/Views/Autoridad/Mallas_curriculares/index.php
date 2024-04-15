@@ -79,7 +79,7 @@ Mallas Curriculares
             const id_curso = $(this).val();
             if (id_curso !== "") {
                 $('#btn_nuevo_item').attr('disabled', false);
-                //listarItems(btn_nuevo_item);
+                listarItems(id_curso);
             } else {
                 $('#btn_nuevo_item').attr('disabled', true);
                 Swal.fire({
@@ -112,7 +112,29 @@ Mallas Curriculares
                 }
             });
         });
-
     });
+
+    function listarItems(id_curso) {
+        var request = $.ajax({
+            url: "<?= base_url(route_to('mallas_curriculares_data')) ?>",
+            method: "post",
+            data: {
+                id_curso: id_curso
+            },
+            dataType: "json"
+        });
+
+        request.done(function(data) {
+            // alert(data);
+            var datos = JSON.parse(data);
+            $(".viewdata").html(datos.cadena);
+            $("#total_horas").val(datos.total_horas);
+            $("#text_message").html("");
+        });
+
+        request.fail(function(jqXHR, textStatus) {
+            alert("Requerimiento fallido: " + jqXHR.responseText);
+        });
+    }
 </script>
 <?= $this->endsection('scripts') ?>
