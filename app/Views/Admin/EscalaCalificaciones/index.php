@@ -4,9 +4,6 @@
 Escalas de Calificaciones
 <?= $this->endsection('title') ?>
     
-</style>
-<?= $this->endsection('css') ?>
-
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
 

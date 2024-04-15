@@ -1,23 +1,23 @@
-<!-- Nuevo Item de Malla Curricular Modal -->
+<!-- Editar Item de Malla Curricular Modal -->
 <!-- Large modal -->
-<div class="modal fade" id="nuevoItemModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarItemModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Nuevo Item de Malla Curricular</h5>
+                <h5 class="modal-title">Editar Item de Malla Curricular</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="form_insert" action="<?= base_url(route_to('mallas_curriculares_store')) ?>" autocomplete="off">
+            <form id="form_update" action="<?= base_url(route_to('mallas_curriculares_update')) ?>" autocomplete="off">
                 <?= csrf_field(); ?>
-                <input type="hidden" name="curso_id" id="curso_id">
+                <input type="hidden" name="id_malla_curricular" id="id_malla_curricular" value="<?= $id_malla_curricular ?>">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="id_asignatura" class="form-label fw-bold">Asignaturas:</label>
-                        <select class="form-select" id="id_asignatura" name="id_asignatura">
+                        <select class="form-select" id="id_asignatura" name="id_asignatura" disabled>
                             <option value="">Seleccione...</option>
                             <?php
                             foreach ($asignaturas as $v) { ?>
-                                <option value="<?= $v->id_asignatura ?>"><?= $v->as_nombre ?></option>
+                                <option value="<?= $v->id_asignatura ?>" <?= $v->id_asignatura == $id_asignatura ? 'selected' : '' ?>><?= $v->as_nombre ?></option>
                             <?php
                             }
                             ?>
@@ -26,17 +26,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="presenciales" class="form-label fw-bold">Horas Presenciales:</label>
-                        <input type="number" min="1" step="1" class="form-control" name="presenciales" id="presenciales" value="1" required>
+                        <input type="number" min="1" step="1" class="form-control" name="presenciales" id="presenciales" value="<?= old('presenciales') ?? $ma_horas_presenciales ?>" required>
                         <p class="invalid-feedback errorPresenciales"></p>
                     </div>
                     <div class="mb-3">
                         <label for="autonomas" class="form-label fw-bold">Horas Autónomas:</label>
-                        <input type="number" min="0" step="1" class="form-control" name="autonomas" id="autonomas" value="0" required>
+                        <input type="number" min="0" step="1" class="form-control" name="autonomas" id="autonomas" value="<?= old('autonomas') ?? $ma_horas_autonomas ?>" required>
                         <p class="invalid-feedback errorAutonomas"></p>
                     </div>
                     <div class="mb-3">
                         <label for="tutorias" class="form-label fw-bold">Horas de Tutorías:</label>
-                        <input type="number" min="0" step="1" class="form-control" name="tutorias" id="tutorias" value="0" required>
+                        <input type="number" min="0" step="1" class="form-control" name="tutorias" id="tutorias" value="<?= old('tutorias') ?? $ma_horas_tutorias ?>" required>
                         <p class="invalid-feedback errorTutorias"></p>
                     </div>
                 </div>
@@ -52,10 +52,9 @@
 
 <script>
     $(document).ready(function() {
-        $("#form_insert").submit(function(e) {
+        $("#form_update").submit(function(e) {
             e.preventDefault();
             id_curso = $("#id_curso").val();
-            $("#curso_id").val(id_curso);
             $.ajax({
                 type: "post",
                 url: $(this).attr('action'),
@@ -104,22 +103,14 @@
                             $('.errorTutorias').html('');
                         }
                     } else {
-                        if (response.error) {
-                            Swal.fire({
-                                title: "Oops!",
-                                text: response.error,
-                                icon: "error"
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Logrado!",
-                                text: response.success,
-                                icon: "success"
-                            });
+                        Swal.fire({
+                            title: "Logrado!",
+                            text: response.success,
+                            icon: "success"
+                        });
 
-                            $('#nuevoItemModal').modal('hide');
-                            listarItems(id_curso);
-                        }
+                        $('#editarItemModal').modal('hide');
+                        listarItems(id_curso);
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

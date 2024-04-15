@@ -136,5 +136,31 @@ Mallas Curriculares
             alert("Requerimiento fallido: " + jqXHR.responseText);
         });
     }
+
+    function edit(e, obj, id_malla_curricular) {
+        e.preventDefault();
+
+        const url = $(obj).attr("href");
+        const id_curso = $("#id_curso").val();
+
+        $.ajax({
+            type: "post",
+            url: url,
+            data: {
+                id_malla_curricular: id_malla_curricular,
+                id_curso: id_curso
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response.success) {
+                    $('.viewmodal').html(response.success).show();
+                    $('#editarItemModal').modal('show');
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
 </script>
 <?= $this->endsection('scripts') ?>

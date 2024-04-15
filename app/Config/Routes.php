@@ -181,4 +181,6 @@ $routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter
     $routes->post('mallas_curriculares/formAgregar', 'Mallas_curriculares::formAgregar', ['as' => 'mallas_curriculares_form_crear']);
     $routes->post('mallas_curriculares/guardar', 'Mallas_curriculares::store', ['as' => 'mallas_curriculares_store']);
     $routes->post('mallas_curriculares/dataMallasCurriculares', 'Mallas_curriculares::dataMallasCurriculares', ['as' => 'mallas_curriculares_data']);
+    $routes->post('mallas_curriculares/editar', 'Mallas_curriculares::edit', ['as' => 'mallas_curriculares_edit']);
+    $routes->post('mallas_curriculares/actualizar', 'Mallas_curriculares::update', ['as' => 'mallas_curriculares_update']);
 });
