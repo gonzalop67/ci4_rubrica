@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\Admin\AsignaturasModel;
 use App\Models\Admin\CursosModel;
 use App\Models\Admin\JornadasModel;
 use App\Models\Admin\ParalelosModel;
@@ -13,12 +14,14 @@ class Paralelos extends BaseController
     private $cursoModel;
     private $jornadaModel;
     private $paraleloModel;
+    private $asignaturaModel;
 
     public function __construct()
     {
         $this->cursoModel = new CursosModel();
         $this->jornadaModel = new JornadasModel();
         $this->paraleloModel = new ParalelosModel();
+        $this->asignaturaModel = new AsignaturasModel();
     }
 
     public function index()
@@ -226,6 +229,17 @@ class Paralelos extends BaseController
 
                 $this->paraleloModel->actualizarOrden($index, $newPosition);
             }
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
+
+    public function listarAsignaturasPorParalelo()
+    {
+        if ($this->request->isAJAX()) {
+            $id_paralelo = $this->request->getVar('id_paralelo');
+
+            echo json_encode($this->asignaturaModel->listarAsignaturasPorParalelo($id_paralelo));
         } else {
             exit('Lo siento, no se puede procesar.');
         }

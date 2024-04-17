@@ -93,6 +93,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('paralelos/actualizar', 'Paralelos::update', ['as' => 'paralelos_update']);
     $routes->post('paralelos/eliminar', 'Paralelos::delete', ['as' => 'paralelos_delete']);
     $routes->post('paralelos/saveNewPositions', 'Paralelos::saveNewPositions', ['as' => 'paralelos_saveNewPositions']);
+    $routes->post('paralelos/listarAsignaturasPorParalelo', 'Paralelos::listarAsignaturasPorParalelo', ['as' => 'listar_asignaturas_por_paralelo']);
     //RUTAS PARA AREAS
     $routes->get('areas', 'Areas::index', ['as' => 'areas']);
     $routes->get('areas/dataAreas', 'Areas::dataAreas', ['as' => 'areas_data']);
@@ -125,14 +126,12 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     //RUTAS PARA APORTES DE EVALUACION
 	$routes->get('aportes_evaluacion', 'Aportes_evaluacion::index', ['as' => 'aportes_evaluacion']);
     $routes->post('aportes_evaluacion/dataAportesEvaluacion', 'Aportes_evaluacion::dataAportesEvaluacion', ['as' => 'aportes_evaluacion_data']);
-    //aportes_evaluacion_form_crear
     $routes->get('aportes_evaluacion/formAgregar', 'Aportes_evaluacion::formAgregar', ['as' => 'aportes_evaluacion_form_crear']);
     $routes->post('aportes_evaluacion/guardar', 'Aportes_evaluacion::store', ['as' => 'aportes_evaluacion_store']);
     $routes->post('aportes_evaluacion/editar', 'Aportes_evaluacion::edit', ['as' => 'aportes_evaluacion_edit']);
     $routes->post('aportes_evaluacion/actualizar', 'Aportes_evaluacion::update', ['as' => 'aportes_evaluacion_update']);
     $routes->post('aportes_evaluacion/eliminar/(:any)', 'Aportes_evaluacion::delete/$1', ['as' => 'aportes_evaluacion_delete']);
     $routes->post('aportes_evaluacion/saveNewPositions', 'Aportes_evaluacion::saveNewPositions', ['as' => 'aportes_evaluacion_saveNewPositions']);
-    //aportes_evaluacion_select
     $routes->post('aportes_evaluacion/getAportesEvaluacion', 'Aportes_evaluacion::getAportesEvaluacion', ['as' => 'aportes_evaluacion_select']);
     //RUTAS PARA INSUMOS DE EVALUACION
     $routes->get('insumos_evaluacion', 'Insumos_evaluacion::index', ['as' => 'insumos_evaluacion']);
@@ -183,4 +182,6 @@ $routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter
     $routes->post('mallas_curriculares/dataMallasCurriculares', 'Mallas_curriculares::dataMallasCurriculares', ['as' => 'mallas_curriculares_data']);
     $routes->post('mallas_curriculares/editar', 'Mallas_curriculares::edit', ['as' => 'mallas_curriculares_edit']);
     $routes->post('mallas_curriculares/actualizar', 'Mallas_curriculares::update', ['as' => 'mallas_curriculares_update']);
+    //RUTAS PARA DISTRIBUTIVOS
+    $routes->get('distributivos', 'Distributivos::index', ['as' => 'distributivos']);
 });
