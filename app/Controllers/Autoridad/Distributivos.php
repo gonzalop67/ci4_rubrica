@@ -146,4 +146,32 @@ class Distributivos extends BaseController
             exit('Lo siento, no se puede procesar.');
         }
     }
+
+    public function getByUsuarioId()
+    {
+        $id_usuario = $_POST['id_usuario'];
+        $id_periodo_lectivo = session()->id_periodo_lectivo;
+        echo json_encode($this->distributivoModel->listarAsignaturasAsociadas($id_usuario, $id_periodo_lectivo));
+    }
+
+    public function delete()
+    {
+        try {
+            $this->distributivoModel->delete($this->request->getVar('id'));
+
+            $data = array(
+                "title"       => "Operación exitosa.",
+                "message"      => "El Item del Distributivo fue eliminado exitosamente.",
+                "icon" => "success"
+            );
+        } catch (\Exception $e) {
+            $data = array(
+                "title"       => "Ocurrió un error inesperado.",
+                "message"      => "El Item del Distributivo no se pudo eliminar...Error: " . $e->getMessage(),
+                "icon" => "error"
+            );
+        }
+
+        echo json_encode($data);
+    }
 }

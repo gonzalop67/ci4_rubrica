@@ -185,4 +185,6 @@ $routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter
     //RUTAS PARA DISTRIBUTIVOS
     $routes->get('distributivos', 'Distributivos::index', ['as' => 'distributivos']);
     $routes->post('distributivos/guardar', 'Distributivos::store', ['as' => 'distributivos_store']);
+    $routes->post('distributivos/getByUsuarioId', 'Distributivos::getByUsuarioId', ['as' => 'distributivos_getByUsuarioId']);
+    $routes->post('distributivos/eliminar', 'Distributivos::delete', ['as' => 'distributivos_delete']);
 });

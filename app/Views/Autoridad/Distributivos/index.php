@@ -79,6 +79,31 @@ Distributivos
                 </table>
             </div>
         </div>
+
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <div class="row mb-2 p-3">
+                <div class="col-sm-3 text-end">
+                    <label class="control-label" style="position:relative; top:7px; font-weight: bold;">Presenciales:</label>
+                </div>
+                <div class="col-sm-1" style="margin-top: 2px;">
+                    <input type="text" class="form-control text-end" id="horas_presenciales" value="0" disabled>
+                </div>
+                <div class="col-sm-3 text-end">
+                    <label class="control-label" style="position:relative; top:7px; font-weight: bold;">Tutorias:</label>
+                </div>
+                <div class="col-sm-1" style="margin-top: 2px;">
+                    <input type="text" class="form-control text-end" id="horas_tutorias" value="0" disabled>
+                </div>
+                <div class="col-sm-3 text-end">
+                    <label class="control-label" style="position:relative; top:7px; font-weight: bold">Total Horas:</label>
+                </div>
+                <div class="col-sm-1" style="margin-top: 2px;">
+                    <input type="text" class="form-control fuente9 text-end" id="total_horas" value="0" disabled>
+                </div>
+            </div>
+        </div>
+        <!-- /.box-footer -->
     </div>
 </div>
 <?= $this->endsection('content') ?>
@@ -207,6 +232,28 @@ Distributivos
             });
         });
 
+        $('#lista_items').on('click', '.item-delete', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('data');
+            $("#text_message").html("<img src='<?php echo base_url(); ?>Assets/img/ajax-loader-blue.GIF' alt='procesando...' />");
+            $.ajax({
+                url: "<?= base_url(route_to('distributivos_delete')) ?>",
+                method: "post",
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    $("#text_message").html("");
+                    toastr[response.icon](response.message, response.title);
+                    listarDistributivo();
+                },
+                error: function(jqXHR, textStatus) {
+                    alert(jqXHR.responseText);
+                }
+            });
+        });
+
         $("#lista_items").html("<tr><td colspan='8' align='center'>Debe seleccionar un docente...</td></tr>");
     });
 
@@ -238,7 +285,33 @@ Distributivos
     }
 
     function listarDistributivo() {
-        //
+        var id_usuario = $("#id_usuario").val();
+        if (id_usuario == "") {
+            $('#id_usuario').addClass('is-invalid');
+            $('.error-id-usuario').html("Debe seleccionar un docente...");
+        } else {
+            var request = $.ajax({
+                url: "<?= base_url(route_to('distributivos_getByUsuarioId')) ?>",
+                method: "post",
+                data: {
+                    id_usuario: id_usuario
+                },
+                dataType: "json"
+            });
+
+            request.done(function(data) {
+                var datos = JSON.parse(data);
+                $("#lista_items").html(datos.cadena);
+                $("#horas_presenciales").val(datos.horas_presenciales);
+                $("#horas_tutorias").val(datos.horas_tutorias);
+                $("#total_horas").val(datos.total_horas);
+                $("#text_message").html("");
+            });
+
+            request.fail(function(jqXHR, textStatus) {
+                alert("Requerimiento fallido: " + jqXHR.responseText);
+            });
+        }
     }
 </script>
 <?= $this->endsection('scripts') ?>
