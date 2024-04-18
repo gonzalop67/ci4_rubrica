@@ -102,6 +102,111 @@ Distributivos
             listarDistributivo();
         });
 
+        toastr.options = {
+            //primeras opciones
+            "closeButton": false, //boton cerrar
+            "debug": false,
+            "newestOnTop": false, //notificaciones mas nuevas van en la parte superior
+            "progressBar": true, //barra de progreso hasta que se oculta la notificacion
+            "preventDuplicates": false, //para prevenir mensajes duplicados
+
+            "onclick": null,
+
+            //Posición de la notificación
+            //toast-bottom-left, toast-bottom-right, toast-bottom-left, toast-top-full-width, toast-top-center
+            "positionClass": "toast-top-center",
+
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "tapToDismiss": false
+        };
+
+        $("#form_insert").submit(function(e) {
+            e.preventDefault();
+
+            const id_curso = $("#id_curso").val();
+
+            $.ajax({
+                type: "post",
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                dataType: "json",
+                beforeSend: function() {
+                    $('.btnAgregar').attr('disable', 'disable');
+                    $('.btnAgregar').html('<i class="fa fa-spin fa-spinner"></i>');
+                },
+                complete: function() {
+                    $('.btnAgregar').removeAttr('disable');
+                    $('.btnAgregar').html('<i class="fa fa-download"></i> Asociar');
+                },
+                success: function(response) {
+                    // alert(JSON.stringify(response))
+                    if (response.errors) {
+                        if (response.errors.id_usuario) {
+                            $('#id_usuario').addClass('is-invalid');
+                            $('.error-id-usuario').html(response.errors.id_usuario);
+                        } else {
+                            $('#id_usuario').removeClass('is-invalid');
+                            $('.error-id-usuario').html('');
+                        }
+
+                        if (response.errors.id_paralelo) {
+                            $('#id_paralelo').addClass('is-invalid');
+                            $('.error-id-paralelo').html(response.errors.id_paralelo);
+                        } else {
+                            $('#id_paralelo').removeClass('is-invalid');
+                            $('.error-id-paralelo').html('');
+                        }
+
+                        if (response.errors.id_asignatura) {
+                            $('#id_asignatura').addClass('is-invalid');
+                            $('.error-id-asignatura').html(response.errors.id_asignatura);
+                        } else {
+                            $('#id_asignatura').removeClass('is-invalid');
+                            $('.error-id-asignatura').html('');
+                        }
+                    } else if (response.error) {
+                        $('#id_usuario').removeClass('is-invalid');
+                        $('.error-id-usuario').html('');
+
+                        $('#id_paralelo').removeClass('is-invalid');
+                        $('.error-id-paralelo').html('');
+
+                        $('#id_asignatura').removeClass('is-invalid');
+                        $('.error-id-asignatura').html('');
+
+                        Swal.fire({
+                            title: "Oops!",
+                            text: response.error,
+                            icon: "error"
+                        });
+                    } else {
+                        $('#id_usuario').removeClass('is-invalid');
+                        $('.error-id-usuario').html('');
+
+                        $('#id_paralelo').removeClass('is-invalid');
+                        $('.error-id-paralelo').html('');
+
+                        $('#id_asignatura').removeClass('is-invalid');
+                        $('.error-id-asignatura').html('');
+
+                        toastr["success"](response.success, "Logrado!");
+
+                        listarDistributivo();
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        });
+
         $("#lista_items").html("<tr><td colspan='8' align='center'>Debe seleccionar un docente...</td></tr>");
     });
 

@@ -184,4 +184,5 @@ $routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter
     $routes->post('mallas_curriculares/actualizar', 'Mallas_curriculares::update', ['as' => 'mallas_curriculares_update']);
     //RUTAS PARA DISTRIBUTIVOS
     $routes->get('distributivos', 'Distributivos::index', ['as' => 'distributivos']);
+    $routes->post('distributivos/guardar', 'Distributivos::store', ['as' => 'distributivos_store']);
 });

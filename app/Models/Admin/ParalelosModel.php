@@ -34,6 +34,19 @@ class ParalelosModel extends Model
         return $registro->getRow()->cu_nombre;
     }
 
+    public function getCursoId($id_paralelo)
+    {
+        $CursoId = $this->db->query("
+            SELECT id_curso 
+            FROM sw_paralelo
+            WHERE id_paralelo = $id_paralelo
+        ");
+
+        $cursoId = $CursoId->getRow();
+
+        return $cursoId->id_curso;
+    }
+
     public function getNextOrderNumber($id_periodo_lectivo)
     {
         $query = $this->db->query("SELECT MAX(pa_orden) AS secuencial FROM sw_paralelo WHERE id_periodo_lectivo = $id_periodo_lectivo");

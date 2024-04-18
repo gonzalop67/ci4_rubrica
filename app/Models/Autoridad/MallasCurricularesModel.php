@@ -29,6 +29,20 @@ class MallasCurricularesModel extends Model
         return $num_rows > 0;
     }
 
+    public function getMallaIdCursoAsignatura($id_curso, $id_asignatura)
+    {
+        $MallaId = $this->db->query("
+            SELECT id_malla_curricular 
+            FROM sw_malla_curricular
+            WHERE id_curso = $id_curso 
+              AND id_asignatura = $id_asignatura
+        ");
+        
+        $mallaId = $MallaId->getRow();
+        
+        return $mallaId->id_malla_curricular;
+    }
+
     public function listarAsignaturasAsociadas($id_curso)
     {
         $query = $this->db->query("SELECT m.*, 
