@@ -45,9 +45,9 @@ Crear Un Periodo de Evaluación
                     <label for="id_tipo_periodo" class="form-label">Tipo de Periodo:</label>
                     <select class="form-select" id="id_tipo_periodo" name="id_tipo_periodo">
                         <?php
-                        foreach ($tipos_periodos as $tipo_periodo) :
+                        foreach ($tipos_periodos as $tp) :
                         ?>
-                            <option value="<?= $tipo_periodo->id_tipo_periodo ?>"><?= $tipo_periodo->tp_descripcion ?></option>
+                            <option value="<?= $tp->id_tipo_periodo ?>" <?= old('id_tipo_periodo') == $tp->id_tipo_periodo ? 'selected' : '' ?>><?= $tp->tp_descripcion ?></option>
                         <?php endforeach ?>
                     </select>
                     <p class="invalid-feedback"><?= session('errors.id_tipo_periodo') ?></p>

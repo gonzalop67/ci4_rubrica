@@ -29,10 +29,23 @@ Crear Un Paralelo
                     <label for="id_curso" class="form-label">Curso:</label>
                     <select class="form-select" id="id_curso" name="id_curso">
                         <?php
-                        foreach ($cursos as $curso) :
+                        if (count($cursos) > 0) {
+                            foreach ($cursos as $curso) {
                         ?>
-                            <option value="<?= $curso->id_curso ?>"><?= $curso->es_figura . " - " . $curso->cu_nombre ?></option>
-                        <?php endforeach ?>
+                                <option value="<?= $curso->id_curso ?>"><?= $curso->es_figura . " - " . $curso->cu_nombre ?></option>
+                            <?php
+                            }
+                        } else { ?>
+                            <script>
+                                Swal.fire({
+                                    icon: "warning",
+                                    title: "Advertencia!",
+                                    text: "No se han asociada niveles de educación al presente periodo lectivo...",
+                                });
+                            </script>
+                        <?php
+                        }
+                        ?>
                     </select>
                     <p class="invalid-feedback"><?= session('errors.id_curso') ?></p>
                 </div>

@@ -38,10 +38,10 @@ class Periodos_evaluacion extends BaseController
         if (!$this->validate([
             'nombre' => [
                 'label' => 'Nombre',
-                'rules' => "required|max_length[24]",
+                'rules' => "required|max_length[48]",
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio',
-                    'max_length' => 'El campo {field} no debe exceder los 24 caracteres.'
+                    'max_length' => 'El campo {field} no debe exceder los 48 caracteres.'
                 ]
             ],
             'abreviatura' => [
@@ -138,10 +138,10 @@ class Periodos_evaluacion extends BaseController
         if (!$this->validate([
             'nombre' => [
                 'label' => 'Nombre',
-                'rules' => "required|max_length[24]",
+                'rules' => "required|max_length[48]",
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio',
-                    'max_length' => 'El campo {field} no debe exceder los 24 caracteres.'
+                    'max_length' => 'El campo {field} no debe exceder los 48 caracteres.'
                 ]
             ],
             'abreviatura' => [

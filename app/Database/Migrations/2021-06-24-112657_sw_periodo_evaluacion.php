@@ -25,7 +25,7 @@ class SwPeriodoEvaluacion extends Migration
 			],
 			'pe_nombre' => [
 				'type'       => 'VARCHAR',
-				'constraint' => '24',
+				'constraint' => '48',
 			],
 			'pe_abreviatura' => [
 				'type'       => 'VARCHAR',
