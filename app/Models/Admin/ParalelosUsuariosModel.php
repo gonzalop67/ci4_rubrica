@@ -38,13 +38,13 @@ class ParalelosUsuariosModel extends Model
             SELECT *
             FROM sw_paralelo_tutor pt,
                  sw_paralelo p,
+                 sw_usuario u, 
                  sw_curso c,
-                 sw_especialidad e,   
-                 sw_usuario u 
+                 sw_especialidad e   
             WHERE p.id_paralelo = pt.id_paralelo
-              AND c.id_curso = p.id_paralelo
-              AND e.id_especialidad = c.id_especialidad 
               AND u.id_usuario = pt.id_usuario
+              AND c.id_curso = p.id_curso
+              AND e.id_especialidad = c.id_especialidad 
               AND pt.id_periodo_lectivo = $id_periodo_lectivo 
             ORDER BY pa_orden              
         ");
