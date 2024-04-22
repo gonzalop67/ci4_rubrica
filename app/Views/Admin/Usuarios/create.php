@@ -6,9 +6,9 @@ Crear Un Usuario
 
 <?= $this->section('css') ?>
 <style>
-.hide {
-    display: none;
-}
+    .hide {
+        display: none;
+    }
 </style>
 <?= $this->endsection('css') ?>
 
@@ -20,6 +20,12 @@ Crear Un Usuario
             Crear Nuevo Usuario
         </div>
         <div class="card-body">
+            <?php if (session('msg')) : ?>
+                <div class="alert alert-<?= session('msg.type') ?> alert-dismissible fade show" role="alert">
+                    <p><i class="icon fa fa-<?= session('msg.icon') ?>"></i> <?= session('msg.body') ?></p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif ?>
             <form action="<?= base_url(route_to('usuarios_store')) ?>" enctype="multipart/form-data" method="post">
                 <div class="mb-3">
                     <label for="abreviatura" class="form-label">Título Abreviatura:</label>
@@ -77,16 +83,14 @@ Crear Un Usuario
                     <?php foreach ($perfiles as $v) : ?>
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" name="perfiles[]" value="<?= $v->id_perfil ?>"
-                                <?= 
-                                    old('perfiles.*')
-                                        ? 
-                                            (in_array($v->id_perfil, old('perfiles.*'))
-                                                ? 'checked'
-                                                : '')
-                                        : ''
-                                ?>
-                                >
+                                <input type="checkbox" name="perfiles[]" value="<?= $v->id_perfil ?>" <?=
+                                                                                                        old('perfiles.*')
+                                                                                                            ?
+                                                                                                            (in_array($v->id_perfil, old('perfiles.*'))
+                                                                                                                ? 'checked'
+                                                                                                                : '')
+                                                                                                            : ''
+                                                                                                        ?>>
                                 <?= $v->pe_nombre ?>
                             </label>
                         </div>
