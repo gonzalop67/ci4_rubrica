@@ -129,6 +129,11 @@ class Aportes_evaluacion extends BaseController
 
                 $this->aporteEvaluacionModel->save($datos);
 
+                $id_periodo_lectivo = session()->id_periodo_lectivo;
+
+                // Asociar el aporte de evaluación creado con los paralelos creados para el cierre de periodos...
+                $this->aporteEvaluacionModel->crearCierresPeriodoLectivo($id_periodo_lectivo);
+
                 $msg = [
                     'success' => 'El Aporte de Evaluación fue insertado exitosamente.'
                 ];

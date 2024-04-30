@@ -14,7 +14,6 @@ $routes->group('auth', ['namespace' => 'App\Controllers\Auth'], static function 
         $routes->get('logout', 'Login::signout', ['as' => 'signout']);
         $routes->get('dashboard', 'Login::dashboard', ['as' => 'dashboard']);
     });
-
 });
 
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'auth'], function ($routes) {
@@ -28,13 +27,13 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('modalidades/eliminar', 'Modalidad::delete', ['as' => 'modalidades_delete']);
     $routes->post('modalidades/saveNewPositions', 'Modalidad::saveNewPositions', ['as' => 'modalidades_saveNewPositions']);
     //RUTAS PARA PERIODOS LECTIVOS
-	$routes->get('periodos_lectivos', 'Periodos_lectivos::index', ['as' => 'periodos_lectivos']);
+    $routes->get('periodos_lectivos', 'Periodos_lectivos::index', ['as' => 'periodos_lectivos']);
     $routes->get('periodos_lectivos/create', 'Periodos_lectivos::create', ['as' => 'periodos_lectivos_create']);
     $routes->post('periodos_lectivos/guardar', 'Periodos_lectivos::store', ['as' => 'periodos_lectivos_store']);
     $routes->get('periodos_lectivos/editar/(:any)', 'Periodos_lectivos::edit/$1', ['as' => 'periodos_lectivos_edit']);
     $routes->post('periodos_lectivos/actualizar', 'Periodos_lectivos::update', ['as' => 'periodos_lectivos_update']);
     //RUTAS PARA PERFILES
-	$routes->get('perfiles', 'Perfiles::index', ['as' => 'perfiles']);
+    $routes->get('perfiles', 'Perfiles::index', ['as' => 'perfiles']);
     $routes->get('perfiles/dataPerfiles', 'Perfiles::dataPerfiles', ['as' => 'perfiles_data']);
     $routes->get('perfiles/create', 'Perfiles::create', ['as' => 'perfiles_create']);
     $routes->post('perfiles/guardar', 'Perfiles::store', ['as' => 'perfiles_store']);
@@ -42,7 +41,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('perfiles/actualizar', 'Perfiles::update', ['as' => 'perfiles_update']);
     $routes->post('perfiles/eliminar/(:any)', 'Perfiles::delete/$1', ['as' => 'perfiles_delete']);
     //RUTAS PARA MENUS
-	$routes->get('menus', 'Menus::index', ['as' => 'menus']);
+    $routes->get('menus', 'Menus::index', ['as' => 'menus']);
     $routes->post('menus/dataMenus', 'Menus::dataMenus', ['as' => 'menus_data']);
     $routes->get('menus/formAgregar', 'Menus::formAgregar', ['as' => 'menus_form_crear']);
     $routes->post('menus/guardar', 'Menus::store', ['as' => 'menus_store']);
@@ -51,14 +50,14 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('menus/actualizar', 'Menus::update', ['as' => 'menus_update']);
     $routes->post('menus/eliminar', 'Menus::delete', ['as' => 'menus_delete']);
     //RUTAS PARA USUARIOS
-	$routes->get('usuarios', 'Usuarios::index', ['as' => 'usuarios']);
+    $routes->get('usuarios', 'Usuarios::index', ['as' => 'usuarios']);
     $routes->get('usuarios/dataUsuarios', 'Usuarios::dataUsuarios', ['as' => 'usuarios_data']);
     $routes->get('usuarios/create', 'Usuarios::create', ['as' => 'usuarios_create']);
     $routes->post('usuarios/guardar', 'Usuarios::store', ['as' => 'usuarios_store']);
     $routes->get('usuarios/editar/(:any)', 'Usuarios::edit/$1', ['as' => 'usuarios_edit']);
     $routes->post('usuarios/actualizar', 'Usuarios::update', ['as' => 'usuarios_update']);
     //RUTAS PARA NIVELES DE EDUCACION
-	$routes->get('niveles_educacion', 'Niveles_educacion::index', ['as' => 'niveles_educacion']);
+    $routes->get('niveles_educacion', 'Niveles_educacion::index', ['as' => 'niveles_educacion']);
     $routes->get('niveles_educacion/dataNivelesEducacion', 'Niveles_educacion::dataNivelesEducacion', ['as' => 'niveles_educacion_data']);
     $routes->get('niveles_educacion/create', 'Niveles_educacion::create', ['as' => 'niveles_educacion_create']);
     $routes->post('niveles_educacion/guardar', 'Niveles_educacion::store', ['as' => 'niveles_educacion_store']);
@@ -115,7 +114,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('institucion/actualizar', 'Institucion::update', ['as' => 'institucion_update']);
     $routes->post('institucion/actualizar_estado_copiar_y_pegar', 'Institucion::actualizar_estado_copiar_y_pegar', ['as' => 'institucion_actualizar_estado_copiar_y_pegar']);
     //RUTAS PARA PERIODOS DE EVALUACION
-	$routes->get('periodos_evaluacion', 'Periodos_evaluacion::index', ['as' => 'periodos_evaluacion']);
+    $routes->get('periodos_evaluacion', 'Periodos_evaluacion::index', ['as' => 'periodos_evaluacion']);
     $routes->get('periodos_evaluacion/create', 'Periodos_evaluacion::create', ['as' => 'periodos_evaluacion_create']);
     $routes->post('periodos_evaluacion/guardar', 'Periodos_evaluacion::store', ['as' => 'periodos_evaluacion_store']);
     $routes->get('periodos_evaluacion/dataPeriodosEvaluacion', 'Periodos_evaluacion::dataPeriodosEvaluacion', ['as' => 'periodos_evaluacion_data']);
@@ -124,7 +123,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('periodos_evaluacion/saveNewPositions', 'Periodos_evaluacion::saveNewPositions', ['as' => 'periodos_evaluacion_saveNewPositions']);
     $routes->post('periodos_evaluacion/eliminar/(:any)', 'Periodos_evaluacion::delete/$1', ['as' => 'periodos_evaluacion_delete']);
     //RUTAS PARA APORTES DE EVALUACION
-	$routes->get('aportes_evaluacion', 'Aportes_evaluacion::index', ['as' => 'aportes_evaluacion']);
+    $routes->get('aportes_evaluacion', 'Aportes_evaluacion::index', ['as' => 'aportes_evaluacion']);
     $routes->post('aportes_evaluacion/dataAportesEvaluacion', 'Aportes_evaluacion::dataAportesEvaluacion', ['as' => 'aportes_evaluacion_data']);
     $routes->get('aportes_evaluacion/formAgregar', 'Aportes_evaluacion::formAgregar', ['as' => 'aportes_evaluacion_form_crear']);
     $routes->post('aportes_evaluacion/guardar', 'Aportes_evaluacion::store', ['as' => 'aportes_evaluacion_store']);
@@ -152,8 +151,8 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('escalas_calificaciones/saveNewPositions', 'Escalas_calificaciones::saveNewPositions', ['as' => 'escalas_calificaciones_saveNewPositions']);
     $routes->post('escalas_calificaciones/eliminar/(:any)', 'Escalas_calificaciones::delete/$1', ['as' => 'escalas_calificaciones_delete']);
     //RUTAS PARA ASIGNATURAS_CURSOS
-	$routes->get('asignaturas_cursos', 'Asignaturas_cursos::index', ['as' => 'asignaturas_cursos']);
-	$routes->post('asignaturas_cursos/guardar', 'Asignaturas_cursos::store', ['as' => 'asignaturas_cursos_store']);
+    $routes->get('asignaturas_cursos', 'Asignaturas_cursos::index', ['as' => 'asignaturas_cursos']);
+    $routes->post('asignaturas_cursos/guardar', 'Asignaturas_cursos::store', ['as' => 'asignaturas_cursos_store']);
     $routes->post('asignaturas_cursos/dataAsignaturasCursos', 'Asignaturas_cursos::dataAsignaturasCursos', ['as' => 'asignaturas_cursos_data']);
     $routes->post('asignaturas_cursos/eliminar', 'Asignaturas_cursos::delete', ['as' => 'asignaturas_cursos_delete']);
     $routes->post('asignaturas_cursos/saveNewPositions', 'Asignaturas_cursos::saveNewPositions', ['as' => 'asignaturas_cursos_saveNewPositions']);
@@ -172,6 +171,9 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'au
     $routes->post('periodos_niveles/guardar', 'Periodos_niveles::store', ['as' => 'periodos_niveles_store']);
     $routes->post('periodos_niveles/dataPeriodosNiveles', 'Periodos_niveles::dataPeriodosNiveles', ['as' => 'periodos_niveles_data']);
     $routes->post('periodos_niveles/eliminar', 'Periodos_niveles::delete', ['as' => 'periodos_niveles_delete']);
+    //RUTAS PARA CIERRES DE PERIODOS
+    $routes->get('cierre_periodos', 'Cierre_periodos::index', ['as' => 'cierre_periodos']);
+    $routes->get('cierre_periodos/listar', 'Cierre_periodos::show', ['as' => 'cierre_periodos_listar']);
 });
 
 $routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter' => 'auth'], function ($routes) {

@@ -86,4 +86,16 @@ class AportesEvaluacionModel extends Model
 
         return $cadena;
     }
+
+    public function crearCierresPeriodoLectivo($id_periodo_lectivo)
+    {
+        $sql = "CALL sp_crear_cierres_periodo_lectivo(?)";
+        $result = $this->db->query($sql, [$id_periodo_lectivo]);
+
+        if ($result) {
+            return true;
+        }
+
+        return false;
+    }
 }
