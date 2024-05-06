@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -35,8 +37,8 @@ class SwAporteParaleloCierre extends Migration
 			],
 		]);
 		$this->forge->addKey('id_aporte_paralelo_cierre', true);
-		$this->forge->addForeignKey('id_aporte_evaluacion','sw_aporte_evaluacion','id_aporte_evaluacion');
-		$this->forge->addForeignKey('id_paralelo','sw_paralelo','id_paralelo');
+		$this->forge->addForeignKey('id_aporte_evaluacion', 'sw_aporte_evaluacion', 'id_aporte_evaluacion', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('id_paralelo', 'sw_paralelo', 'id_paralelo', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('sw_aporte_paralelo_cierre');
 	}
 

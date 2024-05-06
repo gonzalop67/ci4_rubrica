@@ -119,6 +119,9 @@ class Paralelos extends BaseController
 
         $this->paraleloModel->save($datos);
 
+        // Asociar el paralelo creado con los aportes de evaluación creados para el cierre de periodos...
+        $this->paraleloModel->crearCierresPeriodoLectivo($id_periodo_lectivo);
+
         return redirect('paralelos')->with('msg', [
             'type' => 'success',
             'icon' => 'check',

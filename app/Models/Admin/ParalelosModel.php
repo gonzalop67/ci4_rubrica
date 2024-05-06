@@ -76,5 +76,17 @@ class ParalelosModel extends Model
 
         return $num_rows > 0;
     }
+
+    public function crearCierresPeriodoLectivo($id_periodo_lectivo)
+    {
+        $sql = "CALL sp_crear_cierres_periodo_lectivo(?)";
+        $result = $this->db->query($sql, [$id_periodo_lectivo]);
+
+        if ($result) {
+            return true;
+        }
+
+        return false;
+    }
     
 }
