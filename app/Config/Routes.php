@@ -190,3 +190,13 @@ $routes->group('autoridad', ['namespace' => 'App\Controllers\Autoridad', 'filter
     $routes->post('distributivos/getByUsuarioId', 'Distributivos::getByUsuarioId', ['as' => 'distributivos_getByUsuarioId']);
     $routes->post('distributivos/eliminar', 'Distributivos::delete', ['as' => 'distributivos_delete']);
 });
+
+$routes->group('secretaria', ['namespace' => 'App\Controllers\Secretaria', 'filter' => 'auth'], function ($routes) {
+    //RUTAS PARA MATRICULACION
+    $routes->get('matriculacion', 'Matriculacion::index', ['as' => 'matriculacion']);
+    $routes->post('matriculacion/listar', 'Matriculacion::show', ['as' => 'matriculacion_listar']);
+    $routes->post('matriculacion/guardar', 'Matriculacion::store', ['as' => 'matriculacion_store']);
+    $routes->post('matriculacion/formAgregar', 'Matriculacion::formAgregar', ['as' => 'matriculacion_form_crear']);
+    //RUTAS PARA TIPOS DE DOCUMENTO
+    $routes->get('tipos_documento/obtener', 'Tipos_documento::getAll', ['as' => 'tipos_documento_obtener']);
+});
