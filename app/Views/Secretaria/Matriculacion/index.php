@@ -4,6 +4,50 @@
 Matriculación de Estudiantes
 <?= $this->endsection('title') ?>
 
+<?= $this->section('css') ?>
+<style>
+    .fuente8 {
+        font: 8pt helvetica;
+    }
+
+    .fuente9 {
+        font: 9pt helvetica;
+    }
+
+    input {
+        font: 9pt helvetica;
+    }
+
+    .mayusculas {
+        text-transform: uppercase;
+    }
+
+    .ocultar {
+        display: none;
+    }
+
+    .mostrar {
+        display: block;
+    }
+
+    /*****************************************/
+    /* clases relativas a tablas             */
+    /*****************************************/
+
+    .itemParTabla {
+        background-color: #ddd;
+    }
+
+    .itemImparTabla {
+        background-color: #f5f5f5;
+    }
+
+    .itemEncimaTabla {
+        background-color: #ffc;
+    }
+</style>
+<?= $this->endsection('css') ?>
+
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
     <div class="card mt-2">
@@ -76,9 +120,11 @@ Matriculación de Estudiantes
                 $("#text_message").html("Debe seleccionar un paralelo...");
                 $("#text_message").fadeIn("slow");
                 $("#t_estudiantes tbody").html("");
+                $("#new_student").hide();
             } else {
                 $("#text_message").fadeOut();
                 $('#new_student').attr('disabled', false);
+                $("#new_student").show();
                 listarEstudiantesParalelo(id_paralelo);
             }
         });

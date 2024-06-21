@@ -27,6 +27,11 @@ class EstudiantesModel extends Model
         'es_fec_nacim'
     ];
 
+    function CalculaEdad( $fecha ) {
+		list($Y,$m,$d) = explode("-",$fecha);
+		return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
+	}
+
     public function listarEstudiantesParalelo($id_paralelo)
     {
         $query = $this->db->query("
@@ -82,7 +87,7 @@ class EstudiantesModel extends Model
                 $cadena .= "<div class='btn-group'>\n";
                 $cadena .= "<a href='javascript:;' class='btn btn-warning btn-sm item-edit' data=" . $codigo . " title='Editar'><span class='fa fa-pencil'></span></a>\n";
                 if ($estado != "TERMINADO") {
-                    $cadena .= "<a href='javascript:;' class='btn btn-danger btn-sm item-delete' data=" . $codigo . " title='Quitar'><span class='fa fa-remove'></span></a>\n";
+                    $cadena .= "<a href='javascript:;' class='btn btn-danger btn-sm item-delete' data=" . $codigo . " title='Quitar'><span class='fa fa-trash'></span></a>\n";
                 }
                 $cadena .= "<a href='".base_url(route_to('matriculacion_certificado'))."/$codigo' target='_blank' class='btn btn-info btn-sm' title='Certificado'><span class='fa fa-file-text'></span></a>\n";
                 $cadena .= "</div>\n";
@@ -95,5 +100,32 @@ class EstudiantesModel extends Model
             $cadena .= "</tr>\n";
         }
         return $cadena;
+    }
+
+    public function existeNombreEstudiante($apellidos, $nombres)
+    {
+        $estudiante = $this->db->query("
+            SELECT * 
+            FROM sw_estudiante 
+            WHERE es_apellidos = '$apellidos'
+            AND es_nombres = '$nombres'
+        ");
+
+        $num_rows = count($estudiante->getResultObject());
+
+        return $num_rows > 0;
+    }
+
+    public function existeNroCedula($es_cedula)
+    {
+        $estudiante = $this->db->query("
+            SELECT * 
+            FROM sw_estudiante 
+            WHERE es_cedula = '$es_cedula'
+        ");
+
+        $num_rows = count($estudiante->getResultObject());
+
+        return $num_rows > 0;
     }
 }
