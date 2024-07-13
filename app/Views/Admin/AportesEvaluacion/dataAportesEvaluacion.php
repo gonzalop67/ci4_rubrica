@@ -16,7 +16,7 @@ if (count($aportes_evaluacion) > 0) {
             <td><?= ($v->ap_ponderacion * 100) . '%'; ?></td>
             <td>
                 <div class="btn-group">
-                    <a href="<?php echo base_url(route_to('aportes_evaluacion_edit', $v->id_aporte_evaluacion)); ?>" onclick="edit(event, this, '<?= $v->id_aporte_evaluacion ?>')" class="btn btn-warning btn-sm aporte_evaluacion_edit" title="Editar"><span class="fa fa-pencil"></span></a>
+                    <a href="<?= base_url(route_to('aportes_evaluacion_edit', $v->id_aporte_evaluacion)); ?>" onclick="edit(event, this, '<?= $v->id_aporte_evaluacion ?>')" class="btn btn-warning btn-sm aporte_evaluacion_edit" title="Editar"><span class="fa fa-pencil"></span></a>
                     <a href="<?= base_url(route_to('aportes_evaluacion_delete', $hash->encode($v->id_aporte_evaluacion))) ?>" class="btn btn-danger btn-sm aporte_evaluacion_delete" title="Eliminar"><span class="fa fa-trash"></span></a>
                 </div>
             </td>

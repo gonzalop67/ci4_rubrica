@@ -1,13 +1,13 @@
 <?= $this->extend('layouts/layout') ?>
 
 <?= $this->section('title') ?>
-Edit Una Especialidad
+Editar Una Especialidad
 <?= $this->endsection('title') ?>
 
 <?= $this->section('content') ?>
 <div class="container-fluid px-4">
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">editar una Especialidad</li>
+        <li class="breadcrumb-item active">Editar una Especialidad</li>
     </ol>
 
     <div class="card mb-4">

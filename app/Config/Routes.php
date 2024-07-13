@@ -197,6 +197,7 @@ $routes->group('secretaria', ['namespace' => 'App\Controllers\Secretaria', 'filt
     $routes->post('matriculacion/listar', 'Matriculacion::show', ['as' => 'matriculacion_listar']);
     $routes->post('matriculacion/guardar', 'Matriculacion::store', ['as' => 'matriculacion_store']);
     $routes->post('matriculacion/formAgregar', 'Matriculacion::formAgregar', ['as' => 'matriculacion_form_crear']);
+    $routes->post('matriculacion/getStudentById', 'Matriculacion::getStudentById', ['as' => 'matriculacion_getStudentById']);
     //RUTAS PARA TIPOS DE DOCUMENTO
     $routes->get('tipos_documento/obtener', 'Tipos_documento::getAll', ['as' => 'tipos_documento_obtener']);
 });

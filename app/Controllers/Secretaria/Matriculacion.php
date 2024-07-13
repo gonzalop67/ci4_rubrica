@@ -255,4 +255,43 @@ class Matriculacion extends BaseController
             exit('Lo siento, no se puede procesar.');
         }
     }
+
+    public function getStudentById()
+    {
+        if ($this->request->isAJAX()) {
+            $id_estudiante = $this->request->getVar('id_estudiante');
+
+            $estudiante = $this->estudianteModel->find($id_estudiante);
+
+            $tipos_documentos =
+                $this->tiposDocumentoModel
+                ->orderBy('id_tipo_documento')
+                ->findAll();
+
+            $def_generos =
+                $this->defGenerosModel
+                ->orderBy('dg_nombre')
+                ->findAll();
+
+            $def_nacionalidades =
+                $this->defNacionalidadesModel
+                ->orderBy('id_def_nacionalidad')
+                ->findAll();
+
+            $data = [
+                'estudiante' => $estudiante,
+                'def_generos' => $def_generos,
+                'tipos_documentos' => $tipos_documentos,
+                'def_nacionalidades' => $def_nacionalidades
+            ];
+
+            $msg = [
+                'success' => view('Secretaria/Matriculacion/modalEdit', $data)
+            ];
+
+            echo json_encode($msg);
+        } else {
+            exit('Lo siento, no se puede procesar.');
+        }
+    }
 }

@@ -1,14 +1,15 @@
-<!-- New Student Modal -->
+<!-- Edit Student Modal -->
 <!-- Large modal -->
-<div class="modal fade" id="newStudentModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Estudiante Nuevo</h5>
+                <h5 class="modal-title">Editar Estudiante</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="form_insert" action="<?= base_url(route_to('matriculacion_store')) ?>" autocomplete="off">
+            <form id="form_update" action="<?= base_url(route_to('matriculacion_update')) ?>" autocomplete="off">
                 <?= csrf_field(); ?>
+                <input type="hidden" name="id_estudiante" id="id_estudiante" value="<?= $estudiante->id_estudiante ?>">
                 <input type="hidden" name="paralelo_id" id="paralelo_id">
                 <div class="modal-body">
                     <div class="mb-1 row">
@@ -19,35 +20,35 @@
                                 <?php
                                 foreach ($tipos_documentos as $v) :
                                 ?>
-                                    <option value="<?= $v->id_tipo_documento ?>"><?= $v->td_nombre ?></option>
+                                    <option <?= ($estudiante->id_tipo_documento == $v->id_tipo_documento) ? 'selected' : '' ?> value="<?= $v->id_tipo_documento ?>"><?= $v->td_nombre ?></option>
                                 <?php endforeach ?>
                             </select>
                             <p class="invalid-feedback errorTipoDocumento"></p>
                         </div>
                         <label for="dni" class="col-sm-1 col-form-label">DNI:</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="dni" name="dni" value="">
+                            <input type="text" class="form-control" id="dni" name="dni" value="<?= $estudiante->es_cedula ?>">
                             <p class="invalid-feedback errorDNI"></p>
                         </div>
                     </div>
                     <div class="mb-1 row">
                         <label for="apellidos" class="col-sm-2 col-form-label">Apellidos:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control mayusculas" id="apellidos" name="apellidos" value="">
+                            <input type="text" class="form-control mayusculas" id="apellidos" name="apellidos" value="<?= $estudiante->es_apellidos ?>">
                             <p class="invalid-feedback errorApellidos"></p>
                         </div>
                     </div>
                     <div class="mb-1 row">
                         <label for="nombres" class="col-sm-2 col-form-label">Nombres:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control mayusculas" id="nombres" name="nombres" value="">
+                            <input type="text" class="form-control mayusculas" id="nombres" name="nombres" value="<?= $estudiante->es_nombres ?>">
                             <p class="invalid-feedback errorNombres"></p>
                         </div>
                     </div>
                     <div class="mb-1 row">
                         <label for="fec_nac" class="col-sm-2 col-form-label">Fecha de nacimiento:</label>
                         <div class="col-sm-4">
-                            <input type="date" class="form-control" id="fec_nac" name="fec_nac" value="" placeholder="aaaa-mm-dd" maxlength="10">
+                            <input type="date" class="form-control" id="fec_nac" name="fec_nac" value="<?= $estudiante->es_fec_nacim ?>" placeholder="aaaa-mm-dd" maxlength="10">
                             <p class="invalid-feedback errorFecNac"></p>
                         </div>
 
@@ -60,26 +61,26 @@
                     <div class="mb-1 row">
                         <label for="direccion" class="col-sm-2 col-form-label">Dirección:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control mayusculas" id="direccion" name="direccion" value="">
+                            <input type="text" class="form-control mayusculas" id="direccion" name="direccion" value="<?= $estudiante->es_direccion ?>">
                             <p class="invalid-feedback errorDireccion"></p>
                         </div>
                     </div>
                     <div class="mb-1 row">
                         <label for="sector" class="col-sm-2 col-form-label">Sector:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control mayusculas" id="sector" name="sector" value="">
+                            <input type="text" class="form-control mayusculas" id="sector" name="sector" value="<?= $estudiante->es_sector ?>">
                             <p class="invalid-feedback errorSector"></p>
                         </div>
                         <label for="telefono" class="col-sm-1 col-form-label">Celular:</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="telefono" name="telefono" value="">
+                            <input type="text" class="form-control" id="telefono" name="telefono" value="<?= $estudiante->es_telefono ?>">
                             <p class="invalid-feedback errorTelefono"></p>
                         </div>
                     </div>
                     <div class="mb-1 row">
                         <label for="email" class="col-sm-2 col-form-label">E-mail:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="email" name="email" value="">
+                            <input type="text" class="form-control" id="email" name="email" value="<?= $estudiante->es_email ?>">
                             <p class="invalid-feedback errorEmail"></p>
                         </div>
                     </div>
@@ -91,7 +92,7 @@
                                 <?php
                                 foreach ($def_generos as $v) :
                                 ?>
-                                    <option value="<?= $v->id_def_genero ?>"><?= $v->dg_nombre ?></option>
+                                    <option <?= ($estudiante->id_def_genero == $v->id_def_genero) ? 'selected' : '' ?> value="<?= $v->id_def_genero ?>"><?= $v->dg_nombre ?></option>
                                 <?php endforeach ?>
                             </select>
                             <p class="invalid-feedback errorGenero"></p>
@@ -103,7 +104,7 @@
                                 <?php
                                 foreach ($def_nacionalidades as $v) :
                                 ?>
-                                    <option value="<?= $v->id_def_nacionalidad ?>"><?= $v->dn_nombre ?></option>
+                                    <option <?= ($estudiante->id_def_nacionalidad == $v->id_def_nacionalidad) ? 'selected' : '' ?> value="<?= $v->id_def_nacionalidad ?>"><?= $v->dn_nombre ?></option>
                                 <?php endforeach ?>
                             </select>
                             <p class="invalid-feedback errorNacionalidad"></p>
@@ -112,7 +113,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="button" data-bs-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
-                    <button type="submit" class="btn btn-success btnAgregar"><i class="fa fa-download"></i> Guardar</button>
+                    <button type="submit" class="btn btn-success btnAgregar"><i class="fa fa-download"></i> Actualizar</button>
                 </div>
             </form>
         </div>

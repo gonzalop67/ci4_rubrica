@@ -146,6 +146,30 @@ Matriculación de Estudiantes
                 }
             });
         });
+
+        $('#t_estudiantes tbody').on('click', '.item-edit', function() {
+            let id_estudiante = $(this).attr('data');
+            // console.log(id_estudiante);
+
+            $.ajax({
+                type: "post",
+                url: "<?= base_url(route_to('matriculacion_getStudentById')) ?>",
+                data: {
+                    id_estudiante: id_estudiante
+                },
+                dataType: "json",
+                success: function(response) {
+                    if (response.success) {
+                        $('.viewmodal').html(response.success).show();
+                        $('#editStudentModal').modal('show');
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+
+        });
     });
 
     function listarEstudiantesParalelo(id_paralelo) {
