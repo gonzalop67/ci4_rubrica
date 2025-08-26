@@ -23,7 +23,7 @@ Crear Un Periodo Lectivo
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif ?>
-            <form action="<?= base_url(route_to('periodos_lectivos_store')) ?>" method="post">
+            <form id="frm-periodo-lectivo" action="<?= base_url(route_to('periodos_lectivos_store')) ?>" method="post">
                 <div class="mb-3 row">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -42,25 +42,17 @@ Crear Un Periodo Lectivo
                 </div>
                 <div class="mb-3 row">
                     <div class="col-lg-6">
-                        <div id="div_pe_fecha_inicio" class="form-group">
+                        <div class="form-group">
                             <label for="pe_fecha_inicio" class="form-label fw-bold">Fecha de inicio:</label>
-                            <div class="controls">
-                                <div class="input-group date">
-                                    <input type="date" name="pe_fecha_inicio" id="pe_fecha_inicio" class="form-control <?= session('errors.pe_fecha_inicio') ? 'is-invalid' : '' ?>" value="<?= old('pe_fecha_inicio') ?>" required>
-                                    <span id="span_pe_fecha_inicio" class="invalid-feedback"><?= session('errors.pe_fecha_inicio') ?></span>
-                                </div>
-                            </div>
+                            <input type="date" name="pe_fecha_inicio" id="pe_fecha_inicio" class="form-control <?= session('errors.pe_fecha_inicio') ? 'is-invalid' : '' ?>" value="<?= old('pe_fecha_inicio') ?>" required>
+                            <span id="span_pe_fecha_inicio" class="invalid-feedback"><?= session('errors.pe_fecha_inicio') ?></span>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div id="div_pe_fecha_fin" class="form-group">
+                        <div class="form-group">
                             <label for="pe_fecha_fin" class="form-label fw-bold">Fecha de fin:</label>
-                            <div class="controls">
-                                <div class="input-group date">
-                                    <input type="date" name="pe_fecha_fin" id="pe_fecha_fin" class="form-control <?= session('errors.pe_fecha_fin') ? 'is-invalid' : '' ?>" value="<?= old('pe_fecha_fin') ?>" required>
-                                    <span id="span_pe_fecha_fin" class="invalid-feedback"><?= session('errors.pe_fecha_fin') ?></span>
-                                </div>
-                            </div>
+                            <input type="date" name="pe_fecha_fin" id="pe_fecha_fin" class="form-control <?= session('errors.pe_fecha_fin') ? 'is-invalid' : '' ?>" value="<?= old('pe_fecha_fin') ?>" required>
+                            <span id="span_pe_fecha_fin" class="invalid-feedback"><?= session('errors.pe_fecha_fin') ?></span>
                         </div>
                     </div>
                 </div>
@@ -96,24 +88,47 @@ Crear Un Periodo Lectivo
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="niveles" class="form-label fw-bold">Asociar Nivel de Educación:</label>
-                    <?php foreach ($niveles as $v) : ?>
-                        <div class="control">
-                            <label class="checkbox">
-                                <input type="checkbox" name="niveles[]" value="<?= $v->id_nivel_educacion ?>" <?=
-                                                                                                                old('niveles.*')
-                                                                                                                    ?
-                                                                                                                    (in_array($v->id_nivel_educacion, old('niveles.*'))
-                                                                                                                        ? 'checked'
-                                                                                                                        : '')
-                                                                                                                    : ''
-                                                                                                                ?>>
-                                <?= $v->nombre ?>
-                            </label>
-                        </div>
-                    <?php endforeach ?>
-                    <p class="invalid-feedback"><?= session('errors')['niveles.*'] ?? '' ?></p>
+                <div class="mb-3 row">
+                    <div class="col-lg-6">
+                        <label for="niveles" class="form-label fw-bold">Asociar Nivel de Educación:</label>
+                        <?php foreach ($niveles as $v) : ?>
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="niveles[]" value="<?= $v->id_nivel_educacion ?>"
+                                        <?=
+                                        old('niveles.*')
+                                            ?
+                                            (in_array($v->id_nivel_educacion, old('niveles.*'))
+                                                ? 'checked'
+                                                : '')
+                                            : ''
+                                        ?>>
+                                    <?= $v->nombre ?>
+                                </label>
+                            </div>
+                        <?php endforeach ?>
+                        <p class="invalid-feedback"><?= session('errors')['niveles.*'] ?? '' ?></p>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="niveles" class="form-label fw-bold">Asociar Sub Periodos de Evaluación:</label>
+                        <?php foreach ($niveles as $v) : ?>
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="niveles[]" value="<?= $v->id_nivel_educacion ?>"
+                                        <?=
+                                        old('niveles.*')
+                                            ?
+                                            (in_array($v->id_nivel_educacion, old('niveles.*'))
+                                                ? 'checked'
+                                                : '')
+                                            : ''
+                                        ?>>
+                                    <?= $v->nombre ?>
+                                </label>
+                            </div>
+                        <?php endforeach ?>
+                        <p class="invalid-feedback"><?= session('errors')['niveles.*'] ?? '' ?></p>
+                    </div>
                 </div>
                 <p>
                 <div class="form-group">
@@ -126,3 +141,12 @@ Crear Un Periodo Lectivo
     </div>
 </div>
 <?= $this->endsection('content') ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    $(document).ready(function() {
+        APP.validacionGeneral('frm-periodo-lectivo');
+
+    });
+</script>
+<?= $this->endsection('scripts') ?>

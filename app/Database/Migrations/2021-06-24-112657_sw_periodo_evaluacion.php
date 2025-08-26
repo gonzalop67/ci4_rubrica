@@ -7,16 +7,11 @@ class SwPeriodoEvaluacion extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id_periodo_evaluacion' => [
+			'id_sub_periodo_evaluacion' => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 				'unsigned'       => true,
 				'auto_increment' => true,
-			],
-			'id_periodo_lectivo' => [
-				'type'           => 'INT',
-				'constraint'     => 11,
-				'unsigned'       => true,
 			],
 			'id_tipo_periodo' => [
 				'type'           => 'INT',
@@ -40,16 +35,15 @@ class SwPeriodoEvaluacion extends Migration
 				'unsigned'       => true,
 			]
 		]);
-		$this->forge->addKey('id_periodo_evaluacion', true);
-		$this->forge->addForeignKey('id_periodo_lectivo','sw_periodo_lectivo','id_periodo_lectivo');
+		$this->forge->addKey('id_sub_periodo_evaluacion', true);
 		$this->forge->addForeignKey('id_tipo_periodo','sw_tipo_periodo','id_tipo_periodo');
-		$this->forge->createTable('sw_periodo_evaluacion');
+		$this->forge->createTable('sw_sub_periodo_evaluacion');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->forge->dropTable('sw_periodo_evaluacion');
+		$this->forge->dropTable('sw_sub_periodo_evaluacion');
 	}
 }

@@ -13,7 +13,7 @@ class SwAporteEvaluacion extends Migration
 				'unsigned'       => true,
 				'auto_increment' => true,
 			],
-			'id_periodo_evaluacion' => [
+			'id_sub_periodo_evaluacion' => [
 				'type'           => 'INT',
 				'constraint'     => 11,
 				'unsigned'       => true,
@@ -50,7 +50,6 @@ class SwAporteEvaluacion extends Migration
 			]
 		]);
 		$this->forge->addKey('id_aporte_evaluacion', true);
-		$this->forge->addForeignKey('id_periodo_evaluacion','sw_periodo_evaluacion','id_periodo_evaluacion');
 		$this->forge->addForeignKey('id_tipo_aporte','sw_tipo_aporte','id_tipo_aporte');
 		$this->forge->createTable('sw_aporte_evaluacion');
 	}
