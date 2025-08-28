@@ -4,7 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\Admin\AportesEvaluacionModel;
-use App\Models\Admin\PeriodosEvaluacionModel;
+use App\Models\Admin\SubPeriodosEvaluacionModel;
 use App\Models\Admin\TiposAporteModel;
 
 use Hashids\Hashids;
@@ -18,14 +18,26 @@ class Aportes_evaluacion extends BaseController
     public function __construct()
     {
         $this->aporteEvaluacionModel = new AportesEvaluacionModel();
-        $this->periodoEvaluacionModel = new PeriodosEvaluacionModel();
+        $this->periodoEvaluacionModel = new SubPeriodosEvaluacionModel();
         $this->tiposAporteModel = new TiposAporteModel();
     }
 
     public function index()
     {
+        // $periodos_evaluacion = $this->periodoEvaluacionModel
+        //     ->where('id_periodo_lectivo', session('id_periodo_lectivo'))
+        //     ->orderBy('pe_orden')
+        //     ->findAll();
+
+        // $aportes_evaluacion = $this->aporteEvaluacionModel
+        //         ->join('sw_tipo_aporte', 'sw_tipo_aporte.id_tipo_aporte = sw_aporte_evaluacion.id_tipo_aporte')
+        //         ->where('id_periodo_evaluacion', $id_periodo_evaluacion)
+        //         ->orderBy('ap_orden')
+        //         ->findAll();
+
         $periodos_evaluacion = $this->periodoEvaluacionModel
-            ->where('id_periodo_lectivo', session('id_periodo_lectivo'))
+            ->join('sw_periodo_lectivo_sub_periodo', 'sw_sub_periodo_evaluacion.id_sub_periodo_evaluacion = sw_periodo_lectivo_sub_periodo.id_sub_periodo_evaluacion')
+            ->where('sw_periodo_lectivo_sub_periodo.id_periodo_lectivo', session('id_periodo_lectivo'))
             ->orderBy('pe_orden')
             ->findAll();
 
@@ -116,7 +128,7 @@ class Aportes_evaluacion extends BaseController
                 ];
             } else {
                 $datos = [
-                    'id_periodo_evaluacion' => $this->request->getVar('periodo_evaluacion_id'),
+                    'id_sub_periodo_evaluacion' => $this->request->getVar('periodo_evaluacion_id'),
                     'id_tipo_aporte' => $this->request->getVar('id_tipo_aporte'),
                     'ap_nombre' => strtoupper(trim($this->request->getVar('nombre'))),
                     'ap_abreviatura' => strtoupper(trim($this->request->getVar('abreviatura'))),
@@ -151,7 +163,8 @@ class Aportes_evaluacion extends BaseController
             $id_periodo_evaluacion = $this->request->getVar('id_periodo_evaluacion');
             $aportes_evaluacion = $this->aporteEvaluacionModel
                 ->join('sw_tipo_aporte', 'sw_tipo_aporte.id_tipo_aporte = sw_aporte_evaluacion.id_tipo_aporte')
-                ->where('id_periodo_evaluacion', $id_periodo_evaluacion)
+                ->join('sw_periodo_lectivo_sub_periodo', 'sw_aporte_evaluacion.id_sub_periodo_evaluacion = sw_periodo_lectivo_sub_periodo.id_sub_periodo_evaluacion')
+                ->where('sw_aporte_evaluacion.id_sub_periodo_evaluacion', $id_periodo_evaluacion)
                 ->orderBy('ap_orden')
                 ->findAll();
 

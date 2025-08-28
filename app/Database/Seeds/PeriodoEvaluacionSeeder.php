@@ -2,7 +2,7 @@
 
 use CodeIgniter\Database\Seeder;
 use App\Models\Admin\SubPeriodosEvaluacionModel;
-use App\Models\Admin\subPeriodosPeriodosModel;
+use App\Models\Admin\subPeriodosPeriodoModel;
 
 class PeriodoEvaluacionSeeder extends Seeder
 {
@@ -51,7 +51,7 @@ class PeriodoEvaluacionSeeder extends Seeder
 		// $builder->insertBatch($sub_periodos_evaluacion);
 
 		$subPeriodoModel = new SubPeriodosEvaluacionModel();
-        $subPeriodoPeriodoModel = new subPeriodosPeriodosModel();
+        $subPeriodoPeriodoModel = new subPeriodosPeriodoModel();
 
         foreach ($sub_periodos_evaluacion as $sub_periodo) {
             $subPeriodoModel->save([

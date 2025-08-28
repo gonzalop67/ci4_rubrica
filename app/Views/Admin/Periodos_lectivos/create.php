@@ -110,24 +110,24 @@ Crear Un Periodo Lectivo
                         <p class="invalid-feedback"><?= session('errors')['niveles.*'] ?? '' ?></p>
                     </div>
                     <div class="col-lg-6">
-                        <label for="niveles" class="form-label fw-bold">Asociar Sub Periodos de Evaluación:</label>
-                        <?php foreach ($niveles as $v) : ?>
+                        <label for="sub_periodos" class="form-label fw-bold">Asociar Sub Periodos de Evaluación:</label>
+                        <?php foreach ($sub_periodos as $v) : ?>
                             <div class="control">
                                 <label class="checkbox">
-                                    <input type="checkbox" name="niveles[]" value="<?= $v->id_nivel_educacion ?>"
+                                    <input type="checkbox" name="sub_periodos[]" value="<?= $v->id_sub_periodo_evaluacion ?>"
                                         <?=
-                                        old('niveles.*')
+                                        old('sub_periodos.*')
                                             ?
-                                            (in_array($v->id_nivel_educacion, old('niveles.*'))
+                                            (in_array($v->id_nivel_educacion, old('sub_periodos.*'))
                                                 ? 'checked'
                                                 : '')
                                             : ''
                                         ?>>
-                                    <?= $v->nombre ?>
+                                    <?= $v->pe_nombre ?>
                                 </label>
                             </div>
                         <?php endforeach ?>
-                        <p class="invalid-feedback"><?= session('errors')['niveles.*'] ?? '' ?></p>
+                        <p class="invalid-feedback"><?= session('errors')['sub_periodos.*'] ?? '' ?></p>
                     </div>
                 </div>
                 <p>

@@ -4,7 +4,7 @@ namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 
-class subPeriodosPeriodosModel extends Model
+class SubPeriodosPeriodoModel extends Model
 {
 
     protected $table      = 'sw_periodo_lectivo_sub_periodo';

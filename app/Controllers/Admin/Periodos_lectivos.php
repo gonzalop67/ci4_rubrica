@@ -7,21 +7,29 @@ use App\Models\Admin\ModalidadesModel;
 use App\Models\Admin\NivelesEducacionModel;
 use App\Models\Admin\PeriodosLectivosModel;
 use App\Models\Admin\PeriodosNivelesModel;
+use App\Models\Admin\SubPeriodosPeriodoModel;
+use App\Models\Admin\SubPeriodosEvaluacionModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Periodos_lectivos extends BaseController
 {
     private $modalidadModel;
+    private $subPeriodoModel;
+    private $periodoNivelModel;
     private $periodoLectivoModel;
     private $nivelEducacionModel;
-    private $periodoNivelModel;
+    private $subPeriodosPeriodoModel;
+    private $subPeriodosEvaluacionModel;
 
     public function __construct()
     {
         $this->modalidadModel = new ModalidadesModel();
+        $this->periodoNivelModel = new PeriodosNivelesModel();
         $this->periodoLectivoModel = new PeriodosLectivosModel();
         $this->nivelEducacionModel = new NivelesEducacionModel();
-        $this->periodoNivelModel = new PeriodosNivelesModel();
+        $this->subPeriodoModel = new SubPeriodosEvaluacionModel();
+        $this->subPeriodosPeriodoModel = new SubPeriodosPeriodoModel();
+        $this->subPeriodosEvaluacionModel = new SubPeriodosEvaluacionModel();
     }
 
     public function index()
@@ -39,10 +47,12 @@ class Periodos_lectivos extends BaseController
     {
         $modalidades = $this->modalidadModel->listarModalidades();
         $niveles = $this->nivelEducacionModel->findAll();
+        $sub_periodos = $this->subPeriodoModel->findAll();
 
         $data = [
-            'modalidades' => $modalidades,
-            'niveles'     => $niveles
+            'modalidades'  => $modalidades,
+            'niveles'      => $niveles,
+            'sub_periodos' => $sub_periodos
         ];
 
         return view('Admin/Periodos_lectivos/create', $data);
@@ -128,6 +138,17 @@ class Periodos_lectivos extends BaseController
             ]);
         }
 
+        // Comprobar que se han pasado los sub periods de evaluación a asociar al nuevo periodo lectivo
+        $sub_periodos = $this->request->getVar('sub_periodos');
+
+        if ($sub_periodos == null) {
+            return redirect()->back()->withInput()->with('msg', [
+                'type' => 'danger',
+                'icon' => 'exclamation-triangle',
+                'body' => 'Debe seleccionar al menos un sub periodo de evaluación a relacionar...'
+            ]);
+        }
+
         $datos = [
             'id_periodo_estado' => 1,
             'id_modalidad' => trim($this->request->getVar('id_modalidad')),
@@ -151,10 +172,17 @@ class Periodos_lectivos extends BaseController
             ]);
         }
 
+        for ($i = 0; $i < count($sub_periodos); $i++) {
+            $this->subPeriodosPeriodoModel->save([
+                'id_periodo_lectivo' => $id_periodo_lectivo,
+                'id_sub_periodo_evaluacion' => $sub_periodos[$i]
+            ]);
+        }
+
         return redirect('periodos_lectivos')->with('msg', [
             'type' => 'success',
             'icon' => 'check',
-            'body' => 'El periodo lectivo fue guardado correctamente.'
+            'body' => 'El periodo lectivo fue creado correctamente.'
         ]);
     }
 
@@ -168,12 +196,16 @@ class Periodos_lectivos extends BaseController
 
         $niveles = $this->nivelEducacionModel->findAll();
         $periodosNiveles = $this->periodoNivelModel->where('id_periodo_lectivo', $id)->findAll();
+        $subPeriodosEvaluacion = $this->subPeriodosEvaluacionModel->findAll();
+        $subPeriodosPeriodo = $this->subPeriodosPeriodoModel->where('id_periodo_lectivo', $id)->findAll();
 
         return view('Admin/Periodos_lectivos/edit', [
             'periodo_lectivo' => $periodo_lectivo,
             'modalidades'     => $modalidades,
             'niveles'         => $niveles,
-            'periodosNiveles' => $periodosNiveles 
+            'periodosNiveles' => $periodosNiveles, 
+            'subPeriodosEval' => $subPeriodosEvaluacion, 
+            'subPeriodosPeriodoEval' => $subPeriodosPeriodo
         ]);
     }
 
@@ -227,7 +259,6 @@ class Periodos_lectivos extends BaseController
                 ]
             ],
         ])) {
-            // dd($this->validator->getErrors());
             return redirect()->back()->withInput()
                 ->with('msg', [
                     'type' => 'danger',
@@ -247,6 +278,17 @@ class Periodos_lectivos extends BaseController
             ]);
         }
 
+        // Comprobar que se han pasado los niveles de educación a asociar al nuevo periodo lectivo
+        $sub_periodos = $this->request->getVar('sub_periodos');
+
+        if ($sub_periodos == null) {
+            return redirect()->back()->withInput()->with('msg', [
+                'type' => 'danger',
+                'icon' => 'exclamation-triangle',
+                'body' => 'Debe seleccionar al menos un sub periodo de evaluación a relacionar...'
+            ]);
+        }
+
         $id_periodo_lectivo = $this->request->getVar('id_periodo_lectivo');
 
         $datos = [
@@ -261,16 +303,28 @@ class Periodos_lectivos extends BaseController
 
         $this->periodoLectivoModel->save($datos);
 
-        // Actualizar los perfiles asociados
-        // Primero eliminar los perfiles asociados actualmente
+        // Actualizar los niveles de educación asociados
+        // Primero eliminar los niveles de educación asociados actualmente
         $this->periodoNivelModel->where('id_periodo_lectivo', $id_periodo_lectivo)->delete();
-        // Ahora insertar los perfiles enviados mediante POST
+        // Ahora insertar los niveles de educación enviados mediante POST
         for ($i = 0; $i < count($niveles); $i++) {
             $datos = [
                 'id_periodo_lectivo' => $id_periodo_lectivo,
                 'id_nivel_educacion' => $niveles[$i]
             ];
             $this->periodoNivelModel->insert($datos);
+        }
+
+        // Actualizar los sub periodos de evaluación asociados
+        // Primero eliminar los sub periodos de evaluación asociados actualmente
+        $this->subPeriodosPeriodoModel->where('id_periodo_lectivo', $id_periodo_lectivo)->delete();
+        // Ahora insertar los perfiles enviados mediante POST
+        for ($i = 0; $i < count($sub_periodos); $i++) {
+            $datos = [
+                'id_periodo_lectivo' => $id_periodo_lectivo,
+                'id_sub_periodo_evaluacion' => $sub_periodos[$i]
+            ];
+            $this->subPeriodosPeriodoModel->insert($datos);
         }
 
         return redirect('periodos_lectivos')->with('msg', [

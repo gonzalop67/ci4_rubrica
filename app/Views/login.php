@@ -8,6 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Iniciar Sesión</title>
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url() ?>Assets/img/favicon.ico" />
     <link href="<?php echo base_url(); ?>Assets/css/styles.css" rel="stylesheet" />
     <script src="<?php echo base_url(); ?>Assets/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -79,6 +80,8 @@
                                         <?php endif ?>
 
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                            <!-- ¿Olvidó su contraseña? -->
+                                            <a class="small" href="password.html"></a>
                                             <button class="btn btn-primary" type="submit" onclick="frmLogin(event);"><i class="fas fa-sign-in"></i> Ingresar</button>
                                         </div>
                                     </form>
@@ -96,7 +99,7 @@
         </div>
     </div>
     <script src="<?php echo base_url(); ?>Assets/js/jquery-3.7.0.min.js" crossorigin="anonymous"></script>
-    <script src="<?php echo base_url(); ?>Assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="<?php echo base_url(); ?>Assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
 
     <script>
         const base_url = "<?php echo base_url(); ?>";

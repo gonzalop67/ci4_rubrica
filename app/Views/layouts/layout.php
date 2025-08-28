@@ -12,6 +12,8 @@
     
     <link href="<?php echo base_url(); ?>Assets/css/styles.css" rel="stylesheet" />
 
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url() ?>Assets/img/favicon.ico" />
+
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <!-- sweetalert 2 -->

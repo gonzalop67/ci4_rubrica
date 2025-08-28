@@ -34,7 +34,7 @@ Aportes de Evaluacion
                     <?php
                     foreach ($periodos_evaluacion as $v) {
                     ?>
-                        <option value="<?php echo $v->id_periodo_evaluacion; ?>"><?php echo $v->pe_nombre; ?></option>
+                        <option value="<?php echo $v->id_sub_periodo_evaluacion; ?>"><?php echo $v->pe_nombre; ?></option>
                     <?php
                     }
                     ?>

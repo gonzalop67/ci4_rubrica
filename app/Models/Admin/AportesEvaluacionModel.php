@@ -13,7 +13,7 @@ class AportesEvaluacionModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'id_periodo_evaluacion',
+        'id_sub_periodo_evaluacion',
         'id_tipo_aporte',
         'ap_nombre',
         'ap_descripcion',
@@ -53,7 +53,7 @@ class AportesEvaluacionModel extends Model
 
     public function getNextOrderNumber($id_periodo_evaluacion)
     {
-        $query = $this->db->query("SELECT MAX(ap_orden) AS secuencial FROM sw_aporte_evaluacion WHERE id_periodo_evaluacion = $id_periodo_evaluacion");
+        $query = $this->db->query("SELECT MAX(ap_orden) AS secuencial FROM sw_aporte_evaluacion WHERE id_sub_periodo_evaluacion = $id_periodo_evaluacion");
         $aporte = $query->getRow();
 
         return $aporte == null ? 1 : $aporte->secuencial + 1;

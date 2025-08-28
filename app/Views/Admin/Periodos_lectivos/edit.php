@@ -97,31 +97,61 @@ Editar Un Periodo Lectivo
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <label for="niveles" class="form-label fw-bold">Asociar Nivel de Educación:</label>
-                    <?php foreach ($niveles as $v) : ?>
-                        <div class="control">
-                            <label class="checkbox">
-                                <input type="checkbox" name="niveles[]" value="<?= $v->id_nivel_educacion ?>" <?=
-                                                                                                                old('niveles.*')
-                                                                                                                    ?
-                                                                                                                    (in_array($v->id_nivel_educacion, old('niveles.*'))
-                                                                                                                        ? 'checked'
-                                                                                                                        : '')
-                                                                                                                    : ''
-                                                                                                                ?> <?php
-                                    foreach ($periodosNiveles as $periodoNivel) {
-                                        if ($v->id_nivel_educacion == $periodoNivel->id_nivel_educacion) {
-                                            echo 'checked';
-                                            break;
-                                        }
-                                    }
-                                    ?>>
-                                <?= $v->nombre ?>
-                            </label>
-                        </div>
-                    <?php endforeach ?>
-                    <p class="invalid-feedback"><?= session('errors')['niveles.*'] ?? '' ?></p>
+                <div class="mb-3 row">
+                    <div class="col-lg-6">
+                        <label for="niveles" class="form-label fw-bold">Asociar Nivel de Educación:</label>
+                        <?php foreach ($niveles as $v) : ?>
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="niveles[]" value="<?= $v->id_nivel_educacion ?>"
+                                        <?=
+                                        old('niveles.*')
+                                            ?
+                                            (in_array($v->id_nivel_educacion, old('niveles.*'))
+                                                ? 'checked'
+                                                : '')
+                                            : ''
+                                        ?> <?php
+                                            foreach ($periodosNiveles as $periodoNivel) {
+                                                if ($v->id_nivel_educacion == $periodoNivel->id_nivel_educacion) {
+                                                    echo 'checked';
+                                                    break;
+                                                }
+                                            }
+                                            ?>>
+                                    <?= $v->nombre ?>
+                                </label>
+                            </div>
+                        <?php endforeach ?>
+                        <p class="invalid-feedback"><?= session('errors')['niveles.*'] ?? '' ?></p>
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="sub_periodos" class="form-label fw-bold">Asociar Sub Periodos de Evaluación:</label>
+                        <?php foreach ($subPeriodosEval as $v) : ?>
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="sub_periodos[]" value="<?= $v->id_sub_periodo_evaluacion ?>"
+                                        <?=
+                                        old('sub_periodos.*')
+                                            ?
+                                            (in_array($v->id_sub_periodo_evaluacion, old('sub_periodos.*'))
+                                                ? 'checked'
+                                                : '')
+                                            : ''
+                                        ?> <?php
+                                            foreach ($subPeriodosPeriodoEval as $w) {
+                                                if ($v->id_sub_periodo_evaluacion == $w->id_sub_periodo_evaluacion) {
+                                                    echo 'checked';
+                                                    break;
+                                                }
+                                            }
+                                            ?>>
+                                    <?= $v->pe_nombre ?>
+                                </label>
+                            </div>
+                        <?php endforeach ?>
+                        <p class="invalid-feedback"><?= session('errors')['niveles.*'] ?? '' ?></p>
+                    </div>
                 </div>
                 <p>
                 <div class="form-group">

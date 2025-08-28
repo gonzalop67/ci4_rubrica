@@ -2,22 +2,25 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
-use App\Models\Admin\PeriodosEvaluacionModel;
-use App\Models\Admin\TiposPeriodoModel;
-use CodeIgniter\Exceptions\PageNotFoundException;
-
 use Hashids\Hashids;
+use App\Controllers\BaseController;
+use App\Models\Admin\TiposPeriodoModel;
+use App\Models\Admin\SubPeriodosPeriodoModel;
+use App\Models\Admin\SubPeriodosEvaluacionModel;
+
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Periodos_evaluacion extends BaseController
 {
-    private $periodoEvaluacionModel;
     private $tiposPeriodoModel;
+    private $periodoEvaluacionModel;
+    private $subPeriodosPeriodoModel;
 
     public function __construct()
     {
-        $this->periodoEvaluacionModel = new PeriodosEvaluacionModel();
         $this->tiposPeriodoModel = new TiposPeriodoModel();
+        $this->subPeriodosPeriodoModel = new SubPeriodosPeriodoModel();
+        $this->periodoEvaluacionModel = new SubPeriodosEvaluacionModel();
     }
 
     public function index()
@@ -90,6 +93,14 @@ class Periodos_evaluacion extends BaseController
 
         $this->periodoEvaluacionModel->save($datos);
 
+        // Relacionar con la tabla sw_periodo_lectivo_sub_periodo
+        $id_sub_periodo_evaluacion = $this->periodoEvaluacionModel->getInsertID();
+        $this->subPeriodosPeriodoModel->save([
+            'id_periodo_lectivo' => $id_periodo_lectivo,
+            'id_sub_periodo_evaluacion' => $id_sub_periodo_evaluacion
+        ]);
+
+
         return redirect('periodos_evaluacion')->with('msg', [
             'type' => 'success',
             'icon' => 'check',
@@ -101,7 +112,8 @@ class Periodos_evaluacion extends BaseController
     {
         if ($this->request->isAJAX()) {
             $periodos_evaluacion = $this->periodoEvaluacionModel
-                ->where('id_periodo_lectivo', session()->id_periodo_lectivo)
+                ->join('sw_periodo_lectivo_sub_periodo', 'sw_sub_periodo_evaluacion.id_sub_periodo_evaluacion = sw_periodo_lectivo_sub_periodo.id_sub_periodo_evaluacion')
+                ->where('sw_periodo_lectivo_sub_periodo.id_periodo_lectivo', session()->id_periodo_lectivo)
                 ->orderBy('pe_orden')
                 ->findAll();
 
