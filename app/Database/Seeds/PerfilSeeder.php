@@ -7,10 +7,12 @@ class PerfilSeeder extends Seeder
 	public function run()
 	{
 		$perfiles = [
-            'Administrador',
+            'SuperAdmin',
+            'SchoolAdmin',
             'Autoridad',
             'DECE',
             'Docente',
+            'Estudiante',
             'Inspector',
             'Representante',
             'Secretaría',

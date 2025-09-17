@@ -10,10 +10,16 @@
     <title>Iniciar Sesión</title>
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url() ?>Assets/img/favicon.ico" />
     <link href="<?php echo base_url(); ?>Assets/css/styles.css" rel="stylesheet" />
-    <script src="<?php echo base_url(); ?>Assets/js/all.js" crossorigin="anonymous"></script>
+    <script defer src="<?php echo base_url(); ?>Assets/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        .cover {
+            background: 50% 50% no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
-<body class="bg-primary" style="background: url('<?php echo base_url(); ?>Assets/img/loginFont.jpg')">
+<body class="bg-primary cover" style="background: url('<?php echo base_url(); ?>Assets/img/loginFont.jpg')">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
@@ -28,12 +34,12 @@
                                     <form id="frmLogin" action="<?= base_url(route_to('signin')) ?>" method="POST" autocomplete="off">
                                         <?= csrf_field() ?>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Ingrese usuario" value="<?= old('usuario') ?>">
+                                            <input class="form-control" id="usuario" name="usuario" type="text" placeholder="Ingrese usuario" value="<?= old('usuario') ?>" autocomplete="Your username">
                                             <label for="usuario"><i class="fas fa-user"></i> Usuario</label>
                                             <p id="error-usuario" class="invalid-feedback"></p>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="clave" name="clave" type="password" placeholder="Ingrese contraseña" value="<?= old('clave') ?>">
+                                            <input class="form-control" id="clave" name="clave" type="password" placeholder="Ingrese contraseña" value="<?= old('clave') ?>" autocomplete="current-password">
                                             <label for="clave"><i class="fas fa-key"></i> Contraseña</label>
                                             <p id="error-clave" class="invalid-feedback"></p>
                                         </div>
@@ -103,7 +109,7 @@
 
     <script>
         const base_url = "<?php echo base_url(); ?>";
-        console.log(base_url);
+        // console.log(base_url);
 
         function frmLogin(e) {
             e.preventDefault();
@@ -128,8 +134,8 @@
                 } else {
                     clave.classList.remove("is-invalid");
                     document.getElementById("error-clave").innerHTML = "";
-                } 
-                
+                }
+
                 if (periodo.value == "") {
                     periodo.classList.add("is-invalid");
                     document.getElementById("error-periodo").innerHTML = "El campo Periodo Lectivo es obligatorio.";
