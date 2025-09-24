@@ -64,7 +64,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="<?= base_url() ?>Assets/js/funciones.js"></script>
     <script src="<?= base_url() ?>Assets/js/scripts.js"></script>
-    
+    <script>
+        $(document).ready(function() {
+            // $("nav.sb-sidenav-menu-nested").find("a.active").parent().parent().prev().css("background-color", "yellow");
+            $("nav.sb-sidenav-menu-nested").find("a.active").parent().parent().prev().addClass('active');
+
+            $("nav.sb-sidenav-menu-nested").find("a.active").parent().parent().addClass('show');
+
+            //Autoclose
+            window.setTimeout(function() {
+                $(".alert").fadeOut(1500, 0);
+            }, 5000); //5 segundos y desaparece
+
+            $(".close").on('click', function() {
+                $(".alert").css("display", "none");
+            });
+        });
+    </script>
     <?= $this->renderSection('scripts') ?>
 </body>
 

@@ -49,11 +49,6 @@ Niveles de Educación
     $(document).ready(function() {
         dataNivelesEducacion();
 
-        //Autoclose
-        window.setTimeout(function() {
-            $(".alert").fadeOut(1500, 0);
-        }, 3000); //3 segundos y desaparece
-
         $('table tbody').sortable({
             update: function(event, ui) {
                 $(this).children().each(function(index) {

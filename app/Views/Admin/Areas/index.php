@@ -47,11 +47,6 @@ Areas
 
     $(document).ready(function() {
         dataAreas();
-
-        //Autoclose
-        window.setTimeout(function() {
-            $(".alert").fadeOut(1500, 0);
-        }, 3000); //3 segundos y desaparece
     });
 
     function dataAreas() {

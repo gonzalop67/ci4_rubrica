@@ -74,11 +74,6 @@ Periodos Lectivos
 <?= $this->section('scripts') ?>
 <script src="//cdn.datatables.net/2.0.1/js/dataTables.min.js"></script>
 <script>
-    //Autoclose
-    window.setTimeout(function() {
-        $(".alert").fadeOut(1500, 0);
-    }, 3000); //3 segundos y desaparece
-
     let table = new DataTable('#tbl_periodo_lectivo', {
         pageLength: 5,
         lengthMenu: [5, 10, 15, {
