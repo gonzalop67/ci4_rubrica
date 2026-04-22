@@ -4,6 +4,7 @@
             <th>#</th>
             <th>Id</th>
             <th>Nombre</th>
+            <th>Slug</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -21,6 +22,7 @@
                 <td><?= $contador; ?></td>
                 <td><?= $v->id_perfil; ?></td>
                 <td><?= $v->pe_nombre; ?></td>
+                <td><?= $v->pe_slug; ?></td>
                 <td>
                     <div class="btn-group">
                         <a href="<?= base_url(route_to('perfiles_edit', $v->id_perfil)) ?>" class="btn btn-warning btn-sm" title="Editar"><span class="fa fa-pencil"></span></a>

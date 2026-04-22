@@ -15,7 +15,8 @@ class PerfilesModel extends Model
     protected $returnType     = 'object';
 
     protected $allowedFields = [
-        'pe_nombre'
+        'pe_nombre',
+        'pe_slug'
     ];
 
 }
